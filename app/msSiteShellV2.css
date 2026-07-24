@@ -1,0 +1,91 @@
+/* Shell global — header limpio en todas las páginas */
+
+.ms-site .ms-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.88) !important;
+  backdrop-filter: blur(16px) saturate(1.2);
+  border-bottom: 1px solid var(--ms-border) !important;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+}
+
+.ms-site .ms-header__inner {
+  max-width: 68rem;
+  min-height: 4.25rem;
+}
+
+.ms-site .ms-header .ms-brand-link .ms-brand-mark {
+  height: 44px !important;
+}
+
+.ms-site .ms-header .ms-nav-desktop {
+  gap: 0.15rem;
+}
+
+.ms-site .ms-header .ms-nav-desktop a {
+  color: var(--ms-ink) !important;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 0.45rem 0.7rem;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.ms-site .ms-header .ms-nav-desktop a:hover,
+.ms-site .ms-header .ms-nav-desktop a[aria-current="page"] {
+  color: var(--ms-btn-fill-ink) !important;
+  background: var(--ms-product-tint) !important;
+}
+
+.ms-site .ms-header .ms-nav__cta {
+  color: var(--ms-btn-fill-header-ink) !important;
+  background: var(--ms-btn-fill-header) !important;
+  border: 1px solid var(--ms-btn-fill-border) !important;
+  box-shadow: none !important;
+  border-radius: 10px !important;
+  font-weight: 600 !important;
+}
+
+.ms-site .ms-header .ms-nav__cta:hover {
+  background: var(--ms-btn-fill-hover) !important;
+}
+
+.ms-site .ms-header .ms-nav-mobile summary {
+  color: var(--ms-ink) !important;
+  background: var(--ms-surface) !important;
+  border-color: var(--ms-border) !important;
+}
+
+.ms-site .ms-footer {
+  background: var(--ms-product-bg);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ms-site .ms-footer__gradient {
+  display: none;
+}
+
+.ms-site .ms-footer__tagline {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.ms-site .ms-footer__col h3 {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.ms-site .ms-footer__col a {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 0.92rem;
+}
+
+.ms-site .ms-footer__col a:hover {
+  color: #fff;
+}

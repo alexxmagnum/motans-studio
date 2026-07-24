@@ -1,0 +1,182 @@
+/* MotanOS stamp splash — emerge desde dentro + byline typing al terminar recorrido */
+
+.mscap-stamp-splash {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mscap-stamp-splash:focus {
+  outline: none;
+}
+
+.mscap-stamp-splash:focus-visible {
+  outline: 2px solid rgba(82, 235, 230, 0.65);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.mscap-stamp-splash__stage {
+  --stamp-wordmark-ratio: 0.625;
+  --stamp-motion-ms: 1.2s;
+  --stamp-motion-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
+  width: 100%;
+  aspect-ratio: 1774 / 887;
+  position: relative;
+  overflow: visible;
+}
+
+/* Altura fija = stamp completo; emerge y typing no empujan el copy de abajo */
+.mscap-stamp-splash__track {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
+}
+
+.mscap-stamp-splash__wordmark {
+  display: block;
+  width: 100%;
+  height: 62.5%;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+  transform-origin: 18% 58%;
+  will-change: transform, opacity, filter;
+}
+
+/* MotanOS emerge dentro de su hueco reservado (transform no empuja layout) */
+.mscap-stamp-splash--pending .mscap-stamp-splash__wordmark {
+  transform: scale(0.04);
+  opacity: 0;
+  filter: blur(6px) brightness(0.45);
+}
+
+.mscap-stamp-splash__wordmark .mscap-stamp-splash__stamp-art {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: none;
+}
+
+.mscap-stamp-splash__wordmark--zoom {
+  transform: scale(0.04);
+  opacity: 0;
+  filter: blur(6px) brightness(0.45);
+  animation: mscap-stamp-wordmark-emerge var(--stamp-motion-ms) var(--stamp-motion-ease) forwards;
+}
+
+.mscap-stamp-splash__wordmark--settled {
+  transform: scale(1);
+  opacity: 1;
+  filter: none;
+}
+
+.mscap-stamp-splash__crop {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.mscap-stamp-splash__crop--byline {
+  width: 100%;
+  height: 37.5%;
+  margin-top: 0;
+  clip-path: inset(0 calc(100% - var(--byline-reveal, 0%)) 0 0);
+  visibility: hidden;
+}
+
+.mscap-stamp-splash__crop--byline.mscap-stamp-splash__crop--active {
+  visibility: visible;
+}
+
+.mscap-stamp-splash__crop--byline .mscap-stamp-splash__stamp-art {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: auto;
+  transform: translateY(calc(-100% * var(--stamp-wordmark-ratio, 0.625)));
+}
+
+.mscap-stamp-splash__stamp-art {
+  user-select: none;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+.mscap-stamp-splash--pulse .mscap-stamp-splash__wordmark--settled {
+  animation: mscap-stamp-glow-pulse 0.65s ease;
+}
+
+.mscap-stamp-splash:active .mscap-stamp-splash__wordmark--settled {
+  transform: scale(0.98);
+  transition: transform 0.14s ease;
+}
+
+@keyframes mscap-stamp-wordmark-emerge {
+  0% {
+    transform: scale(0.04);
+    opacity: 0;
+    filter: blur(6px) brightness(0.45);
+  }
+
+  35% {
+    opacity: 0.55;
+    filter: blur(2px) brightness(0.72);
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    filter: none;
+  }
+}
+
+@keyframes mscap-stamp-glow-pulse {
+  0% {
+    filter: drop-shadow(0 0 0 rgba(82, 235, 230, 0));
+  }
+
+  45% {
+    filter: drop-shadow(0 0 22px rgba(82, 235, 230, 0.38));
+  }
+
+  100% {
+    filter: drop-shadow(0 0 0 rgba(82, 235, 230, 0));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mscap-stamp-splash--pending .mscap-stamp-splash__track,
+  .mscap-stamp-splash--motion .mscap-stamp-splash__track {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .mscap-stamp-splash__wordmark--zoom {
+    animation: none;
+    transform: scale(1);
+    opacity: 1;
+    filter: none;
+  }
+
+  .mscap-stamp-splash--pulse .mscap-stamp-splash__wordmark--settled {
+    animation: none;
+  }
+}

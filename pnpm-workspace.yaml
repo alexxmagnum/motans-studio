@@ -1,0 +1,12 @@
+# Local vendor packages (linked via file: in package.json — no workspace:*)
+packages:
+  - "packages/*"
+
+allowBuilds:
+  sharp: true
+
+# Local file: vendors are intentional
+blockExoticSubdeps: false
+
+# Avoid re-running install before every script when sharp policy is already set
+verifyDepsBeforeRun: false

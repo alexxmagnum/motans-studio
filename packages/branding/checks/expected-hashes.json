@@ -1,0 +1,27 @@
+{
+  "source": "apps/motanos-client/public/brand",
+  "assets": {
+    "MotanOS.stamp.png": {
+      "sha256": "c8fed4036b0631b59445c49c1d938925b296086b4279d9976e28facbd139efe2",
+      "size": 1107684,
+      "width": 1774,
+      "height": 887
+    },
+    "motans-m.png": {
+      "sha256": "90356a71b00dbe825a453d6898db995e6e4f10817c8de39720aa46b22d06d49e",
+      "size": 1418054,
+      "width": 1024,
+      "height": 1024
+    },
+    "motans-ms.webp": {
+      "sha256": "184d47269d69df0ce4a7502d45dbe3602e400fc8d88c619a77012cb9728c2a34",
+      "size": 64832
+    },
+    "motans-ms.png": {
+      "sha256": "115614534901feb3cd538cd3bf1308aaf247e9560500f8bdf1d1681560a18acd",
+      "size": 80774,
+      "width": 1024,
+      "height": 1024
+    }
+  }
+}

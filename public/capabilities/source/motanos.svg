@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750" fill="none">
+  <rect width="1200" height="750" rx="24" fill="#050505"/>
+  <rect x="80" y="100" width="480" height="550" rx="20" fill="#0a0a0a" stroke="rgba(82,235,230,0.2)"/>
+  <rect x="640" y="100" width="480" height="550" rx="20" fill="#0a0a0a" stroke="rgba(4,162,251,0.2)"/>
+  <text x="320" y="160" text-anchor="middle" fill="#52ebe6" font-family="system-ui,sans-serif" font-size="18" letter-spacing="0.15em">CARTA DIGITAL</text>
+  <text x="880" y="160" text-anchor="middle" fill="#04a2fb" font-family="system-ui,sans-serif" font-size="18" letter-spacing="0.15em">OPERACIONES</text>
+  <text x="320" y="280" text-anchor="middle" fill="#ffffff" font-family="Georgia,serif" font-size="42">MotanOS</text>
+  <rect x="140" y="320" width="360" height="48" rx="10" fill="rgba(255,255,255,0.06)"/>
+  <rect x="140" y="390" width="360" height="48" rx="10" fill="rgba(255,255,255,0.04)"/>
+  <rect x="140" y="460" width="360" height="48" rx="10" fill="rgba(255,255,255,0.04)"/>
+  <rect x="700" y="220" width="360" height="80" rx="12" fill="rgba(4,162,251,0.12)"/>
+  <rect x="700" y="320" width="360" height="80" rx="12" fill="rgba(82,235,230,0.1)"/>
+  <rect x="700" y="420" width="360" height="80" rx="12" fill="rgba(166,225,11,0.08)"/>
+</svg>

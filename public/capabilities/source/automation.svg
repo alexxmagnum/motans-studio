@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750" fill="none">
+  <rect width="1200" height="750" rx="24" fill="#050505"/>
+  <text x="600" y="120" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="system-ui,sans-serif" font-size="18" letter-spacing="0.2em">FLUJO AUTOMATIZADO</text>
+  <rect x="120" y="220" width="240" height="280" rx="20" fill="#0a0a0a" stroke="rgba(4,162,251,0.3)"/>
+  <rect x="480" y="220" width="240" height="280" rx="20" fill="#0a0a0a" stroke="rgba(82,235,230,0.3)"/>
+  <rect x="840" y="220" width="240" height="280" rx="20" fill="#0a0a0a" stroke="rgba(166,225,11,0.3)"/>
+  <text x="240" y="310" text-anchor="middle" fill="#04a2fb" font-family="system-ui,sans-serif" font-size="22" font-weight="600">QR Mesa</text>
+  <text x="600" y="310" text-anchor="middle" fill="#52ebe6" font-family="system-ui,sans-serif" font-size="22" font-weight="600">Staff</text>
+  <text x="960" y="310" text-anchor="middle" fill="#a6e10b" font-family="system-ui,sans-serif" font-size="22" font-weight="600">Cocina</text>
+  <rect x="160" y="340" width="160" height="100" rx="10" fill="rgba(4,162,251,0.15)"/>
+  <rect x="520" y="340" width="160" height="100" rx="10" fill="rgba(82,235,230,0.12)"/>
+  <rect x="880" y="340" width="160" height="100" rx="10" fill="rgba(166,225,11,0.12)"/>
+  <path d="M360 360 H480" stroke="url(#g1)" stroke-width="3"/>
+  <path d="M720 360 H840" stroke="url(#g1)" stroke-width="3"/>
+  <polygon points="480,360 468,352 468,368" fill="#52ebe6"/>
+  <polygon points="840,360 828,352 828,368" fill="#a6e10b"/>
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#04a2fb"/>
+      <stop offset="1" stop-color="#a6e10b"/>
+    </linearGradient>
+  </defs>
+</svg>

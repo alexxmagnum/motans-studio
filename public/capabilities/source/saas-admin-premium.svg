@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" fill="none">
+  <rect width="1440" height="900" fill="#07080c"/>
+  <rect x="0" y="0" width="240" height="900" fill="#0b0d12"/>
+  <rect x="240" y="0" width="1" height="900" fill="rgba(255,255,255,0.06)"/>
+  <rect x="32" y="40" width="32" height="32" rx="8" fill="url(#brand)"/>
+  <text x="76" y="62" fill="#fff" font-family="system-ui,sans-serif" font-size="15" font-weight="600">Nexus Admin</text>
+  <rect x="24" y="120" width="192" height="40" rx="10" fill="rgba(82,235,230,0.12)"/>
+  <text x="48" y="146" fill="#52ebe6" font-family="system-ui,sans-serif" font-size="13">Dashboard</text>
+  <text x="48" y="196" fill="rgba(255,255,255,0.45)" font-family="system-ui,sans-serif" font-size="13">Clientes</text>
+  <text x="48" y="236" fill="rgba(255,255,255,0.45)" font-family="system-ui,sans-serif" font-size="13">Pedidos</text>
+  <text x="48" y="276" fill="rgba(255,255,255,0.45)" font-family="system-ui,sans-serif" font-size="13">Informes</text>
+  <text x="280" y="72" fill="#fff" font-family="system-ui,sans-serif" font-size="28" font-weight="600">Panel operativo</text>
+  <text x="280" y="102" fill="rgba(255,255,255,0.45)" font-family="system-ui,sans-serif" font-size="14">Resumen en tiempo real de tu negocio</text>
+  <rect x="280" y="140" width="260" height="130" rx="16" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)"/>
+  <rect x="560" y="140" width="260" height="130" rx="16" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)"/>
+  <rect x="840" y="140" width="260" height="130" rx="16" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)"/>
+  <rect x="1120" y="140" width="240" height="130" rx="16" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)"/>
+  <text x="308" y="175" fill="rgba(255,255,255,0.5)" font-family="system-ui,sans-serif" font-size="12">Ingresos</text>
+  <text x="308" y="220" fill="#fff" font-family="system-ui,sans-serif" font-size="34" font-weight="600">24.8k</text>
+  <text x="588" y="175" fill="rgba(255,255,255,0.5)" font-family="system-ui,sans-serif" font-size="12">Usuarios activos</text>
+  <text x="588" y="220" fill="#52ebe6" font-family="system-ui,sans-serif" font-size="34" font-weight="600">1,284</text>
+  <text x="868" y="175" fill="rgba(255,255,255,0.5)" font-family="system-ui,sans-serif" font-size="12">Conversion</text>
+  <text x="868" y="220" fill="#a6e10b" font-family="system-ui,sans-serif" font-size="34" font-weight="600">8.4%</text>
+  <rect x="280" y="300" width="820" height="340" rx="16" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)"/>
+  <rect x="320" y="380" width="48" height="180" rx="6" fill="rgba(4,162,251,0.5)"/>
+  <rect x="390" y="420" width="48" height="140" rx="6" fill="rgba(82,235,230,0.45)"/>
+  <rect x="460" y="350" width="48" height="210" rx="6" fill="rgba(52,204,104,0.45)"/>
+  <rect x="530" y="400" width="48" height="160" rx="6" fill="rgba(166,225,11,0.4)"/>
+  <rect x="600" y="370" width="48" height="190" rx="6" fill="rgba(4,162,251,0.35)"/>
+  <rect x="670" y="430" width="48" height="130" rx="6" fill="rgba(82,235,230,0.35)"/>
+  <rect x="1120" y="300" width="240" height="340" rx="16" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)"/>
+  <circle cx="1200" cy="420" r="56" stroke="rgba(82,235,230,0.35)" stroke-width="12" fill="none" stroke-dasharray="220 360"/>
+  <text x="1200" y="430" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="22" font-weight="600">92%</text>
+  <defs>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#04a2fb"/>
+      <stop offset="1" stop-color="#a6e10b"/>
+    </linearGradient>
+  </defs>
+</svg>

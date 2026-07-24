@@ -1,0 +1,379 @@
+/* Home premium — usa tokens del design system (msSite1703Global.css) */
+
+body:has(.ms-page--home-premium) .ms-site {
+  background: #fff;
+}
+
+.ms-page--home-premium {
+  max-width: none !important;
+  width: 100%;
+  padding: 0 !important;
+}
+
+.ms-hp-shell {
+  width: min(68rem, calc(100% - clamp(1.5rem, 5vw, 3rem)));
+  margin-inline: auto;
+}
+
+/* —— Hero —— */
+.ms-hp-hero {
+  padding: clamp(2.5rem, 6vw, 4.5rem) 0 clamp(3rem, 8vw, 5rem);
+  background:
+    radial-gradient(ellipse 80% 60% at 100% 0%, rgba(45, 154, 244, 0.07) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 0% 100%, rgba(49, 210, 199, 0.06) 0%, transparent 50%),
+    #fff;
+}
+
+.ms-hp-hero__grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+
+.ms-hp-hero__title {
+  font-family: var(--ms-font-display);
+  font-size: clamp(2.35rem, 5.5vw, 3.75rem);
+  font-weight: 400;
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+  margin: 0.5rem 0 0;
+  color: var(--ms-ink);
+}
+
+.ms-hp-hero__hints {
+  margin: 1rem 0 0;
+  font-size: 1rem;
+  color: var(--ms-muted);
+  font-weight: 500;
+}
+
+.ms-hp-hero__lead {
+  margin-top: 1rem !important;
+  max-width: 28rem;
+}
+
+.ms-hp-hero__actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-top: 1.75rem !important;
+}
+
+.ms-hp-hero__actions .ms-btn {
+  width: 100%;
+  min-height: 2.85rem;
+  font-size: 0.95rem;
+}
+
+.ms-hp-hero__visual {
+  display: flex;
+  justify-content: center;
+}
+
+.ms-hp-hero__panel {
+  position: relative;
+  width: min(100%, 22rem);
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 2rem;
+  border-radius: var(--ms-radius-lg);
+  background: linear-gradient(145deg, #0a0f12 0%, #111820 45%, #0d1518 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--ms-shadow-elevated);
+  overflow: hidden;
+}
+
+.ms-hp-hero__panel-glow {
+  position: absolute;
+  inset: -30% -20% auto;
+  height: 70%;
+  background: radial-gradient(circle, rgba(49, 210, 199, 0.22) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.ms-hp-hero__stamp {
+  position: relative;
+  width: auto;
+  max-width: 58%;
+  height: auto;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.35));
+}
+
+.ms-hp-hero__panel-title {
+  position: relative;
+  margin: 0.5rem 0 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.ms-hp-hero__panel-line {
+  position: relative;
+  margin: 0;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* —— Sections —— */
+.ms-hp-section {
+  padding: clamp(3.5rem, 8vw, 5.5rem) 0;
+  border-top: 1px solid var(--ms-border);
+}
+
+.ms-hp-section--surface {
+  background: var(--ms-surface);
+}
+
+.ms-hp-section--dark {
+  background: var(--ms-product-bg);
+  color: var(--ms-product-ink);
+  border-top: none;
+  position: relative;
+}
+
+.ms-hp-section--dark::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--ms-brand-gradient);
+}
+
+.ms-hp-section__head {
+  margin-bottom: 2rem;
+  max-width: 36rem;
+}
+
+.ms-hp-section__head--on-dark .ms-eyebrow--on-dark {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.ms-hp-section__title {
+  font-family: var(--ms-font-display);
+  font-size: clamp(1.85rem, 3.5vw, 2.35rem);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  margin: 0.35rem 0 0;
+}
+
+.ms-hp-section__title--on-dark {
+  color: #fff;
+}
+
+.ms-hp-section__lead--on-dark {
+  margin: 0.75rem 0 0;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 1.05rem;
+}
+
+.ms-hp-section__note {
+  margin: 0.75rem 0 0;
+  color: var(--ms-muted);
+  font-size: 1rem;
+}
+
+.ms-hp-section__more {
+  margin: 2rem 0 0;
+}
+
+/* —— Cards —— */
+.ms-hp-cards {
+  display: grid;
+  gap: 1rem;
+}
+
+.ms-hp-cards--three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.ms-hp-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.35rem 1.25rem 1.2rem;
+  background: var(--ms-bg);
+  border: 1px solid var(--ms-border);
+  border-radius: var(--ms-radius-lg);
+  box-shadow: var(--ms-shadow-card);
+  overflow: hidden;
+  min-height: 8.5rem;
+}
+
+.ms-hp-card--link {
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.ms-hp-card--link:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--ms-shadow-elevated);
+  border-color: rgba(45, 154, 244, 0.28);
+}
+
+.ms-hp-card__accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--ms-brand-gradient-soft);
+}
+
+.ms-hp-card--case .ms-hp-card__accent {
+  background: var(--ms-brand-gradient);
+}
+
+.ms-hp-card__title {
+  margin: 0.35rem 0 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.ms-hp-card__line,
+.ms-hp-card__meta {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--ms-muted);
+}
+
+.ms-hp-card__meta strong {
+  color: var(--ms-ink);
+  font-weight: 600;
+}
+
+.ms-hp-card__cta {
+  margin-top: auto;
+  padding-top: 0.5rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ms-btn-fill-ink);
+}
+
+.ms-hp-card__thumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 5.5rem;
+  background: var(--ms-surface);
+  border-radius: var(--ms-radius);
+  margin-bottom: 0.25rem;
+}
+
+.ms-hp-card__thumb img {
+  max-height: 4rem;
+  width: auto;
+}
+
+.ms-hp-card__badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ms-btn-fill-ink);
+}
+
+/* —— MotanOS flow —— */
+.ms-hp-flow {
+  margin: 0 0 2rem;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.ms-hp-flow li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1rem 0.85rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--ms-radius);
+  font-size: 0.88rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.ms-hp-flow__num {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(49, 210, 199, 0.9);
+  letter-spacing: 0.06em;
+}
+
+.ms-hp-section--dark .ms-actions {
+  margin-top: 0;
+}
+
+/* —— Contacto —— */
+.ms-hp-contact,
+.ms-v2-contact {
+  background: var(--ms-surface);
+  border-top: 1px solid var(--ms-border);
+}
+
+.ms-page--home-premium .ms-v2-contact {
+  padding: 0;
+}
+
+.ms-page--home-premium .ms-landing-contact {
+  padding-top: clamp(3rem, 8vw, 5rem);
+  padding-bottom: clamp(3rem, 8vw, 5rem);
+}
+
+.ms-page--home-premium .ms-landing-chapter-card {
+  width: min(68rem, calc(100% - clamp(1.5rem, 5vw, 3rem)));
+  margin-inline: auto;
+  background: var(--ms-bg);
+  border: 1px solid var(--ms-border);
+  border-radius: var(--ms-radius-lg);
+  box-shadow: var(--ms-shadow-card);
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+}
+
+.ms-page--home-premium .ms-landing-chapter-card__hairline {
+  background: var(--ms-brand-gradient);
+  height: 3px;
+}
+
+/* —— Responsive —— */
+@media (max-width: 960px) {
+  .ms-hp-hero__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ms-hp-hero__visual {
+    order: -1;
+  }
+
+  .ms-hp-hero__panel {
+    width: min(100%, 16rem);
+    aspect-ratio: auto;
+    min-height: 12rem;
+  }
+
+  .ms-hp-cards--three,
+  .ms-hp-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .ms-hp-hero__actions {
+    grid-template-columns: 1fr;
+  }
+}

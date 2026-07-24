@@ -1,0 +1,188 @@
+/* Hero vídeo — textos fijos; badge tras el vídeo */
+
+.msh-hero--copy-fixed .msh-hero__content {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.msh-hero--copy-fixed .msh-hero__badge--floor--hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.msh-hero--copy-fixed .msh-hero__badge--floor--enter {
+  visibility: visible;
+  pointer-events: none;
+  animation: msh-hero-badge-floor-rise 0.72s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.msh-hero--copy-fixed .msh-hero__badge--floor--visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: none;
+}
+
+@keyframes msh-hero-badge-floor-rise {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(42vh) translateZ(28px) rotateX(74deg) rotateZ(-2.5deg) scale(1.08);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateZ(48px) rotateX(74deg) rotateZ(-2.5deg) scale(1.14);
+  }
+}
+
+.msh-hero--copy-fixed .msh-hero__badge--floor {
+  transform: translateX(-50%) translateZ(48px) rotateX(74deg) rotateZ(-2.5deg) scale(1.14);
+}
+
+.msh-hero--copy-fixed .msh-hero__floor-stage {
+  perspective-origin: 50% 64%;
+}
+
+.msh-hero__figure.msh-hero__figure--hero-video {
+  position: relative;
+  z-index: 1;
+  margin: 0 -8vw 0 0;
+  width: auto;
+  max-width: none;
+  line-height: 0;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
+
+.msh-hero__figure--hero-video .msh-hero__hero-video {
+  display: block;
+  width: auto;
+  min-width: 12rem;
+  min-height: 12rem;
+  height: min(calc(100svh - var(--msh-header-h, 5.75rem) - 2.5rem), 68.6rem);
+  max-width: min(66vw, 65.8rem);
+  object-fit: contain;
+  object-position: right 36%;
+  opacity: 1;
+  visibility: visible;
+  background: #000;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
+
+@media (min-width: 1025px) {
+  .msh-hero__figure.msh-hero__figure--hero-video {
+    transform: translateX(-1.25rem);
+  }
+
+  .msh-hero--copy-fixed .msh-hero__badge--floor {
+    bottom: 6.5%;
+  }
+
+  .msh-hero--copy-fixed .msh-hero__badge--floor--enter {
+    animation-name: msh-hero-badge-floor-rise-desktop;
+  }
+
+  @keyframes msh-hero-badge-floor-rise-desktop {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) translateY(42vh) translateZ(28px) rotateX(74deg) rotateZ(-2.5deg) scale(1.08);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(-50%) translateZ(48px) rotateX(74deg) rotateZ(-2.5deg) scale(1.14);
+    }
+  }
+}
+
+@media (max-width: 1100px) {
+  .msh-hero__figure--hero-video .msh-hero__hero-video {
+    height: min(calc(100svh - var(--msh-header-h, 5.75rem) - 2rem), 60.1rem);
+    max-width: min(62vw, 54.3rem);
+  }
+}
+
+@media (max-width: 1024px) {
+  .msh-hero__figure.msh-hero__figure--hero-video {
+    margin: 0 auto;
+    transform: none;
+  }
+
+  .msh-hero__figure--hero-video .msh-hero__hero-video {
+    height: min(77vh, 40rem);
+    max-width: min(100%, 48.6rem);
+    object-position: center 38%;
+  }
+
+  .msh-hero--copy-fixed .msh-hero__badge--floor {
+    bottom: 3.5%;
+    transform: translateX(-50%) translateZ(34px) rotateX(72deg) rotateZ(-2deg) scale(1.05);
+  }
+
+  .msh-hero--copy-fixed .msh-hero__badge--floor--enter {
+    animation-name: msh-hero-badge-floor-rise-tablet;
+  }
+
+  @keyframes msh-hero-badge-floor-rise-tablet {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) translateY(38vh) translateZ(22px) rotateX(72deg) rotateZ(-2deg) scale(1.04);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(-50%) translateZ(34px) rotateX(72deg) rotateZ(-2deg) scale(1.05);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .msh-hero__figure.msh-hero__figure--hero-video {
+    margin: 0 auto;
+    transform: translate(-0.75rem, -1.45rem);
+  }
+
+  .msh-hero__figure--hero-video .msh-hero__hero-video {
+    height: min(44vh, 24rem);
+    max-width: min(108vw, 40rem);
+    object-position: center 88%;
+  }
+
+  .msh-hero--copy-fixed .msh-hero__badge--floor {
+    bottom: 3%;
+    transform: translateX(-50%) translateZ(28px) rotateX(68deg) rotateZ(-1.5deg) scale(1.03);
+  }
+
+  .msh-hero--copy-fixed .msh-hero__badge--floor--enter {
+    animation-name: msh-hero-badge-floor-rise-mobile;
+  }
+
+  @keyframes msh-hero-badge-floor-rise-mobile {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) translateY(34vh) translateZ(18px) rotateX(68deg) rotateZ(-1.5deg) scale(1.02);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(-50%) translateZ(28px) rotateX(68deg) rotateZ(-1.5deg) scale(1.03);
+    }
+  }
+
+  .msh-hero--copy-fixed .msh-hero__floor-stage {
+    perspective-origin: 50% 66%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .msh-hero--copy-fixed .msh-hero__badge--floor--enter {
+    animation: none;
+    opacity: 1;
+    visibility: visible;
+  }
+}

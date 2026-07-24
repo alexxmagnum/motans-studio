@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750" fill="none">
+  <rect width="1200" height="750" rx="24" fill="#050505"/>
+  <rect x="48" y="48" width="220" height="654" rx="14" fill="#0c0c0c" stroke="rgba(255,255,255,0.07)"/>
+  <rect x="300" y="48" width="852" height="654" rx="14" fill="#0a0a0a" stroke="rgba(255,255,255,0.07)"/>
+  <rect x="72" y="80" width="172" height="14" rx="7" fill="rgba(82,235,230,0.35)"/>
+  <rect x="72" y="120" width="140" height="10" rx="5" fill="rgba(255,255,255,0.12)"/>
+  <rect x="72" y="150" width="140" height="10" rx="5" fill="rgba(255,255,255,0.08)"/>
+  <rect x="72" y="180" width="140" height="10" rx="5" fill="rgba(255,255,255,0.08)"/>
+  <text x="330" y="100" fill="#ffffff" font-family="system-ui,sans-serif" font-size="28" font-weight="600">Panel SaaS</text>
+  <rect x="330" y="130" width="360" height="120" rx="12" fill="rgba(4,162,251,0.12)" stroke="rgba(4,162,251,0.25)"/>
+  <rect x="710" y="130" width="360" height="120" rx="12" fill="rgba(166,225,11,0.08)" stroke="rgba(166,225,11,0.2)"/>
+  <text x="360" y="175" fill="#52ebe6" font-family="system-ui,sans-serif" font-size="16">Tenants activos</text>
+  <text x="360" y="210" fill="#ffffff" font-family="system-ui,sans-serif" font-size="36" font-weight="600">128</text>
+  <text x="740" y="175" fill="#a6e10b" font-family="system-ui,sans-serif" font-size="16">Modulos</text>
+  <text x="740" y="210" fill="#ffffff" font-family="system-ui,sans-serif" font-size="36" font-weight="600">24</text>
+  <rect x="330" y="280" width="740" height="360" rx="12" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)"/>
+  <rect x="360" y="320" width="680" height="12" rx="6" fill="rgba(255,255,255,0.15)"/>
+  <rect x="360" y="360" width="520" height="10" rx="5" fill="rgba(255,255,255,0.08)"/>
+  <rect x="360" y="390" width="580" height="10" rx="5" fill="rgba(255,255,255,0.08)"/>
+  <rect x="360" y="420" width="440" height="10" rx="5" fill="rgba(255,255,255,0.08)"/>
+</svg>

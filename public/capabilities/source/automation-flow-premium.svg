@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" fill="none">
+  <rect width="1440" height="900" fill="#050608"/>
+  <rect width="1440" height="900" fill="url(#bg)"/>
+  <text x="720" y="120" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-family="system-ui,sans-serif" font-size="13" letter-spacing="0.22em">AUTOMATIZACION INTELIGENTE</text>
+  <text x="720" y="170" text-anchor="middle" fill="#fff" font-family="Georgia, serif" font-size="42">Flujos que trabajan solos</text>
+  <rect x="140" y="280" width="320" height="380" rx="24" fill="rgba(255,255,255,0.04)" stroke="rgba(4,162,251,0.35)"/>
+  <rect x="560" y="280" width="320" height="380" rx="24" fill="rgba(255,255,255,0.04)" stroke="rgba(82,235,230,0.35)"/>
+  <rect x="980" y="280" width="320" height="380" rx="24" fill="rgba(255,255,255,0.04)" stroke="rgba(166,225,11,0.35)"/>
+  <circle cx="300" cy="350" r="28" fill="rgba(4,162,251,0.2)"/>
+  <text x="300" y="358" text-anchor="middle" fill="#04a2fb" font-family="system-ui,sans-serif" font-size="18">1</text>
+  <text x="300" y="420" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="22" font-weight="600">Trigger</text>
+  <text x="300" y="460" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="system-ui,sans-serif" font-size="14">Nuevo pedido o reserva</text>
+  <rect x="200" y="500" width="200" height="56" rx="12" fill="rgba(4,162,251,0.12)"/>
+  <rect x="220" y="518" width="160" height="10" rx="5" fill="rgba(255,255,255,0.2)"/>
+  <rect x="220" y="536" width="120" height="8" rx="4" fill="rgba(255,255,255,0.1)"/>
+  <circle cx="720" cy="350" r="28" fill="rgba(82,235,230,0.2)"/>
+  <text x="720" y="358" text-anchor="middle" fill="#52ebe6" font-family="system-ui,sans-serif" font-size="18">2</text>
+  <text x="720" y="420" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="22" font-weight="600">Proceso</text>
+  <text x="720" y="460" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="system-ui,sans-serif" font-size="14">Validacion y enrutado</text>
+  <rect x="620" y="500" width="200" height="56" rx="12" fill="rgba(82,235,230,0.1)"/>
+  <rect x="640" y="518" width="160" height="10" rx="5" fill="rgba(255,255,255,0.18)"/>
+  <circle cx="1140" cy="350" r="28" fill="rgba(166,225,11,0.2)"/>
+  <text x="1140" y="358" text-anchor="middle" fill="#a6e10b" font-family="system-ui,sans-serif" font-size="18">3</text>
+  <text x="1140" y="420" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="22" font-weight="600">Accion</text>
+  <text x="1140" y="460" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="system-ui,sans-serif" font-size="14">Equipo notificado</text>
+  <rect x="1040" y="500" width="200" height="56" rx="12" fill="rgba(166,225,11,0.1)"/>
+  <rect x="1060" y="518" width="160" height="10" rx="5" fill="rgba(255,255,255,0.18)"/>
+  <path d="M460 470 H560" stroke="url(#line)" stroke-width="2"/>
+  <path d="M880 470 H980" stroke="url(#line)" stroke-width="2"/>
+  <polygon points="560,470 548,462 548,478" fill="#52ebe6"/>
+  <polygon points="980,470 968,462 968,478" fill="#a6e10b"/>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="70%">
+      <stop stop-color="#04a2fb" stop-opacity="0.06"/>
+      <stop offset="1" stop-color="#050608" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#04a2fb"/>
+      <stop offset="1" stop-color="#a6e10b"/>
+    </linearGradient>
+  </defs>
+</svg>

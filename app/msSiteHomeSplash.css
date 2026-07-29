@@ -186,3 +186,91 @@
     visibility: visible;
   }
 }
+
+/* Experience hero desktop only */
+@media (min-width: 1025px) {
+  .msh-hero--experience .msh-hero__figure--hero-video .msh-hero__hero-video {
+    height: min(calc(100svh - var(--msh-header-h, 5.75rem) - 0.5rem), 74rem) !important;
+    max-height: none !important;
+    max-width: 100% !important;
+    object-position: right 36%;
+  }
+}
+
+/* Experience mobile/tablet: anular caps del splash base */
+@media (max-width: 1024px) {
+  .msh-hero--experience .msh-hero__figure.msh-hero__figure--hero-video {
+    margin: 0 !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .msh-hero--experience .msh-hero__figure--hero-video .msh-hero__hero-video {
+    width: 100% !important;
+    height: auto !important;
+    max-width: none !important;
+    max-height: none !important;
+    object-fit: contain !important;
+    object-position: center bottom !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .msh-hero--experience .msh-hero__figure.msh-hero__figure--hero-video {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .msh-hero--experience .msh-hero__figure--hero-video .msh-hero__hero-video {
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    object-fit: contain !important;
+    object-position: center bottom !important;
+  }
+
+  .msh-hero--experience.msh-hero--copy-fixed .msh-hero__floor-stage {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 1.15rem 0 0 !important;
+    padding: 0.15rem 0 0.35rem !important;
+    transform: none !important;
+    perspective-origin: 50% 0% !important;
+  }
+
+  .msh-hero--experience.msh-hero--copy-fixed .msh-hero__badge--floor,
+  .msh-hero--experience.msh-hero--copy-fixed .msh-hero__badge--floor--visible {
+    position: relative !important;
+    left: 50% !important;
+    bottom: auto !important;
+    top: auto !important;
+    transform: translateX(-50%) rotateX(52deg) rotateZ(-1deg) scale(1.02) !important;
+    transform-origin: 50% 0% !important;
+  }
+
+  .msh-hero--experience.msh-hero--copy-fixed .msh-hero__badge--floor--enter {
+    animation-name: msh-hero-badge-floor-rise-experience-mobile !important;
+  }
+
+  .msh-hero--experience.msh-hero--copy-fixed .msh-hero__badge--floor .msh-hero__badge-text {
+    font-size: clamp(1.75rem, 8.5vw, 2.4rem) !important;
+    letter-spacing: 0.14em !important;
+  }
+
+  @keyframes msh-hero-badge-floor-rise-experience-mobile {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) translateY(1.2rem) rotateX(52deg) rotateZ(-1deg) scale(0.98);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(-50%) rotateX(52deg) rotateZ(-1deg) scale(1.02);
+    }
+  }
+}

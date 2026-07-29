@@ -1,9 +1,9 @@
 "use client";
 
 import type { ReactElement } from "react";
-import Link from "next/link";
 import { MS_STUDIO_HOME_FINAL_CTA } from "../../lib/msStudioHomeFoundation.js";
 import { useMsSiteLocale } from "../MsSiteLocaleProvider.js";
+import { MsSiteNavAnchor } from "../MsSiteNavAnchor.js";
 
 /** CTA final home — chrome ms-dp-section + botones msh-btn existentes. */
 export function MsStudioHomeFinalCta(): ReactElement {
@@ -23,12 +23,12 @@ export function MsStudioHomeFinalCta(): ReactElement {
         </h2>
         <p className="ms-dp-section__note">{ui.finalLead}</p>
         <div className="msh-hero__actions">
-          <Link href={cta.cta.href} className="msh-btn msh-btn--cta msh-btn--cta-hero-primary">
+          <MsSiteNavAnchor href={cta.cta.href} className="msh-btn msh-btn--cta msh-btn--cta-hero-primary">
             {ui.hablemos}
             <span className="msh-btn__arrow" aria-hidden="true">
               →
             </span>
-          </Link>
+          </MsSiteNavAnchor>
         </div>
       </div>
     </section>

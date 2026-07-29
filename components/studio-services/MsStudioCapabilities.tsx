@@ -2,7 +2,10 @@
 
 import type { ReactElement } from "react";
 import Link from "next/link";
-import { MS_SITE_BRAND_ASSETS } from "../../lib/msSite1701Foundation.js";
+import {
+  MS_SITE_BRAND_ASSETS,
+  MS_SITE_PUBLIC_MOTANOS_VISIBLE,
+} from "../../lib/msSite1701Foundation.js";
 import {
   MS_STUDIO_CAPABILITIES,
   type MsStudioCapabilitiesVisualVariant,
@@ -15,7 +18,7 @@ type MsStudioCapabilitiesProps = {
   readonly asPage?: boolean;
   /** Oculta el intro rail (home: Continuity ya introduce). */
   readonly hideIntro?: boolean;
-  /** Excluye bloques por id (home: MotanOS vive en Innovation Lab). */
+  /** Excluye bloques por id. MotanOS se excluye siempre si la superficie pública lo tiene congelado. */
   readonly excludeBlockIds?: readonly MsStudioCapabilitiesVisualVariant[];
   /** Ancla de sección; `null` = sin id. Default: `servicios` si no asPage. */
   readonly sectionId?: string | null;
@@ -32,7 +35,10 @@ export function MsStudioCapabilities({
   const { ui } = useMsSiteLocale();
   const sectionTitleId = "msh-servicios-title";
   const SectionHeading = asPage ? "h1" : "h2";
-  const exclude = new Set(excludeBlockIds);
+  const exclude = new Set<MsStudioCapabilitiesVisualVariant>([
+    ...excludeBlockIds,
+    ...(MS_SITE_PUBLIC_MOTANOS_VISIBLE ? [] : (["motanos"] as const)),
+  ]);
   const blocks = page.blocks.filter((block) => !exclude.has(block.id));
   const resolvedSectionId =
     sectionId === null ? undefined : sectionId !== undefined ? sectionId : asPage ? undefined : "servicios";

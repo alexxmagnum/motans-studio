@@ -1,0 +1,632 @@
+/**
+ * Motans Studio — Hero Experience (Fase 2)
+ * Desktop y mobile = composiciones distintas. Motion mínima. Vídeo muted.
+ */
+
+.msh-hero--experience {
+  --msh-hero-ink: #ffffff;
+  --msh-hero-muted: rgba(255, 255, 255, 0.62);
+  --msh-hero-faint: rgba(255, 255, 255, 0.38);
+  --msh-hero-line: rgba(255, 255, 255, 0.12);
+  position: relative;
+  isolation: isolate;
+  background: #000;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .msh-hero--experience {
+    overflow: visible !important;
+  }
+}
+
+/* Desktop: M grande a la derecha; copy con aire, centrado en altura */
+.msh-hero--experience .msh-hero__viewport {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  align-items: center;
+  gap: 0;
+  padding-block: 0.5rem 1rem;
+}
+
+.msh-hero--experience .msh-hero__content {
+  position: relative;
+  z-index: 2;
+  grid-area: 1 / 1;
+  justify-self: start;
+  align-self: center;
+  max-width: min(36rem, 42vw);
+  padding-right: clamp(1.25rem, 3vw, 2.5rem);
+  pointer-events: auto;
+  opacity: 0;
+  transform: translateY(0.85rem);
+  transition:
+    opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.msh-hero--experience.msh-hero--experience-entered .msh-hero__content {
+  opacity: 1;
+  transform: none;
+}
+
+.msh-hero--experience .msh-hero__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0 0 1.85rem;
+  font-family: var(--msh-font-display);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--msh-hero-faint);
+}
+
+.msh-hero--experience .msh-hero__brand-mark {
+  display: block;
+  width: 1.65rem;
+  height: 1px;
+  background: linear-gradient(90deg, #04a2fb 0%, #52ebe6 50%, #a6e10b 100%);
+}
+
+.msh-hero--experience .msh-hero__brand-text {
+  line-height: 1;
+}
+
+.msh-hero--experience .msh-hero__title {
+  margin: 0;
+  font-family: var(--msh-font-display);
+  font-size: clamp(2.85rem, 5vw, 4.25rem);
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.12;
+  letter-spacing: -0.028em;
+  color: var(--msh-hero-ink);
+  text-wrap: balance;
+}
+
+.msh-hero--experience .msh-hero__title-line {
+  display: block;
+}
+
+.msh-hero--experience .msh-hero__title-line + .msh-hero__title-line {
+  margin-top: 0.22em;
+}
+
+.msh-hero--experience .msh-hero__title-line--accent {
+  margin-top: 0.28em;
+}
+
+.msh-hero--experience .msh-hero__title-accent--gradient {
+  font-family: inherit;
+  font-weight: 400;
+  background: linear-gradient(90deg, #04a2fb 0%, #52ebe6 42%, #a6e10b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.msh-hero--experience .msh-hero__subtitle {
+  margin: 1.95rem 0 0;
+  max-width: 32rem;
+  font-size: clamp(1.02rem, 1.2vw, 1.14rem);
+  font-weight: 400;
+  line-height: 1.68;
+  color: var(--msh-hero-muted);
+  text-wrap: pretty;
+}
+
+.msh-hero--experience .msh-hero__tags {
+  display: none;
+}
+
+.msh-hero--experience .msh-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 2.75rem;
+}
+
+.msh-hero--experience .msh-hero__visual {
+  position: relative;
+  z-index: 1;
+  grid-area: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 0;
+  width: 100%;
+  margin-top: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 900ms cubic-bezier(0.22, 1, 0.36, 1) 80ms;
+}
+
+.msh-hero--experience.msh-hero--experience-entered .msh-hero__visual {
+  opacity: 1;
+}
+
+.msh-hero--experience .msh-hero__sculpture-anchor {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+  width: auto;
+  max-width: none;
+  pointer-events: auto;
+  transform-style: preserve-3d;
+}
+
+.msh-hero--experience .msh-hero__figure {
+  position: relative;
+  z-index: 1;
+  margin: 0 -8vw 0 0;
+  width: auto;
+  max-width: none;
+  line-height: 0;
+  overflow: visible;
+  transform-style: preserve-3d;
+  transform: translateX(-1.25rem);
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
+
+.msh-hero--experience .msh-hero__floor-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  perspective: 820px;
+  perspective-origin: 50% 64%;
+}
+
+/* Desktop only — NUNCA filtrar a móvil */
+@media (min-width: 1025px) {
+  .msh-hero--experience .msh-hero__viewport {
+    min-height: calc(100svh - var(--msh-header-h));
+  }
+
+  .msh-hero--experience .msh-hero__figure.msh-hero__figure--hero-video {
+    position: relative;
+    transform: translateX(9rem);
+    /* Difumina solo el corte inferior (alfa), sin nublar la imagen */
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 84%, transparent 100%) !important;
+    mask-image: linear-gradient(to bottom, #000 0%, #000 84%, transparent 100%) !important;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
+
+  /* Splash contenido en la columna visual (sin max-width en vw del viewport). */
+  .msh-hero--experience .msh-hero__figure.msh-hero__figure--hero-video {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .msh-hero--experience .msh-hero__figure--hero-video .msh-hero__hero-video {
+    display: block;
+    width: 100%;
+    min-width: 12rem;
+    min-height: 12rem;
+    height: min(calc(100svh - var(--msh-header-h, 5.75rem) - 0.5rem), 74rem) !important;
+    max-height: none !important;
+    max-width: 100% !important;
+    object-fit: contain;
+    object-position: right 36%;
+    background: #000;
+  }
+
+  /* Solo difuminado lateral izquierdo — sin nube negra abajo */
+  .msh-hero--experience .msh-hero__figure.msh-hero__figure--hero-video::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(to right, #000 0%, rgba(0, 0, 0, 0.55) 8%, transparent 28%);
+  }
+
+  /* Nombre: ver bloque desktop más abajo (evita conflicto de left) */
+  .msh-hero--experience.msh-hero--copy-fixed .msh-hero__badge--floor,
+  .msh-hero--experience .msh-hero__badge--floor {
+    left: 66% !important;
+    bottom: 9% !important;
+  }
+
+  /* Sonido: se redefine más abajo (después de la regla base) */
+}
+
+/* Sound anclado al bloque visual (no al vídeo oversized) */
+.msh-hero--experience .msh-hero__sound {
+  position: absolute;
+  right: clamp(1.25rem, 3vw, 2.5rem);
+  bottom: clamp(1rem, 2.5vw, 1.75rem);
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid var(--msh-hero-line);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.55);
+  color: rgba(255, 255, 255, 0.78);
+  font-family: var(--msh-font);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  pointer-events: auto;
+  backdrop-filter: blur(8px);
+  transition:
+    color 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease;
+}
+
+.msh-hero--experience .msh-hero__sound:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(0, 0, 0, 0.72);
+}
+
+.msh-hero--experience .msh-hero__sound:focus-visible {
+  outline: 2px solid rgba(82, 235, 230, 0.7);
+  outline-offset: 3px;
+}
+
+.msh-hero--experience .msh-hero__sound-dot {
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow: none;
+  transition: background 160ms ease, box-shadow 160ms ease;
+}
+
+.msh-hero--experience .msh-hero__sound[aria-pressed="true"] .msh-hero__sound-dot {
+  background: #a6e10b;
+  box-shadow: 0 0 0 3px rgba(166, 225, 11, 0.18);
+}
+
+/* Desktop: sonido arriba-derecha (DESPUÉS de la regla base — si no, top+bottom lo estiran) */
+@media (min-width: 1025px) {
+  .msh-hero--experience {
+    overflow: visible;
+  }
+
+  .msh-hero--experience .msh-hero__viewport {
+    padding-bottom: 2.75rem;
+  }
+
+  .msh-hero--experience .msh-hero__sound {
+    top: clamp(0.85rem, 2vw, 1.35rem) !important;
+    right: clamp(1rem, 2.5vw, 1.75rem) !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: auto !important;
+    height: auto !important;
+    align-self: auto !important;
+    writing-mode: horizontal-tb !important;
+    white-space: nowrap !important;
+  }
+
+  /* Nombre completo visible + un poco a la derecha (solo desktop) */
+  .msh-hero--experience.msh-hero--copy-fixed .msh-hero__badge--floor,
+  .msh-hero--experience .msh-hero__badge--floor {
+    left: 66% !important;
+    bottom: 9% !important;
+  }
+}
+
+/* —— Tablet: composición apilada — splash grande + texto con aire —— */
+@media (max-width: 1024px) {
+  .msh-hero--experience {
+    min-height: 0;
+    height: auto;
+  }
+
+  .msh-hero--experience .msh-hero__viewport {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    grid-template-columns: unset;
+    grid-template-rows: unset;
+    align-content: unset;
+    gap: clamp(1.5rem, 3.5vh, 2.25rem);
+    min-height: 0;
+    height: auto;
+    padding-block: clamp(1rem, 2.5vh, 1.5rem) clamp(1.25rem, 3vh, 2rem);
+  }
+
+  .msh-hero--experience .msh-hero__content {
+    grid-area: unset;
+    order: 1;
+    max-width: none;
+    justify-self: stretch;
+    align-self: stretch;
+    margin-top: 0.75rem;
+    padding-right: 0;
+  }
+
+  .msh-hero--experience .msh-hero__visual {
+    grid-area: unset;
+    order: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: clamp(0.85rem, 2.5vh, 1.5rem);
+    padding-bottom: 0;
+    overflow: visible;
+    pointer-events: auto;
+  }
+
+  .msh-hero--experience .msh-hero__sculpture-anchor {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+    line-height: 0;
+  }
+
+  .msh-hero--experience .msh-hero__figure,
+  .msh-hero--experience .msh-hero__figure.msh-hero__figure--hero-video {
+    margin: 0 auto !important;
+    width: 100%;
+    max-width: min(100%, 42rem);
+    transform: none !important;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+  }
+
+  .msh-hero--experience .msh-hero__figure--hero-video .msh-hero__hero-video {
+    display: block;
+    width: 100% !important;
+    height: auto !important;
+    max-width: none !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    object-fit: contain !important;
+    object-position: center bottom !important;
+  }
+
+  .msh-hero--experience .msh-hero__sound {
+    top: 0.75rem;
+    right: 0.75rem;
+    bottom: auto;
+    left: auto;
+    z-index: 6;
+  }
+
+  .msh-hero--experience .msh-hero__brand {
+    margin-bottom: 1.65rem;
+  }
+
+  .msh-hero--experience .msh-hero__title {
+    font-size: clamp(2.15rem, 6.2vw, 3rem);
+    line-height: 1.18;
+  }
+
+  .msh-hero--experience .msh-hero__title-line + .msh-hero__title-line {
+    margin-top: 0.22em;
+  }
+
+  .msh-hero--experience .msh-hero__subtitle {
+    margin-top: 1.75rem;
+    line-height: 1.7;
+  }
+
+  .msh-hero--experience .msh-hero__actions {
+    margin-top: 2.5rem;
+    gap: 1rem;
+  }
+}
+
+/* —— Mobile: M completa, SIN zoom/cover —— */
+@media (max-width: 768px) {
+  .msh-hero--experience {
+    min-height: 0 !important;
+    height: auto !important;
+    overflow: visible;
+  }
+
+  .msh-hero--experience .msh-hero__viewport {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 1.5rem;
+    min-height: 0 !important;
+    height: auto !important;
+    padding-block: 0.85rem 1.25rem !important;
+    grid-template-columns: none !important;
+    grid-template-rows: none !important;
+    overflow: visible !important;
+  }
+
+  .msh-hero--experience .msh-hero__visual {
+    order: 0 !important;
+    position: relative !important;
+    z-index: 1 !important;
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    grid-area: unset !important;
+    pointer-events: auto;
+  }
+
+  .msh-hero--experience .msh-hero__sculpture-anchor {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 0;
+    overflow: visible !important;
+  }
+
+  /* Vídeo íntegro: contain + auto. Nunca cover. */
+  .msh-hero--experience .msh-hero__figure,
+  .msh-hero--experience .msh-hero__figure.msh-hero__figure--hero-video {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+    overflow: visible !important;
+    line-height: 0 !important;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+    background: #000 !important;
+  }
+
+  .msh-hero--experience .msh-hero__figure--hero-video .msh-hero__hero-video {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    object-fit: contain !important;
+    object-position: center bottom !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    background: #000 !important;
+  }
+
+  .msh-hero--experience .msh-hero__floor-stage {
+    position: relative !important;
+    inset: auto !important;
+    left: auto !important;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 1.15rem 0 0 !important;
+    padding: 0.15rem 0 0.35rem !important;
+    transform: none !important;
+    perspective: 640px !important;
+    perspective-origin: 50% 0% !important;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .msh-hero--experience.msh-hero--copy-fixed .msh-hero__badge--floor,
+  .msh-hero--experience .msh-hero__badge--floor,
+  .msh-hero--experience.msh-hero--copy-fixed .msh-hero__badge--floor--visible,
+  .msh-hero--experience.msh-hero--copy-fixed .msh-hero__badge--floor--enter,
+  .msh-hero--experience.msh-hero--copy-fixed .msh-hero__badge--floor--hidden {
+    position: relative !important;
+    left: 50% !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    display: block !important;
+    width: max-content !important;
+    max-width: min(100%, 22rem) !important;
+    margin: 0 !important;
+    transform: translateX(-50%) rotateX(52deg) rotateZ(-1deg) scale(1.02) !important;
+    transform-origin: 50% 0% !important;
+  }
+
+  .msh-hero--experience.msh-hero--copy-fixed .msh-hero__badge--floor--enter {
+    animation: msh-hero-badge-floor-rise-experience-mobile 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+  }
+
+  .msh-hero--experience .msh-hero__badge--floor .msh-hero__badge-text {
+    font-size: clamp(1.75rem, 8.5vw, 2.4rem) !important;
+    letter-spacing: 0.14em !important;
+  }
+
+  .msh-hero--experience .msh-hero__sound {
+    top: 0.35rem !important;
+    right: 0.35rem !important;
+    bottom: auto !important;
+    left: auto !important;
+    z-index: 6;
+    gap: 0.32rem;
+    padding: 0.26rem 0.45rem !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    background: rgba(0, 0, 0, 0.32) !important;
+    color: rgba(255, 255, 255, 0.58) !important;
+    font-size: 0.52rem !important;
+    letter-spacing: 0.05em !important;
+  }
+
+  .msh-hero--experience .msh-hero__sound-dot {
+    width: 0.28rem;
+    height: 0.28rem;
+  }
+
+  .msh-hero--experience .msh-hero__content {
+    order: 1 !important;
+    position: relative !important;
+    z-index: 2 !important;
+    flex: 0 0 auto !important;
+    margin: 0.85rem 0 0 !important;
+    max-width: none !important;
+    transform: none !important;
+    background: #000;
+    grid-area: unset !important;
+  }
+
+  .msh-hero--experience .msh-hero__brand {
+    margin-bottom: 1.75rem;
+  }
+
+  .msh-hero--experience .msh-hero__title {
+    font-size: clamp(1.95rem, 8.5vw, 2.45rem);
+    line-height: 1.2;
+    letter-spacing: -0.028em;
+  }
+
+  .msh-hero--experience .msh-hero__title-line + .msh-hero__title-line {
+    margin-top: 0.26em;
+  }
+
+  .msh-hero--experience .msh-hero__title-line--accent {
+    margin-top: 0.3em;
+  }
+
+  .msh-hero--experience .msh-hero__subtitle {
+    margin-top: 1.85rem;
+    max-width: none;
+    font-size: 0.98rem;
+    line-height: 1.72;
+  }
+
+  .msh-hero--experience .msh-hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: 1.85rem;
+    margin-bottom: 0;
+    gap: 0.9rem;
+  }
+
+  .msh-hero--experience .msh-hero__actions .msh-btn--cta {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .msh-hero--experience .msh-hero__content,
+  .msh-hero--experience .msh-hero__visual {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

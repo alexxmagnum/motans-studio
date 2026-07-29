@@ -1,4 +1,4 @@
-/** Vídeo en panel del hero — sustituye escultura PNG; textos siempre visibles. */
+/** Vídeo en panel del hero — ambient muted; unmute opcional (Fase 2). */
 
 export const MS_SITE_HOME_VIDEO_SPLASH_BLOCK_ID =
   "MOTANS_STUDIO_HOME_PANEL_VIDEO_V8" as const;

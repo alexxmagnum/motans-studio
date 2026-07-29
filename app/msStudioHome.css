@@ -77,8 +77,10 @@ body:has(.ms-page--planes) {
 
 .ms-site--dark-premium .msh-brand {
   display: inline-flex;
+  flex-direction: row;
   align-items: center;
-  gap: 0.6rem;
+  justify-content: center;
+  gap: 0;
   text-decoration: none !important;
   color: var(--msh-ink) !important;
   justify-self: start;
@@ -93,9 +95,10 @@ body:has(.ms-page--planes) {
 .ms-site--dark-premium .msh-brand__mark {
   display: block;
   width: auto;
-  height: 58px;
-  max-width: 104px;
+  height: 48px;
+  max-width: 96px;
   object-fit: contain;
+  object-position: left center;
   background: transparent;
 }
 
@@ -340,15 +343,13 @@ body:has(.ms-page--planes) {
   margin-top: -0.35rem;
 }
 
-/* Rail editorial único — misma columna de logo a footer */
+/* Rail editorial único — misma columna de logo a contenido (footer gestiona su propio padding) */
 .ms-site--dark-premium .ms-header__inner,
 .ms-site--dark-premium .ms-dp-header__inner,
 .msh-hero__viewport,
 .msh-continuity__shell,
 .mscap-rail,
-.ms-page--studio-home .ms-dp-shell,
-.ms-site--dark-premium .ms-studio-footer__hairline,
-.ms-site--dark-premium .ms-studio-footer__inner {
+.ms-page--studio-home .ms-dp-shell {
   box-sizing: border-box;
   width: 100% !important;
   max-width: var(--msh-max) !important;
@@ -769,7 +770,7 @@ body:has(.ms-page--planes) {
   margin-top: 0.35rem;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1024px) {
   .msh-continuity__catalog--cards.ms-dp-trio {
     grid-template-columns: 1fr;
   }
@@ -1718,12 +1719,17 @@ body:has(.ms-page--planes) {
   }
 
   .ms-site--dark-premium .msh-brand__mark {
-    height: 58px;
-    max-width: 104px;
+    height: 42px;
+    max-width: 88px;
   }
 
   .msh-hero {
     min-height: calc(100svh - var(--msh-header-h));
+  }
+
+  .msh-hero.msh-hero--experience {
+    min-height: 0 !important;
+    height: auto !important;
   }
 
   .msh-hero__viewport {
@@ -1733,6 +1739,11 @@ body:has(.ms-page--planes) {
     gap: 0;
     min-height: calc(100svh - var(--msh-header-h));
     padding-block: clamp(0.85rem, 2.5vh, 1.25rem) clamp(0.35rem, 1vh, 0.65rem);
+  }
+
+  .msh-hero--experience .msh-hero__viewport {
+    min-height: 0 !important;
+    height: auto !important;
   }
 
   .msh-hero__content {
@@ -1754,11 +1765,69 @@ body:has(.ms-page--planes) {
     margin-bottom: 3.5vh;
   }
 
+  /* Experience: NUNCA overlay en móvil — texto debajo del splash */
+  .msh-hero.msh-hero--experience {
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  .msh-hero--experience .msh-hero__viewport {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: none !important;
+    grid-template-rows: none !important;
+    align-content: unset !important;
+    gap: 1.5rem !important;
+    min-height: 0 !important;
+    height: auto !important;
+    padding-block: 0.85rem 1.25rem !important;
+  }
+
+  .msh-hero--experience .msh-hero__visual {
+    grid-area: unset !important;
+    order: 0 !important;
+    position: relative !important;
+    z-index: 1 !important;
+    align-self: stretch !important;
+    justify-self: stretch !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding-bottom: 0 !important;
+    flex: 0 0 auto !important;
+    overflow: visible !important;
+  }
+
+  .msh-hero--experience .msh-hero__sculpture-anchor {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    padding-bottom: 0 !important;
+    overflow: visible !important;
+  }
+
+  .msh-hero--experience .msh-hero__content {
+    grid-area: unset !important;
+    order: 1 !important;
+    position: relative !important;
+    z-index: 2 !important;
+    align-self: stretch !important;
+    justify-self: stretch !important;
+    margin: 0.5rem 0 0 !important;
+    flex: 0 0 auto !important;
+    background: #000;
+  }
+
   .msh-hero__figure {
     width: auto;
     max-width: none;
     margin: 0 auto;
     transform: translate(-0.75rem, -1.45rem);
+  }
+
+  .msh-hero--experience .msh-hero__figure,
+  .msh-hero--experience .msh-hero__figure.msh-hero__figure--hero-video {
+    transform: none !important;
+    margin: 0 !important;
   }
 
   .msh-hero__visual-img {
@@ -1819,8 +1888,10 @@ body:has(.ms-page--planes) {
 }
 
 /* —— Volver (todas las páginas excepto home) —— */
-.ms-site--dark-premium {
-  --msh-header-h: 5.75rem;
+@media (min-width: 961px) {
+  .ms-site--dark-premium {
+    --msh-header-h: 5.75rem;
+  }
 }
 
 .ms-page-back-wrap {
@@ -1886,84 +1957,4 @@ body:has(.ms-page--planes) {
   transform: translateX(-3px);
 }
 
-/* —— Footer bar — legal + copyright only —— */
-.ms-site--dark-premium .ms-studio-footer {
-  margin-top: 0;
-  padding: 1.35rem 0 1.5rem;
-  background: #000000 !important;
-  background-image: none !important;
-  color: rgba(255, 255, 255, 0.42);
-  font-family: var(--msh-font, Inter, system-ui, sans-serif);
-  font-size: 0.8125rem;
-  text-align: left;
-  border-top: none;
-}
-
-.ms-site--dark-premium .ms-studio-footer__hairline {
-  height: 1px;
-  width: 100%;
-  margin: 0 auto 1.15rem;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(4, 162, 251, 0.22) 22%,
-    rgba(82, 235, 230, 0.22) 50%,
-    rgba(166, 225, 11, 0.22) 78%,
-    transparent 100%
-  );
-}
-
-.ms-site--dark-premium .ms-studio-footer__inner {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.45rem 0.75rem;
-}
-
-.ms-site--dark-premium .ms-studio-footer__copy,
-.ms-site--dark-premium .ms-studio-footer__lockup {
-  margin: 0;
-  color: rgba(255, 255, 255, 0.38);
-}
-
-.ms-site--dark-premium .ms-studio-footer__legal {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.35rem 0.45rem;
-}
-
-.ms-site--dark-premium .ms-studio-footer__legal-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-}
-
-.ms-site--dark-premium .ms-studio-footer__sep {
-  color: rgba(255, 255, 255, 0.2);
-  user-select: none;
-}
-
-.ms-site--dark-premium .ms-studio-footer__legal-link {
-  color: rgba(255, 255, 255, 0.48) !important;
-  text-decoration: none !important;
-  transition: color 0.18s ease;
-}
-
-.ms-site--dark-premium .ms-studio-footer__legal-link:hover {
-  color: rgba(255, 255, 255, 0.82) !important;
-}
-
-.ms-site--dark-premium .ms-studio-footer__lockup {
-  flex-basis: 100%;
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.28);
-}
-
-@media (min-width: 768px) {
-  .ms-site--dark-premium .ms-studio-footer__lockup {
-    flex-basis: auto;
-    margin-left: auto;
-    font-size: 0.8125rem;
-  }
-}
+/* —— Footer: estilos en app/msStudioFooter.css (Fase 6 premium) —— */

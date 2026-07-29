@@ -15,7 +15,7 @@ export const MS_STUDIO_SERVICES_EDITORIAL_COMPOSITION_BLOCK_ID =
 export const MS_STUDIO_HOME_HERO_BLOCK_ID = "MOTANS_STUDIO_PREMIUM_HERO_SPLIT_V2" as const;
 export const MS_STUDIO_HOME_REPOSITIONING_BLOCK_ID =
   "MOTANS_STUDIO_HOME_STRATEGIC_REPOSITIONING_V1" as const;
-/** Fase temporal: MotanOS oculto en experiencia pública (reactivable). */
+/** Fase 0: MotanOS congelado en superficie pública (reactivable). */
 export const MS_STUDIO_HOME_MOTANOS_PUBLIC_VISIBLE = MS_SITE_PUBLIC_MOTANOS_VISIBLE;
 
 export const MS_STUDIO_HOME_LOGO = {
@@ -45,16 +45,20 @@ export const MS_STUDIO_HOME_BRAND_COLORS = {
     "linear-gradient(90deg, #04a2fb 0%, #52ebe6 38%, #34cc68 62%, #a6e10b 100%)",
 } as const;
 
+/** Nav de referencia studio. MotanOS solo si MS_STUDIO_HOME_MOTANOS_PUBLIC_VISIBLE. */
 export const MS_STUDIO_HOME_NAV = [
   { href: "/", label: "Inicio" },
-  { href: MS_SITE_ROUTES.servicios, label: "Qué hacemos" },
-  { href: "/motanos", label: "MotanOS" },
-  { href: MS_SITE_ROUTES.contacto, label: "Contacto" },
+  { href: "/#servicios", label: "Qué hacemos" },
+  { href: "/#proceso", label: "Proceso" },
+  ...(MS_STUDIO_HOME_MOTANOS_PUBLIC_VISIBLE
+    ? ([{ href: "/motanos", label: "MotanOS" }] as const)
+    : ([] as const)),
+  { href: "/#contacto", label: "Contacto" },
 ] as const;
 
 export const MS_STUDIO_HOME_HEADER_CTA = {
   label: "Hablemos",
-  href: MS_SITE_ROUTES.contacto,
+  href: "/#contacto",
 } as const;
 
 export const MS_STUDIO_HOME_BRAND_WORDMARK = {
@@ -65,20 +69,21 @@ export const MS_STUDIO_HOME_BRAND_WORDMARK = {
 export const MS_STUDIO_HOME_HERO = {
   anchorId: "inicio",
   badge: "Motans Studio",
-  titleBeforeAccent: ["Diseñamos y", "construimos productos digitales"] as const,
+  titleBeforeAccent: ["Creamos herramientas digitales", "que simplifican el"] as const,
   titleAccentLine: {
-    before: "para empresas que quieren ",
-    accent: "crecer",
+    before: "",
+    accent: "trabajo",
     after: ".",
   } as const,
   subtitle:
-    "Desde webs premium hasta plataformas SaaS, automatización e inteligencia artificial. Creamos tecnología que ayuda a las empresas a vender más, ahorrar tiempo y crecer.",
+    "Desde una web hasta una plataforma SaaS, una automatización o una solución basada en inteligencia artificial. Cada herramienta se diseña para resolver un problema real.",
   tags: ["Webs", "SaaS", "Automatización", "IA"] as const,
-  cta: { label: "Conocer Motans Studio", href: MS_SITE_ROUTES.servicios },
+  /** CTA primario — conversión. */
+  cta: { label: "Hablemos", href: "/#contacto" },
   /** Conservado — visible solo si MS_SITE_PUBLIC_MOTANOS_VISIBLE. */
   secondaryCta: { label: "Explorar MotanOS", href: "/motanos" },
-  /** CTA secundario studio mientras MotanOS está oculto. */
-  secondaryCtaStudio: { label: "Hablemos", href: MS_SITE_ROUTES.contacto },
+  /** CTA secundario studio — explorar oferta. */
+  secondaryCtaStudio: { label: "Ver qué hacemos", href: "/#servicios" },
 } as const;
 
 /** Sección Qué construimos — catálogo Continuity en home. */
@@ -124,9 +129,9 @@ export const MS_STUDIO_HOME_CONTINUITY = {
   ],
 } as const;
 
-/** Cómo trabajamos — timeline ms-ladder / continuity chrome. */
+/** Cómo trabajamos — copy legacy; sección viva en msStudioProcessFoundation. */
 export const MS_STUDIO_HOME_PROCESS = {
-  anchorId: "como-trabajamos",
+  anchorId: "proceso",
   kicker: "Proceso",
   title: "Cómo trabajamos.",
   steps: [
@@ -155,8 +160,8 @@ export const MS_STUDIO_HOME_MOTANOS_LAB = {
 /** CTA final home. */
 export const MS_STUDIO_HOME_FINAL_CTA = {
   anchorId: "hablemos",
-  title: "¿Quieres mejorar tu negocio con tecnología?",
+  title: "¿Quieres mejorar tu empresa con tecnología?",
   lead:
     "Diseñamos, desarrollamos y evolucionamos productos digitales adaptados a cada empresa.",
-  cta: { label: "Hablemos", href: MS_SITE_ROUTES.contacto },
+  cta: { label: "Hablemos", href: "/#contacto" },
 } as const;

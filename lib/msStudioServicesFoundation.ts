@@ -1,6 +1,6 @@
 /**
  * Motans Studio — Capacidades premium V13.
- * Demos super premium (WebP) + carta MotanOS real.
+ * Demos super premium (WebP). Bloque MotanOS conservado internamente; oculto en superficie pública.
  */
 
 import { MS_SITE_ROUTES } from "./msSite1701Foundation.js";
@@ -78,6 +78,7 @@ export const MS_STUDIO_CAPABILITY_ASSETS = {
     frame: "landscape",
     kind: "demo",
   },
+  /** Asset conservado para reactivar MotanOS; no se monta en superficie pública. */
   motanosCarta: {
     src: "/capabilities/motanos-carta.webp",
     alt: "Carta digital MotanOS — Casa Motans, menú hostelería",
@@ -98,14 +99,15 @@ export const MS_STUDIO_CAPABILITIES = {
     after: ".",
   },
   lead:
-    "Creamos experiencias web, plataformas SaaS, automatizaciones y productos propios que simplifican operaciones y ayudan a crecer.",
+    "Creamos experiencias web, plataformas SaaS, automatizaciones e inteligencia artificial que simplifican operaciones y ayudan a crecer.",
   ctaPrimary: {
     label: "Ver qué hacemos",
     href: "#webs",
   },
+  /** CTA secundario studio — MotanOS fuera de superficie pública. */
   ctaSecondary: {
-    label: "Descubrir MotanOS",
-    href: MS_SITE_ROUTES.motanos,
+    label: "Hablemos",
+    href: "/#contacto",
   },
   blocks: [
     {
@@ -122,7 +124,7 @@ export const MS_STUDIO_CAPABILITIES = {
         "Diseño orientado a conversión",
       ],
       cta: "Solicitar proyecto web",
-      href: MS_SITE_ROUTES.solicitud,
+      href: "/#contacto",
       screens: [MS_STUDIO_CAPABILITY_ASSETS.websDemo],
     },
     {
@@ -138,8 +140,8 @@ export const MS_STUDIO_CAPABILITIES = {
         "Módulos activables por negocio",
         "Panel operativo unificado",
       ],
-      cta: "Ver planes SaaS",
-      href: MS_SITE_ROUTES.planes,
+      cta: "Solicitar proyecto SaaS",
+      href: "/#contacto",
       screens: [MS_STUDIO_CAPABILITY_ASSETS.saasDemo],
     },
     {
@@ -151,12 +153,12 @@ export const MS_STUDIO_CAPABILITIES = {
       description:
         "Conectamos herramientas, datos y procesos para liberar tiempo operativo.",
       proofPoints: [
-        "Flujos staff validados en tiempo real",
-        "Pedido QR → cocina sin fricción",
-        "Menos tareas manuales en hora punta",
+        "Flujos entre herramientas y datos",
+        "Menos tareas manuales en el día a día",
+        "Operativa más rápida y fiable",
       ],
-      cta: "Ver MotanOS Hostelería",
-      href: MS_SITE_ROUTES.hosteleria,
+      cta: "Solicitar automatización",
+      href: "/#contacto",
       screens: [MS_STUDIO_CAPABILITY_ASSETS.automationDemo],
     },
     {

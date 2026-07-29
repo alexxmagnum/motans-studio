@@ -8,9 +8,16 @@ import "./msSite1703Global.css";
 import "./msSite1703Obsessive.css";
 import "./msSiteDarkPremium.css";
 import "./msStudioHome.css";
+import "./msStudioWhy.css";
+import "./msStudioOffer.css";
+import "./msStudioProcess.css";
 import "./msSiteHomeSplash.css";
 import "./msStudioServices.css";
 import "./msStudioStampSplash.css";
+/* Experience last — otherwise splash.css wins on video size */
+import "./msStudioHeroExperience.css";
+/* Kill-switch móvil: anula caps desktop que filtraban a phone */
+import "./msStudioHeroMobileFix.css";
 /* Fase 6 — confianza / legales / footer (después del home para no pisar hero) */
 import "./msSiteConsent.css";
 import "./msStudioFooter.css";

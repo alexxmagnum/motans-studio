@@ -33,7 +33,9 @@ function validateLeadForm(data: LeadFormData, ui: MsSiteUiCopy): LeadFormErrors 
   }
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!data.email.trim() || !emailRegex.test(data.email)) {
+  if (!data.email.trim()) {
+    errors.email = ui.formRequiredEmail;
+  } else if (!emailRegex.test(data.email)) {
     errors.email = ui.formInvalidEmail;
   }
 
@@ -42,7 +44,7 @@ function validateLeadForm(data: LeadFormData, ui: MsSiteUiCopy): LeadFormErrors 
   }
 
   if (data.message.length > 500) {
-    errors.message = "500";
+    errors.message = ui.formMessageTooLong;
   }
 
   return errors;
@@ -164,14 +166,14 @@ export function LeadForm({
     return (
       <div className="ms-form ms-form__status ms-form__status--success" role="status">
         <h3 style={{ margin: "0 0 0.5rem", fontFamily: "var(--ms-font-display)" }}>
-          Mensaje enviado
+          {ui.formSuccessTitle}
         </h3>
         <p style={{ margin: 0, fontSize: "0.95rem" }}>
-          Gracias, {formData.name}. Te responderemos en {formData.email}.
+          {ui.formSuccessBody.replace("{name}", formData.name).replace("{email}", formData.email)}
         </p>
         <button
           type="button"
-          className="ms-btn ms-btn--ghost"
+          className="msh-btn msh-btn--cta"
           style={{ marginTop: "1.25rem" }}
           onClick={() => {
             setStatus("idle");
@@ -185,7 +187,7 @@ export function LeadForm({
             setSector("");
           }}
         >
-          Enviar otro mensaje
+          {ui.formSendAnother}
         </button>
       </div>
     );
@@ -198,7 +200,7 @@ export function LeadForm({
     <form onSubmit={handleSubmit} className={`ms-form${isPremium ? " ms-form--premium" : ""}`} noValidate>
       {status === "error" && (
         <div className="ms-form__status ms-form__status--error" role="alert">
-          {errorMessage || "Hubo un error. Inténtalo de nuevo."}
+          {errorMessage || ui.formErrorGeneric}
         </div>
       )}
 

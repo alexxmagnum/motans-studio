@@ -9,13 +9,14 @@
   --ms-dp-ink: #ffffff;
   --ms-dp-muted: rgba(255, 255, 255, 0.55);
   --ms-dp-border: rgba(255, 255, 255, 0.1);
-  --ms-dp-cyan: #0070f3;
-  --ms-dp-blue: #2d9af4;
-  --ms-dp-lime: #a6ff00;
-  --ms-dp-lime-deep: #8fea1e;
-  --ms-dp-aqua: #31d2c7;
-  --ms-dp-gradient: linear-gradient(90deg, var(--ms-dp-blue) 0%, var(--ms-dp-aqua) 48%, var(--ms-dp-lime) 100%);
-  --ms-dp-gradient-vertical: linear-gradient(180deg, var(--ms-dp-blue) 0%, var(--ms-dp-lime-deep) 100%);
+  /* Aliased to studio brand tokens (--msh-*) for a single palette */
+  --ms-dp-cyan: #04a2fb;
+  --ms-dp-blue: #04a2fb;
+  --ms-dp-lime: #a6e10b;
+  --ms-dp-lime-deep: #34cc68;
+  --ms-dp-aqua: #52ebe6;
+  --ms-dp-gradient: linear-gradient(90deg, #04a2fb 0%, #52ebe6 38%, #34cc68 62%, #a6e10b 100%);
+  --ms-dp-gradient-vertical: linear-gradient(180deg, #04a2fb 0%, #52ebe6 42%, #a6e10b 100%);
   --ms-dp-max: 76rem;
   --ms-dp-font: Inter, "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
 }

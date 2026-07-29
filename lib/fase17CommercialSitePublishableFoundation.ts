@@ -16,7 +16,7 @@ export const FASE_17_PUBLISHABLE_ROUTES = {
   home: "/",
   planes: "/planes",
   solicitud: "/solicitud",
-  legal: "/legal",
+  legal: "/legal/aviso-legal",
   contacto: "/contacto",
   hosteleria: "/motanos/hosteleria",
 } as const;
@@ -39,7 +39,7 @@ export const FASE_17_PLAN_07_22_4_CHECKLIST: readonly {
   { id: "lead", route: "/contacto", label: "Formulario lead (/contacto)" },
   { id: "assisted", route: "/solicitud", label: "Solicitud asistida" },
   { id: "market_es", route: "/planes", label: "España activa; otros países próximamente" },
-  { id: "legal", route: "/legal", label: "Legales básicos (privacidad, cookies, términos)" },
+  { id: "legal", route: "/legal/aviso-legal", label: "Legales básicos (aviso, privacidad, cookies, condiciones)" },
 ];
 
 export const FASE_17_PUBLISHABLE_STATUS = {

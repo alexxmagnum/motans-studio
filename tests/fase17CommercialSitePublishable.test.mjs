@@ -17,14 +17,14 @@ describe("Fase 17 commercial site publishable", () => {
     assert.ok(routes.includes("/"));
     assert.ok(routes.includes("/planes"));
     assert.ok(routes.includes("/solicitud"));
-    assert.ok(routes.includes("/legal"));
+    assert.ok(routes.includes("/legal/aviso-legal"));
   });
 
   it("should include publishable routes in sitemap", () => {
     const seo = readFileSync(join(root, "lib", "msSite1703SeoFoundation.ts"), "utf-8");
     assert.ok(seo.includes('"/planes"'));
     assert.ok(seo.includes('"/solicitud"'));
-    assert.ok(seo.includes('"/legal"'));
+    assert.ok(seo.includes('"/legal/aviso-legal"'));
   });
 
   it("should wire lead and assisted forms to public API paths", () => {

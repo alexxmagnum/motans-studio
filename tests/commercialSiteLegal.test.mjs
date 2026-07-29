@@ -1,6 +1,5 @@
 // Commercial Site Legal Tests
-// Fase 17 - Block 4: SEO/legal/performance closure
-// Fase 6 — hub + plantillas legales
+// Fase 4 — cuatro documentos mínimos (aviso, privacidad, cookies, condiciones)
 
 import { describe, it } from "node:test";
 import assert from "node:assert";
@@ -16,70 +15,64 @@ const libDir = join(__dirname, "..", "lib");
 
 function readLegalSurface() {
   return [
-    readFileSync(join(appDir, "legal", "page.tsx"), "utf-8"),
+    readFileSync(join(appDir, "legal", "aviso-legal", "page.tsx"), "utf-8"),
     readFileSync(join(componentsDir, "MsSiteLegalDocument.tsx"), "utf-8"),
     readFileSync(join(libDir, "msSiteLegalFoundation.ts"), "utf-8"),
   ].join("\n");
 }
 
 describe("Commercial Site Legal", () => {
-  it("should have legal page", () => {
-    const legalPath = join(appDir, "legal", "page.tsx");
-    assert.ok(existsSync(legalPath), "legal page should exist");
+  it("should have legal redirect at /legal", () => {
+    assert.ok(existsSync(join(appDir, "legal", "page.tsx")), "legal page should exist");
   });
 
-  it("should have contact information in legal page", () => {
+  it("should have contact information in legal documents", () => {
     const content = readLegalSurface().toLowerCase();
     assert.ok(
       content.includes("motans studio") ||
-        content.includes("contacto") ||
+        content.includes("correo") ||
         content.includes("email"),
-      "legal page should have contact information",
+      "legal documents should have contact information",
     );
   });
 
-  it("should have privacy mention in legal page", () => {
+  it("should have privacy document", () => {
     const content = readLegalSurface().toLowerCase();
-    assert.ok(content.includes("privacidad"), "legal page should mention privacy");
+    assert.ok(content.includes("privacidad"), "should mention privacy");
   });
 
-  it("should mention cookies in legal page", () => {
+  it("should mention cookies", () => {
     const content = readLegalSurface().toLowerCase();
     assert.ok(
       content.includes("cookies") || content.includes("cookie"),
-      "legal page should mention cookies",
+      "should mention cookies",
     );
   });
 
-  it("should have terms of use mention", () => {
+  it("should have terms of use", () => {
     const content = readLegalSurface().toLowerCase();
     assert.ok(
-      content.includes("términos") ||
-        content.includes("condiciones") ||
-        content.includes("uso"),
-      "legal page should mention terms of use",
+      content.includes("condiciones") || content.includes("uso"),
+      "should mention terms of use",
     );
   });
 
-  it("should expose legal document routes", () => {
-    const routes = [
-      "aviso-legal",
-      "privacidad",
-      "cookies",
-      "condiciones",
-      "servicios",
-      "contacto-legal",
-      "accesibilidad",
-    ];
+  it("should expose exactly four legal document routes", () => {
+    const routes = ["aviso-legal", "privacidad", "cookies", "condiciones"];
     for (const route of routes) {
       assert.ok(
         existsSync(join(appDir, "legal", route, "page.tsx")),
         `legal/${route} page should exist`,
       );
     }
+    const foundation = readFileSync(join(libDir, "msSiteLegalFoundation.ts"), "utf-8");
+    assert.ok(!foundation.includes('id: "servicios"'));
+    assert.ok(!foundation.includes("contacto-legal"));
+    assert.ok(!foundation.includes('id: "accesibilidad"'));
+    assert.ok(!foundation.includes("MS_SITE_LEGAL_HUB"));
   });
 
-  it("should link back to home from legal page", () => {
+  it("should link back to home from legal pages", () => {
     const layoutPath = join(__dirname, "..", "app", "layout.tsx");
     const backFoundationPath = join(__dirname, "..", "lib", "msSitePageBackFoundation.ts");
     const layout = readFileSync(layoutPath, "utf-8");
@@ -88,28 +81,26 @@ describe("Commercial Site Legal", () => {
     assert.ok(
       layout.includes("MsSitePageBackLink") &&
         foundation.includes("href: MS_SITE_ROUTES.home") &&
-        foundation.includes("[MS_SITE_ROUTES.legal]"),
-      "legal route should use global back link to home via layout",
+        foundation.includes("[MS_SITE_ROUTES.legalAviso]"),
+      "legal routes should use global back link to home via layout",
     );
   });
 
-  it("should have footer with legal link in layout", () => {
-    const footerPath = join(__dirname, "..", "components", "MsStudioFooter.tsx");
-    const foundationPath = join(__dirname, "..", "lib", "msSiteFooterFoundation.ts");
+  it("should have footer with legal links", () => {
+    const footerPath = join(componentsDir, "MsStudioFooter.tsx");
+    const foundationPath = join(libDir, "msSiteFooterFoundation.ts");
     const content = `${readFileSync(footerPath, "utf-8")}\n${readFileSync(foundationPath, "utf-8")}`;
 
     assert.ok(
-      content.includes('href="/legal"') ||
-        content.includes("MS_SITE_ROUTES.legal") ||
-        content.includes("MS_SITE_FOOTER"),
-      "footer should link to legal page",
+      content.includes("MS_SITE_ROUTES.legalAviso") ||
+        content.includes("MS_SITE_FOOTER_LEGAL") ||
+        content.includes("/legal/"),
+      "footer should link to legal pages",
     );
   });
 
   it("should have copyright notice", () => {
-    const footerPath = join(__dirname, "..", "components", "MsStudioFooter.tsx");
-    const content = readFileSync(footerPath, "utf-8");
-
+    const content = readFileSync(join(componentsDir, "MsStudioFooter.tsx"), "utf-8");
     assert.ok(
       content.includes("©") || content.toLowerCase().includes("copyright"),
       "should have copyright notice",
@@ -117,10 +108,9 @@ describe("Commercial Site Legal", () => {
   });
 
   it("should mention all rights reserved or similar", () => {
-    const footerPath = join(__dirname, "..", "components", "MsStudioFooter.tsx");
-    const uiI18nPath = join(__dirname, "..", "lib", "msSiteUiI18nFoundation.ts");
-    const content = `${readFileSync(footerPath, "utf-8")}\n${readFileSync(uiI18nPath, "utf-8")}`;
-
+    const footer = readFileSync(join(componentsDir, "MsStudioFooter.tsx"), "utf-8");
+    const ui = readFileSync(join(libDir, "msSiteUiI18nFoundation.ts"), "utf-8");
+    const content = `${footer}\n${ui}`;
     assert.ok(
       content.toLowerCase().includes("todos los derechos") ||
         content.toLowerCase().includes("all rights") ||

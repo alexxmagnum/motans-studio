@@ -1,6 +1,5 @@
 // Commercial Site Legal Tests
-// Fase 17 - Block 4: SEO/legal/performance closure
-// Fase 6 — hub + plantillas legales
+// Fase 4 — cuatro documentos mínimos
 
 import { describe, it } from "node:test";
 import assert from "node:assert";
@@ -16,7 +15,7 @@ const libDir = join(__dirname, "..", "lib");
 
 function readLegalSurface(): string {
   return [
-    readFileSync(join(appDir, "legal", "page.tsx"), "utf-8"),
+    readFileSync(join(appDir, "legal", "aviso-legal", "page.tsx"), "utf-8"),
     readFileSync(join(componentsDir, "MsSiteLegalDocument.tsx"), "utf-8"),
     readFileSync(join(libDir, "msSiteLegalFoundation.ts"), "utf-8"),
   ].join("\n");
@@ -24,15 +23,14 @@ function readLegalSurface(): string {
 
 describe("Commercial Site Legal", () => {
   it("should have legal page", () => {
-    const legalPath = join(appDir, "legal", "page.tsx");
-    assert.ok(existsSync(legalPath), "legal page should exist");
+    assert.ok(existsSync(join(appDir, "legal", "page.tsx")), "legal page should exist");
   });
 
   it("should have contact information in legal page", () => {
     const content = readLegalSurface().toLowerCase();
     assert.ok(
       content.includes("motans studio") ||
-        content.includes("contacto") ||
+        content.includes("correo") ||
         content.includes("email"),
       "legal page should have contact information",
     );
@@ -54,9 +52,7 @@ describe("Commercial Site Legal", () => {
   it("should have terms of use mention", () => {
     const content = readLegalSurface().toLowerCase();
     assert.ok(
-      content.includes("términos") ||
-        content.includes("condiciones") ||
-        content.includes("uso"),
+      content.includes("condiciones") || content.includes("uso"),
       "legal page should mention terms of use",
     );
   });
@@ -81,10 +77,11 @@ describe("Commercial Site Legal", () => {
     const content = `${readFileSync(footerPath, "utf-8")}\n${readFileSync(foundationPath, "utf-8")}`;
 
     assert.ok(
-      content.includes('href="/legal"') ||
-        content.includes("MS_SITE_ROUTES.legal") ||
-        content.includes("MS_SITE_FOOTER"),
-      "footer should link to legal page",
+      content.includes("MS_SITE_ROUTES.legalAviso") ||
+        content.includes("MS_SITE_ROUTES.legalPrivacidad") ||
+        content.includes("MS_SITE_FOOTER_LEGAL") ||
+        content.includes("/legal/"),
+      "footer should link to legal pages",
     );
   });
 

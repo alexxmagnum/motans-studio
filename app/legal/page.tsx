@@ -1,10 +1,32 @@
-import type React from "react";
-import type { Metadata } from "next";
-import { MsSiteLegalHub } from "../../components/MsSiteLegalDocument.js";
-import { createMsSitePageMetadata } from "../../lib/msSite1703SeoFoundation.js";
+"use client";
 
-export const metadata: Metadata = createMsSitePageMetadata("legal");
+/**
+ * /legal ya no es un hub de «Información legal».
+ * Redirige al Aviso legal.
+ */
+import Link from "next/link";
+import { useEffect, type ReactElement } from "react";
+import { MS_SITE_ROUTES } from "../../lib/msSite1701Foundation.js";
 
-export default function LegalPage(): React.ReactElement {
-  return <MsSiteLegalHub />;
+export default function LegalHubRedirectPage(): ReactElement {
+  useEffect(() => {
+    window.location.replace(MS_SITE_ROUTES.legalAviso);
+  }, []);
+
+  return (
+    <main
+      className="ms-page"
+      style={{
+        minHeight: "50vh",
+        display: "grid",
+        placeItems: "center",
+        padding: "2rem",
+        textAlign: "center",
+      }}
+    >
+      <p>
+        <Link href={MS_SITE_ROUTES.legalAviso}>Ir al Aviso legal</Link>
+      </p>
+    </main>
+  );
 }

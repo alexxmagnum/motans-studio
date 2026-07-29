@@ -1,25 +1,25 @@
 /**
- * Motans Studio — páginas legales (Fase 6).
- * Contenido claramente marcado como plantilla editable — no es asesoramiento legal.
+ * Motans Studio — documentos legales mínimos (producción).
+ * Solo: Aviso legal, Privacidad, Cookies, Condiciones de uso.
  */
 
-export const MS_SITE_LEGAL_BLOCK_ID = "MS_SITE_LEGAL_PAGES_V1" as const;
+import {
+  MS_SITE_IDENTITY,
+  MS_SITE_OFFICIAL_ORIGIN,
+} from "./msSiteIdentityFoundation.js";
+
+export const MS_SITE_LEGAL_BLOCK_ID = "MS_SITE_LEGAL_PAGES_V3" as const;
 
 export type MsSiteLegalPageId =
-  | "hub"
   | "aviso-legal"
   | "privacidad"
   | "cookies"
-  | "condiciones"
-  | "servicios"
-  | "contacto-legal"
-  | "accesibilidad";
+  | "condiciones";
 
 export type MsSiteLegalSection = {
   readonly heading: string;
   readonly paragraphs: readonly string[];
   readonly bullets?: readonly string[];
-  readonly editableNote?: string;
 };
 
 export type MsSiteLegalPage = {
@@ -28,46 +28,62 @@ export type MsSiteLegalPage = {
   readonly title: string;
   readonly description: string;
   readonly kicker: string;
-  readonly templateBanner: string;
   readonly sections: readonly MsSiteLegalSection[];
 };
 
-const TEMPLATE_BANNER =
-  "Plantilla editable — contenido orientativo pendiente de revisión legal profesional. No constituye asesoramiento jurídico.";
+/** Identificación del titular — solo en Aviso legal. */
+const MS_SITE_LEGAL_IDENTIFICATION = [
+  `Nombre comercial: ${MS_SITE_IDENTITY.brand}`,
+  `Titular: ${MS_SITE_IDENTITY.legalName}`,
+  `NIE: ${MS_SITE_IDENTITY.taxId}`,
+  "Domicilio:",
+  "Av. Castellón 1",
+  "Bloque 2",
+  "Escalera 3",
+  "Apartamento 231",
+  `${MS_SITE_IDENTITY.address.postalCode} ${MS_SITE_IDENTITY.address.addressLocality}`,
+  MS_SITE_IDENTITY.address.addressRegion,
+  MS_SITE_IDENTITY.address.countryName,
+  `Correo electrónico: ${MS_SITE_IDENTITY.email}`,
+  `Teléfono: ${MS_SITE_IDENTITY.phone}`,
+  `WhatsApp: ${MS_SITE_IDENTITY.phone}`,
+  `Sitio web: ${MS_SITE_OFFICIAL_ORIGIN}`,
+] as const;
 
 export const MS_SITE_LEGAL_PAGES: readonly MsSiteLegalPage[] = [
   {
     id: "aviso-legal",
     path: "/legal/aviso-legal",
     title: "Aviso legal",
-    description: "Información societaria y condiciones de uso del sitio Motans Studio.",
+    description: "Identificación del titular y marco legal del sitio Motans Studio.",
     kicker: "Legal",
-    templateBanner: TEMPLATE_BANNER,
     sections: [
       {
-        heading: "Titular del sitio",
-        paragraphs: [
-          "[EDITAR] Razón social / nombre comercial: Motans Studio.",
-          "[EDITAR] NIF/CIF, domicilio social y datos de registro mercantil.",
-        ],
-        editableNote: "Completar con datos societarios reales antes de producción.",
+        heading: "Identificación",
+        paragraphs: MS_SITE_LEGAL_IDENTIFICATION,
       },
       {
-        heading: "Objeto",
+        heading: "Objeto del sitio web",
         paragraphs: [
-          "Este sitio web ofrece información comercial sobre los servicios de Motans Studio: diseño y desarrollo de productos digitales, software a medida, plataformas SaaS, automatización e inteligencia artificial.",
+          "Este sitio informa sobre los servicios de Motans Studio: software a medida, plataformas SaaS, aplicaciones web, automatización, integraciones, diseño UX/UI e inteligencia artificial aplicada.",
         ],
       },
       {
         heading: "Propiedad intelectual",
         paragraphs: [
-          "Los textos, marcas, logotipos, diseños y código visibles en este sitio están protegidos. Queda prohibida su reproducción sin autorización escrita de Motans Studio.",
+          "Los textos, marcas, logotipos, diseños y código de este sitio pertenecen a Motans Studio o a sus legítimos titulares. Queda prohibida su reproducción sin autorización escrita.",
         ],
       },
       {
         heading: "Limitación de responsabilidad",
         paragraphs: [
-          "La información publicada tiene carácter orientativo. Motans Studio no garantiza la ausencia de errores tipográficos ni la vigencia permanente de precios o disponibilidad descritos en el sitio.",
+          "La información del sitio es orientativa. Motans Studio no garantiza la ausencia de errores ni la vigencia permanente de descripciones hasta confirmación por escrito o contrato.",
+        ],
+      },
+      {
+        heading: "Legislación y jurisdicción",
+        paragraphs: [
+          "Este aviso se rige por la legislación española. Para cualquier controversia, serán competentes los juzgados del domicilio del titular, salvo norma imperativa en contrario.",
         ],
       },
     ],
@@ -76,38 +92,50 @@ export const MS_SITE_LEGAL_PAGES: readonly MsSiteLegalPage[] = [
     id: "privacidad",
     path: "/legal/privacidad",
     title: "Política de privacidad",
-    description: "Cómo Motans Studio trata los datos personales en el sitio comercial.",
+    description: "Tratamiento de datos personales en el sitio Motans Studio.",
     kicker: "Privacidad",
-    templateBanner: TEMPLATE_BANNER,
     sections: [
       {
-        heading: "Responsable del tratamiento",
+        heading: "Datos que se recogen",
         paragraphs: [
-          "[EDITAR] Identidad y datos de contacto del responsable del tratamiento.",
-          "Email de contacto de privacidad: [EDITAR] privacy@motans.studio",
+          "Los datos que facilitas en el formulario de contacto: nombre, email y, si los aportas, empresa, sector, tipo de proyecto y mensaje.",
         ],
       },
       {
-        heading: "Datos que tratamos",
+        heading: "Finalidad",
         paragraphs: [
-          "Datos facilitados en formularios de contacto (nombre, email, empresa, mensaje y preferencias de proyecto).",
+          "Responder a tu solicitud y gestionar la relación comercial derivada.",
         ],
-        bullets: [
-          "Finalidad: responder solicitudes y gestionar la relación comercial.",
-          "Base jurídica: [EDITAR] consentimiento / medidas precontractuales.",
-          "Conservación: el tiempo necesario para la relación y obligaciones legales.",
+      },
+      {
+        heading: "Base jurídica",
+        paragraphs: [
+          "Tu consentimiento y, cuando aplique, la adopción de medidas precontractuales a petición tuya (art. 6.1.a y 6.1.b del RGPD).",
+        ],
+      },
+      {
+        heading: "Conservación",
+        paragraphs: [
+          "Durante el tiempo necesario para atender la solicitud, la relación comercial y las obligaciones legales aplicables.",
+        ],
+      },
+      {
+        heading: "Destinatarios",
+        paragraphs: [
+          "No se ceden datos a terceros salvo proveedores necesarios para operar el sitio y el correo (por ejemplo, hosting), o cuando lo exija la ley.",
         ],
       },
       {
         heading: "Derechos",
         paragraphs: [
-          "Puedes ejercer acceso, rectificación, supresión, oposición, limitación y portabilidad conforme a la normativa aplicable, contactando en la dirección indicada.",
+          "Puedes ejercer acceso, rectificación, supresión, oposición, limitación y portabilidad. También puedes reclamar ante la Agencia Española de Protección de Datos.",
         ],
       },
       {
-        heading: "Encargados y transferencias",
+        heading: "Contacto",
         paragraphs: [
-          "[EDITAR] Proveedores de hosting, email y herramientas de gestión. Indicar si hay transferencias internacionales y garantías aplicadas.",
+          `Para ejercer tus derechos o consultas de privacidad: ${MS_SITE_IDENTITY.email}.`,
+          "La identificación completa del responsable figura en el Aviso legal.",
         ],
       },
     ],
@@ -116,39 +144,32 @@ export const MS_SITE_LEGAL_PAGES: readonly MsSiteLegalPage[] = [
     id: "cookies",
     path: "/legal/cookies",
     title: "Política de cookies",
-    description: "Uso de cookies y tecnologías similares en motans.studio.",
+    description: "Cookies y gestión del consentimiento en Motans Studio.",
     kicker: "Cookies",
-    templateBanner: TEMPLATE_BANNER,
     sections: [
       {
-        heading: "Qué son las cookies",
+        heading: "Qué cookies utiliza el sitio",
         paragraphs: [
-          "Las cookies son pequeños archivos que el sitio puede almacenar en tu dispositivo para recordar preferencias o medir el uso del servicio.",
+          "Actualmente solo se usan cookies o almacenamiento local necesarios para recordar tu preferencia de consentimiento.",
         ],
       },
       {
-        heading: "Categorías",
-        paragraphs: ["Clasificamos las cookies en las siguientes categorías:"],
-        bullets: [
-          "Necesarias — imprescindibles para el funcionamiento del sitio (siempre activas).",
-          "Analíticas — miden tráfico y uso (solo con consentimiento).",
-          "Marketing — publicidad y remarketing (solo con consentimiento).",
-          "Preferencias — recuerdan opciones de interfaz (solo con consentimiento).",
-          "Funcionales — mejoran funciones no esenciales (solo con consentimiento).",
+        heading: "Para qué sirven",
+        paragraphs: [
+          "Guardar si aceptas, rechazas o configuras el uso de cookies no esenciales. No se usan cookies de analítica ni de marketing mientras no se activen y se documenten aquí.",
         ],
       },
       {
-        heading: "Gestión del consentimiento",
+        heading: "Cómo configurarlas",
         paragraphs: [
-          "Puedes aceptar, rechazar o configurar categorías desde el panel de cookies del sitio. Puedes cambiar tu elección en cualquier momento desde el enlace «Configurar cookies» del pie de página.",
+          "Desde el panel de cookies del sitio puedes aceptar, rechazar o elegir categorías. También desde «Configurar cookies» en el pie de página.",
         ],
       },
       {
-        heading: "Listado detallado",
+        heading: "Cómo retirarlas",
         paragraphs: [
-          "[EDITAR] Tabla de cookies concretas (nombre, proveedor, duración, finalidad) cuando se activen integraciones (Analytics, Meta Pixel, etc.).",
+          "Puedes cambiar o retirar tu consentimiento en cualquier momento desde «Configurar cookies». También puedes borrar las cookies desde la configuración de tu navegador.",
         ],
-        editableNote: "Mantener sincronizado con el panel de consentimiento.",
       },
     ],
   },
@@ -156,124 +177,38 @@ export const MS_SITE_LEGAL_PAGES: readonly MsSiteLegalPage[] = [
     id: "condiciones",
     path: "/legal/condiciones",
     title: "Condiciones de uso",
-    description: "Condiciones de acceso y uso del sitio web de Motans Studio.",
+    description: "Condiciones de acceso y uso del sitio Motans Studio.",
     kicker: "Uso",
-    templateBanner: TEMPLATE_BANNER,
     sections: [
-      {
-        heading: "Aceptación",
-        paragraphs: [
-          "El acceso y uso de este sitio implica la aceptación de estas condiciones. Si no estás de acuerdo, te rogamos que no utilices el sitio.",
-        ],
-      },
       {
         heading: "Uso permitido",
         paragraphs: [
-          "El sitio es una vitrina comercial informativa. Queda prohibido el uso fraudulento, la extracción masiva de contenidos o cualquier actividad que degrade la seguridad o disponibilidad del servicio.",
+          "El sitio es informativo y comercial. Debes usarlo de forma lícita. Queda prohibido el uso fraudulento, la extracción masiva de contenidos o cualquier acción que afecte a la seguridad o disponibilidad del sitio.",
         ],
       },
       {
-        heading: "Contenidos y ofertas",
+        heading: "Propiedad intelectual",
         paragraphs: [
-          "Descripciones de servicios, plazos y precios son orientativos hasta confirmación por escrito o contrato.",
-        ],
-      },
-    ],
-  },
-  {
-    id: "servicios",
-    path: "/legal/servicios",
-    title: "Política de servicios",
-    description: "Marco orientativo de prestación de servicios de Motans Studio.",
-    kicker: "Servicios",
-    templateBanner: TEMPLATE_BANNER,
-    sections: [
-      {
-        heading: "Alcance",
-        paragraphs: [
-          "Motans Studio presta servicios de diseño y desarrollo de software, webs, plataformas SaaS, automatización e inteligencia artificial bajo encargo.",
+          "El contenido del sitio está protegido. No puedes copiarlo, distribuirlo ni explotarlo sin autorización escrita de Motans Studio, salvo el uso personal necesario para navegar.",
         ],
       },
       {
-        heading: "Proceso y entregables",
+        heading: "Exclusión de responsabilidad",
         paragraphs: [
-          "El alcance, plazos, ownership del código y criterios de aceptación se definen en propuesta o contrato específico por proyecto.",
-        ],
-        editableNote: "Enlazar a plantillas de contrato / SOW cuando existan.",
-      },
-      {
-        heading: "Soporte y mantenimiento",
-        paragraphs: [
-          "[EDITAR] Condiciones de soporte post-entrega, SLAs y exclusiones.",
-        ],
-      },
-    ],
-  },
-  {
-    id: "contacto-legal",
-    path: "/legal/contacto-legal",
-    title: "Contacto legal",
-    description: "Canales de contacto para asuntos legales y de privacidad.",
-    kicker: "Contacto",
-    templateBanner: TEMPLATE_BANNER,
-    sections: [
-      {
-        heading: "Canales",
-        paragraphs: [
-          "Email general: info@motans.studio",
-          "[EDITAR] Email legal / privacidad: legal@motans.studio",
-          "[EDITAR] Domicilio a efectos de notificaciones.",
+          "Motans Studio no responde de daños derivados del uso del sitio ni de la interpretación de la información publicada, que es orientativa hasta confirmación por escrito o contrato.",
         ],
       },
       {
-        heading: "Horario orientativo",
+        heading: "Legislación aplicable",
         paragraphs: [
-          "[EDITAR] Días laborables y franja horaria de respuesta (p. ej. 24–48 h laborables).",
-        ],
-      },
-    ],
-  },
-  {
-    id: "accesibilidad",
-    path: "/legal/accesibilidad",
-    title: "Accesibilidad",
-    description: "Compromiso de accesibilidad del sitio Motans Studio.",
-    kicker: "Accesibilidad",
-    templateBanner: TEMPLATE_BANNER,
-    sections: [
-      {
-        heading: "Compromiso",
-        paragraphs: [
-          "Motans Studio trabaja para que este sitio sea usable con teclado, lectores de pantalla y contrastes adecuados, alineado con buenas prácticas WCAG.",
-        ],
-      },
-      {
-        heading: "Estado",
-        paragraphs: [
-          "Se revisan de forma continua focus visible, etiquetas ARIA, estructura semántica y responsive. Si encuentras una barrera, escríbenos a info@motans.studio.",
-        ],
-      },
-      {
-        heading: "Mejoras previstas",
-        paragraphs: [
-          "[EDITAR] Roadmap de auditorías y correcciones de accesibilidad.",
+          "Estas condiciones se rigen por la legislación española. Cualquier controversia se someterá a los juzgados del domicilio del titular, salvo norma imperativa en contrario.",
         ],
       },
     ],
   },
 ] as const;
 
-export const MS_SITE_LEGAL_HUB = {
-  id: "hub" as const,
-  path: "/legal",
-  title: "Información legal",
-  description: "Centro de documentos legales y de cumplimiento de Motans Studio.",
-  kicker: "Cumplimiento",
-  intro:
-    "Documentación legal del sitio comercial. Los textos marcados como plantilla deben revisarse con asesoramiento profesional antes de producción.",
-} as const;
-
-export function getMsSiteLegalPage(id: Exclude<MsSiteLegalPageId, "hub">): MsSiteLegalPage {
+export function getMsSiteLegalPage(id: MsSiteLegalPageId): MsSiteLegalPage {
   const page = MS_SITE_LEGAL_PAGES.find((item) => item.id === id);
   if (!page) {
     throw new Error(`Unknown legal page: ${id}`);

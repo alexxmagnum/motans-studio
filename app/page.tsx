@@ -3,8 +3,7 @@ import type { Metadata } from "next";
 import { MsSiteStructuredData } from "../components/MsSiteStructuredData.js";
 import { MsStudioHomeHero } from "../components/studio-home/MsStudioHomeHero.js";
 import { MsStudioOfferSection } from "../components/studio-home/MsStudioOfferSection.js";
-import { MsStudioWhySectionSlot } from "../components/studio-home/MsStudioWhySectionSlot.js";
-import { MsStudioHomeProcess } from "../components/studio-home/MsStudioHomeProcess.js";
+import { MsStudioFactorySection } from "../components/studio-home/MsStudioFactorySection.js";
 import { MsStudioHomeFinalCta } from "../components/studio-home/MsStudioHomeFinalCta.js";
 import { MsHomeContact } from "../components/home/MsHomeContact.js";
 import { createMsSitePageMetadata } from "../lib/msSite1703SeoFoundation.js";
@@ -12,7 +11,7 @@ import { createMsSitePageMetadata } from "../lib/msSite1703SeoFoundation.js";
 export const metadata: Metadata = createMsSitePageMetadata("home");
 
 /**
- * Landing pública — Hero + Offer + Why + Process + CTA + Contacto.
+ * Landing pública — Hero + Offer + El Estudio + CTA + Contacto.
  * Entrega / Tecnologías / FAQ: chasis reservado, no montado hasta tener contenido real.
  */
 export default function MotansStudioHomePage(): React.ReactElement {
@@ -22,8 +21,7 @@ export default function MotansStudioHomePage(): React.ReactElement {
 
       <MsStudioHomeHero />
       <MsStudioOfferSection />
-      <MsStudioWhySectionSlot />
-      <MsStudioHomeProcess />
+      <MsStudioFactorySection />
       <MsStudioHomeFinalCta />
       <MsHomeContact />
     </div>

@@ -23,13 +23,18 @@ describe("MOTANS_STUDIO_HOME_V10 content SSOT", () => {
     const home = readFileSync(join(appDir, "page.tsx"), "utf-8");
     assert.ok(home.includes("ms-page--studio-home"));
     assert.ok(home.includes("MsStudioHomeHero"));
-    assert.ok(home.includes("MsStudioCapabilities"));
-    assert.ok(home.includes("MsStudioHomeProcess"));
+    assert.ok(home.includes("MsStudioOfferSection"));
+    assert.ok(home.includes("MsStudioFactorySection"));
+    assert.ok(!home.includes("MsStudioHomeProcess"));
     assert.ok(home.includes("MsStudioHomeFinalCta"));
     assert.ok(!home.includes("MsStudioHomeContinuity"));
     assert.ok(!home.includes("MsStudioHomeMotanosLab"));
     assert.ok(!home.includes("MsHomePlans"));
-    assert.ok(!home.includes("MsHomeContact"));
+    assert.ok(home.includes("MsHomeContact"));
+    assert.ok(home.indexOf("MsStudioHomeHero") < home.indexOf("MsStudioOfferSection"));
+    assert.ok(home.indexOf("MsStudioOfferSection") < home.indexOf("MsStudioFactorySection"));
+    assert.ok(home.indexOf("MsStudioFactorySection") < home.indexOf("MsStudioHomeFinalCta"));
+    assert.ok(home.indexOf("MsStudioHomeFinalCta") < home.indexOf("MsHomeContact"));
   });
 
   it("hero uses single H1 and CTA buttons", () => {

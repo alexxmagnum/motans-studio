@@ -1,5 +1,5 @@
 import type React from "react";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { MotansStudioSiteShell } from "../components/MotansStudioSiteShell.js";
 import { MsSitePageBackLink } from "../components/MsSitePageBackLink.js";
 import { MsSiteMotanosLangStyles } from "../components/MsSiteMotanosLangStyles.js";
@@ -8,9 +8,8 @@ import "./msSite1703Global.css";
 import "./msSite1703Obsessive.css";
 import "./msSiteDarkPremium.css";
 import "./msStudioHome.css";
-import "./msStudioWhy.css";
+import "./msStudioFactory.css";
 import "./msStudioOffer.css";
-import "./msStudioProcess.css";
 import "./msSiteHomeSplash.css";
 import "./msStudioServices.css";
 import "./msStudioStampSplash.css";
@@ -24,6 +23,16 @@ import "./msStudioFooter.css";
 import "./msSiteLegal.css";
 
 export const metadata: Metadata = createMsSitePageMetadata("studio");
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+    { media: "(prefers-color-scheme: light)", color: "#000000" },
+  ],
+  colorScheme: "dark",
+  width: "device-width",
+  initialScale: 1,
+};
 
 export default function RootLayout({
   children,

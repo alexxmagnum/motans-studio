@@ -25,7 +25,8 @@ describe("MS_SITE_17_03C emergency visual redesign", () => {
     assert.ok(home.includes("ms-page--studio-home"));
     assert.ok(home.includes("MsStudioHomeHero"));
     assert.ok(home.includes("MsStudioOfferSection"));
-    assert.ok(home.includes("MsStudioHomeProcess"));
+    assert.ok(home.includes("MsStudioFactorySection"));
+    assert.ok(!home.includes("MsStudioHomeProcess"));
     assert.ok(home.includes("MsStudioHomeFinalCta"));
     assert.ok(home.includes("MsHomeContact"));
     assert.ok(!home.includes("MsStudioLandingSectionSlot"));
@@ -71,7 +72,9 @@ describe("MS_SITE_17_03C emergency visual redesign", () => {
     const footer = readFileSync(join(componentsDir, "MsStudioFooter.tsx"), "utf-8");
     assert.ok(footer.includes("ms-studio-footer"));
     assert.ok(footer.includes("MS_SITE_FOOTER_LEGAL") || footer.includes("legal"));
-    assert.ok(!footer.includes("href=\"#\""));
+    assert.ok(footer.includes("ms-studio-footer__rule") || footer.includes("ms-studio-footer__copy"));
+    assert.ok(!footer.includes('href="#"'));
+    assert.ok(!footer.includes("MS_SITE_FOOTER_NAV"));
   });
 
   it("brand mark supports webp MS and lockups", () => {

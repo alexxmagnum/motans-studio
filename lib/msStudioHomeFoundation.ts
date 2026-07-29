@@ -49,7 +49,7 @@ export const MS_STUDIO_HOME_BRAND_COLORS = {
 export const MS_STUDIO_HOME_NAV = [
   { href: "/", label: "Inicio" },
   { href: "/#servicios", label: "Qué hacemos" },
-  { href: "/#proceso", label: "Proceso" },
+  { href: "/#estudio", label: "Estudio" },
   ...(MS_STUDIO_HOME_MOTANOS_PUBLIC_VISIBLE
     ? ([{ href: "/motanos", label: "MotanOS" }] as const)
     : ([] as const)),
@@ -76,7 +76,7 @@ export const MS_STUDIO_HOME_HERO = {
     after: ".",
   } as const,
   subtitle:
-    "Desde una web hasta una plataforma SaaS, una automatización o una solución basada en inteligencia artificial. Cada herramienta se diseña para resolver un problema real.",
+    "Desde una web hasta un SaaS, una automatización o una solución con IA. Cada herramienta resuelve un problema concreto.",
   tags: ["Webs", "SaaS", "Automatización", "IA"] as const,
   /** CTA primario — conversión. */
   cta: { label: "Hablemos", href: "/#contacto" },
@@ -129,21 +129,6 @@ export const MS_STUDIO_HOME_CONTINUITY = {
   ],
 } as const;
 
-/** Cómo trabajamos — copy legacy; sección viva en msStudioProcessFoundation. */
-export const MS_STUDIO_HOME_PROCESS = {
-  anchorId: "proceso",
-  kicker: "Proceso",
-  title: "Cómo trabajamos.",
-  steps: [
-    "Entendemos el problema.",
-    "Diseñamos la solución.",
-    "Creamos un prototipo.",
-    "Desarrollamos el producto.",
-    "Lo desplegamos.",
-    "Lo mejoramos continuamente.",
-  ] as const,
-} as const;
-
 /** MotanOS Innovation Lab — no comercial, sin planes ni compra. */
 export const MS_STUDIO_HOME_MOTANOS_LAB = {
   anchorId: "motanos-lab",
@@ -157,11 +142,12 @@ export const MS_STUDIO_HOME_MOTANOS_LAB = {
   linkLabel: "Conocer el laboratorio",
 } as const;
 
-/** CTA final home. */
+/** CTA final home — puente desde El Estudio hacia contacto. */
 export const MS_STUDIO_HOME_FINAL_CTA = {
   anchorId: "hablemos",
-  title: "¿Quieres mejorar tu empresa con tecnología?",
+  kicker: "SIGUIENTE PASO",
+  title: "¿Hay algo en tu negocio que podría funcionar mejor?",
   lead:
-    "Diseñamos, desarrollamos y evolucionamos productos digitales adaptados a cada empresa.",
+    "Primero hablamos para entender el problema. Si encaja, lo convertimos en una herramienta preparada para crecer.",
   cta: { label: "Hablemos", href: "/#contacto" },
 } as const;

@@ -33,8 +33,8 @@ describe("MOTANS_STUDIO_HOME_PREMIUM_HERO_CONTINUITY_V1", () => {
     const nav = readFileSync(join(libDir, "msSite1701Foundation.ts"), "utf-8");
     assert.ok(home.includes("MsStudioHomeHero"));
     assert.ok(home.includes("MsStudioOfferSection"));
-    assert.ok(home.includes("MsStudioWhySectionSlot"));
-    assert.ok(home.includes("MsStudioHomeProcess"));
+    assert.ok(home.includes("MsStudioFactorySection"));
+    assert.ok(!home.includes("MsStudioHomeProcess"));
     assert.ok(home.includes("MsStudioHomeFinalCta"));
     assert.ok(home.includes("MsHomeContact"));
     assert.ok(!home.includes("MsStudioLandingSectionSlot"));

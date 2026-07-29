@@ -10,7 +10,6 @@ export type MsStudioLandingSectionId =
   | "inicio"
   | "servicios"
   | "estudio"
-  | "proceso"
   | "entrega"
   | "tecnologias"
   | "faq"
@@ -29,8 +28,8 @@ export type MsStudioLandingSection = {
 };
 
 /**
- * Flujo narrativo aprobado:
- * Hero → Qué hacemos → Por qué → Proceso → Entrega → Tech → FAQ → Contacto
+ * Flujo narrativo:
+ * Hero → Qué hacemos → El Estudio → CTA → Contacto
  */
 export const MS_STUDIO_LANDING_SECTIONS = [
   {
@@ -52,18 +51,10 @@ export const MS_STUDIO_LANDING_SECTIONS = [
   {
     id: "estudio",
     navHref: "/#estudio",
-    inPrimaryNav: false,
-    kicker: "Estudio",
-    title: "Por qué Motans Studio",
-    slotNote: "Editorial Fase 3 — forma de trabajar.",
-  },
-  {
-    id: "proceso",
-    navHref: "/#proceso",
     inPrimaryNav: true,
-    kicker: "Proceso",
-    title: "Cómo trabajamos",
-    slotNote: "Editorial Fase 5 — criterio y ritmo, sin timeline.",
+    kicker: "EL ESTUDIO",
+    title: "De una necesidad a una herramienta que evoluciona.",
+    slotNote: "Línea de producción digital — ancla #estudio.",
   },
   {
     id: "entrega",
@@ -104,7 +95,6 @@ export const MS_STUDIO_LANDING_MOUNTED_SECTION_IDS = [
   "inicio",
   "servicios",
   "estudio",
-  "proceso",
   "contacto",
 ] as const satisfies readonly MsStudioLandingSectionId[];
 
@@ -114,7 +104,7 @@ export type MsStudioLandingPrimaryNavItem = {
   readonly kind: "studio";
 };
 
-/** Nav visible: Inicio · Qué hacemos · Proceso · Contacto */
+/** Nav visible: Inicio · Qué hacemos · Estudio · Contacto */
 export const MS_STUDIO_LANDING_PRIMARY_NAV: readonly MsStudioLandingPrimaryNavItem[] =
   MS_STUDIO_LANDING_SECTIONS.filter((section) => section.inPrimaryNav).map((section) => ({
     href: section.navHref,
@@ -123,8 +113,8 @@ export const MS_STUDIO_LANDING_PRIMARY_NAV: readonly MsStudioLandingPrimaryNavIt
         ? "Inicio"
         : section.id === "servicios"
           ? "Qué hacemos"
-          : section.id === "proceso"
-            ? "Proceso"
+          : section.id === "estudio"
+            ? "Estudio"
             : "Contacto",
     kind: "studio" as const,
   }));

@@ -26,14 +26,15 @@ describe("MOTANS_STUDIO_HOME_PREMIUM_HERO_CONTINUITY_V1 (dark premium shell)", (
     const plans = readFileSync(join(__dirname, "..", "components", "home", "MsHomePlans.tsx"), "utf-8");
     assert.ok(home.includes("ms-page--studio-home"));
     assert.ok(home.includes("MsStudioHomeHero"));
-    assert.ok(home.includes("MsStudioCapabilities"));
-    assert.ok(home.includes("MsStudioHomeProcess"));
+    assert.ok(home.includes("MsStudioOfferSection"));
+    assert.ok(home.includes("MsStudioFactorySection"));
+    assert.ok(!home.includes("MsStudioHomeProcess"));
     assert.ok(home.includes("MsStudioHomeFinalCta"));
     assert.ok(!home.includes("MsStudioHomeContinuity"));
     assert.ok(!home.includes("MsStudioHomeMotanosLab"));
     assert.ok(!home.includes("MsHomePlans"));
     assert.ok(plans.includes("MsMotanosPlansSection"));
-    assert.ok(!home.includes("MsHomeContact"));
+    assert.ok(home.includes("MsHomeContact"));
   });
 
   it("hero uses split layout with sculpture panel on the right", () => {

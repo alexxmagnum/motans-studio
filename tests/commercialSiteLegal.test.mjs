@@ -1,5 +1,6 @@
 // Commercial Site Legal Tests
 // Fase 17 - Block 4: SEO/legal/performance closure
+// Fase 6 — hub + plantillas legales
 
 import { describe, it } from "node:test";
 import assert from "node:assert";
@@ -10,6 +11,16 @@ import { dirname, join } from "node:path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const appDir = join(__dirname, "..", "app");
+const componentsDir = join(__dirname, "..", "components");
+const libDir = join(__dirname, "..", "lib");
+
+function readLegalSurface() {
+  return [
+    readFileSync(join(appDir, "legal", "page.tsx"), "utf-8"),
+    readFileSync(join(componentsDir, "MsSiteLegalDocument.tsx"), "utf-8"),
+    readFileSync(join(libDir, "msSiteLegalFoundation.ts"), "utf-8"),
+  ].join("\n");
+}
 
 describe("Commercial Site Legal", () => {
   it("should have legal page", () => {
@@ -18,49 +29,54 @@ describe("Commercial Site Legal", () => {
   });
 
   it("should have contact information in legal page", () => {
-    const legalPath = join(appDir, "legal", "page.tsx");
-    const content = readFileSync(legalPath, "utf-8");
-    
-    // Check for contact info
+    const content = readLegalSurface().toLowerCase();
     assert.ok(
-      content.toLowerCase().includes("motans studio") || 
-      content.toLowerCase().includes("contacto") ||
-      content.toLowerCase().includes("email"),
-      "legal page should have contact information"
+      content.includes("motans studio") ||
+        content.includes("contacto") ||
+        content.includes("email"),
+      "legal page should have contact information",
     );
   });
 
   it("should have privacy mention in legal page", () => {
-    const legalPath = join(appDir, "legal", "page.tsx");
-    const content = readFileSync(legalPath, "utf-8");
-    
-    assert.ok(
-      content.toLowerCase().includes("privacidad"), 
-      "legal page should mention privacy"
-    );
+    const content = readLegalSurface().toLowerCase();
+    assert.ok(content.includes("privacidad"), "legal page should mention privacy");
   });
 
   it("should mention cookies in legal page", () => {
-    const legalPath = join(appDir, "legal", "page.tsx");
-    const content = readFileSync(legalPath, "utf-8");
-    
+    const content = readLegalSurface().toLowerCase();
     assert.ok(
-      content.toLowerCase().includes("cookies") || 
-      content.toLowerCase().includes("cookie"),
-      "legal page should mention cookies"
+      content.includes("cookies") || content.includes("cookie"),
+      "legal page should mention cookies",
     );
   });
 
   it("should have terms of use mention", () => {
-    const legalPath = join(appDir, "legal", "page.tsx");
-    const content = readFileSync(legalPath, "utf-8");
-    
+    const content = readLegalSurface().toLowerCase();
     assert.ok(
-      content.toLowerCase().includes("términos") || 
-      content.toLowerCase().includes("condiciones") ||
-      content.toLowerCase().includes("uso"),
-      "legal page should mention terms of use"
+      content.includes("términos") ||
+        content.includes("condiciones") ||
+        content.includes("uso"),
+      "legal page should mention terms of use",
     );
+  });
+
+  it("should expose legal document routes", () => {
+    const routes = [
+      "aviso-legal",
+      "privacidad",
+      "cookies",
+      "condiciones",
+      "servicios",
+      "contacto-legal",
+      "accesibilidad",
+    ];
+    for (const route of routes) {
+      assert.ok(
+        existsSync(join(appDir, "legal", route, "page.tsx")),
+        `legal/${route} page should exist`,
+      );
+    }
   });
 
   it("should link back to home from legal page", () => {
@@ -71,7 +87,7 @@ describe("Commercial Site Legal", () => {
 
     assert.ok(
       layout.includes("MsSitePageBackLink") &&
-        foundation.includes('href: MS_SITE_ROUTES.home') &&
+        foundation.includes("href: MS_SITE_ROUTES.home") &&
         foundation.includes("[MS_SITE_ROUTES.legal]"),
       "legal route should use global back link to home via layout",
     );

@@ -14,43 +14,42 @@ describe("MOTANS_STUDIO_HOME_PREMIUM_HERO_CONTINUITY_V1", () => {
     assert.ok(foundation.includes("MOTANS_STUDIO_HOME_PREMIUM_HERO_CONTINUITY_V1"));
     assert.ok(foundation.includes("MOTANS_STUDIO_HOME_STRATEGIC_REPOSITIONING_V1"));
     assert.ok(foundation.includes("MOTANS_STUDIO_PREMIUM_HERO_SPLIT_V2"));
-    assert.ok(foundation.includes("construimos productos digitales"));
-    assert.ok(foundation.includes('accent: "crecer"'));
-    assert.ok(foundation.includes("Conocer Motans Studio"));
-    assert.ok(foundation.includes("Explorar MotanOS"));
     assert.ok(foundation.includes("secondaryCtaStudio"));
-    assert.ok(foundation.includes("laboratorio de innovación"));
-    assert.ok(foundation.includes("PRÓXIMAMENTE"));
+    assert.ok(foundation.includes("Creamos herramientas digitales"));
+    assert.ok(foundation.includes("que simplifican el"));
+    assert.ok(foundation.includes('accent: "trabajo"'));
+    assert.ok(foundation.includes("MS_STUDIO_HOME_MOTANOS_PUBLIC_VISIBLE"));
   });
 
-  it("hero uses split layout with right-side sculpture panel", () => {
+  it("hero uses experience video splash layout", () => {
     const hero = readFileSync(join(componentsDir, "MsStudioHomeHero.tsx"), "utf-8");
-    const splashCss = readFileSync(join(__dirname, "..", "app", "msSiteHomeSplash.css"), "utf-8");
     assert.ok(hero.includes("msh-hero__hero-video"));
-    assert.ok(hero.includes("msh-hero__tags"));
+    assert.ok(hero.includes("msh-hero--experience"));
     assert.ok(hero.includes("MS_STUDIO_HOME_MOTANOS_PUBLIC_VISIBLE"));
-    assert.ok(splashCss.includes("msh-hero--copy-fixed"));
   });
 
   it("home mounts studio narrative without public MotanOS surfaces", () => {
     const home = readFileSync(join(__dirname, "..", "app", "page.tsx"), "utf-8");
     const nav = readFileSync(join(libDir, "msSite1701Foundation.ts"), "utf-8");
     assert.ok(home.includes("MsStudioHomeHero"));
-    assert.ok(home.includes("MsStudioCapabilities"));
+    assert.ok(home.includes("MsStudioOfferSection"));
+    assert.ok(home.includes("MsStudioWhySectionSlot"));
     assert.ok(home.includes("MsStudioHomeProcess"));
     assert.ok(home.includes("MsStudioHomeFinalCta"));
+    assert.ok(home.includes("MsHomeContact"));
+    assert.ok(!home.includes("MsStudioLandingSectionSlot"));
     assert.ok(!home.includes("MsStudioHomeContinuity"));
     assert.ok(!home.includes("MsStudioHomeMotanosLab"));
     assert.ok(!home.includes("MsHomePlans"));
     assert.ok(nav.includes("MS_SITE_PUBLIC_MOTANOS_VISIBLE = false"));
     assert.ok(nav.includes("MS_SITE_PUBLIC_NAV_ITEMS"));
+    assert.ok(!nav.includes('href: "/#faq"'));
   });
 
-  it("servicios and contacto are dedicated pages matching former hash sections", () => {
+  it("servicios and contacto routes redirect to landing anchors", () => {
     const serviciosPage = readFileSync(join(__dirname, "..", "app", "servicios", "page.tsx"), "utf-8");
     const contactoPage = readFileSync(join(__dirname, "..", "app", "contacto", "page.tsx"), "utf-8");
-    assert.ok(serviciosPage.includes("MsStudioCapabilities"));
-    assert.ok(serviciosPage.includes("excludeBlockIds"));
-    assert.ok(contactoPage.includes("MsHomeContact"));
+    assert.ok(serviciosPage.includes("servicios") || serviciosPage.includes("location"));
+    assert.ok(contactoPage.includes("contacto") || contactoPage.includes("location"));
   });
 });

@@ -87,27 +87,21 @@ describe("Commercial Site SEO", () => {
       join(__dirname, "..", "lib", "msSite1701Foundation.ts"),
       "utf-8",
     );
-    const motanos = readFileSync(join(appDir, "motanos", "page.tsx"), "utf-8");
-    const combined = `${home}\n${contacto}\n${motanos}\n${shell}\n${footer}\n${footerFoundation}\n${studioHome}\n${navFoundation}`;
+    const combined = `${home}\n${contacto}\n${shell}\n${footer}\n${footerFoundation}\n${studioHome}\n${navFoundation}`;
 
-    assert.ok(
-      combined.includes('href="/planes"') ||
-        combined.includes("/#planes") ||
-        combined.includes("MS_SITE_ROUTES.planes"),
-      "should link to /planes",
-    );
-    assert.ok(
-      combined.includes('href="/solicitud"') || combined.includes("MS_SITE_ROUTES.solicitud"),
-      "should link to /solicitud",
-    );
+    // MotanOS planes/solicitud frozen — CTA público es contacto studio.
     assert.ok(
       combined.includes('href="#contacto"') ||
         combined.includes('href="/#contacto"') ||
         combined.includes('href="/contacto"') ||
         combined.includes("#contacto") ||
         combined.includes("MS_SITE_ROUTES.contacto") ||
-        combined.includes("MS_SITE_DARK_HEADER_CTA"),
+        combined.includes("MS_STUDIO_HOME_HEADER_CTA"),
       "should link to contacto",
+    );
+    assert.ok(
+      navFoundation.includes("MS_SITE_PUBLIC_MOTANOS_VISIBLE = false"),
+      "MotanOS remains frozen on public surface",
     );
   });
 

@@ -1,5 +1,5 @@
 // Commercial Site Foundation Tests Runner
-// Fase 17 - Block 4: SEO/legal/performance closure
+// Fase 17 + Fase 7A — suite alineada a superficie studio pública (MotanOS congelado).
 
 import { run } from "node:test";
 import { fileURLToPath } from "node:url";
@@ -7,6 +7,13 @@ import { dirname, join } from "node:path";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
+/**
+ * Activos: site comercial studio + claims + SEO/legal + foundations vivas.
+ * Fuera del runner (obsoletos para superficie pública MotanOS congelada):
+ * - msSiteMotanosPlansFoundation.test.mjs
+ * - msSiteSaasOnboardingCtaFoundation.test.mjs
+ * Conservados aparte: hostelería foundations (producto interno / futuro).
+ */
 const testFiles = [
   join(__dirname, "commercialSiteFoundation.test.mjs"),
   join(__dirname, "commercialSiteSeo.test.mjs"),
@@ -15,8 +22,6 @@ const testFiles = [
   join(__dirname, "commercialLandingClaimsGuard.test.mjs"),
   join(__dirname, "msSite1701Foundation.test.mjs"),
   join(__dirname, "msSiteFooterFoundation.test.mjs"),
-  join(__dirname, "msSiteMotanosPlansFoundation.test.mjs"),
-  join(__dirname, "msSiteSaasOnboardingCtaFoundation.test.mjs"),
   join(__dirname, "msSite1703Foundation.test.mjs"),
   join(__dirname, "msSiteLocaleFoundation.test.mjs"),
   join(__dirname, "msSiteLandingNavFoundation.test.mjs"),

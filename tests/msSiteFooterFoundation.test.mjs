@@ -9,19 +9,22 @@ const foundation = readFileSync(join(__dirname, "..", "lib", "msSiteFooterFounda
 const component = readFileSync(join(__dirname, "..", "components", "MsStudioFooter.tsx"), "utf-8");
 
 describe("msSiteFooterFoundation", () => {
-  test("footer bar — no hero copy or menu", () => {
-    assert.ok(foundation.includes("MS_SITE_FOOTER_STUDIO_BAR_V3"));
-    assert.ok(foundation.includes("legalLinks"));
-    assert.ok(!foundation.includes("tagline"));
-    assert.ok(!foundation.includes("Creemos productos"));
-    assert.ok(!component.includes("ms-studio-footer__tagline"));
-    assert.ok(!component.includes("MS_STUDIO_HOME_LOGO"));
-    assert.ok(!component.includes("Inicio"));
-    assert.ok(!component.includes("Servicios"));
+  test("footer premium — brand, nav, services, legal (no MotanOS CTA routes)", () => {
+    assert.ok(foundation.includes("MS_SITE_FOOTER_STUDIO_PREMIUM_V1"));
+    assert.ok(foundation.includes("legalLinks") || foundation.includes("MS_SITE_FOOTER_LEGAL"));
+    assert.ok(foundation.includes("tagline"));
+    assert.ok(component.includes("ms-studio-footer__tagline"));
+    assert.ok(component.includes("Motans Studio"));
+    assert.ok(component.includes("Servicios") || foundation.includes("MS_SITE_FOOTER_SERVICES"));
+    assert.ok(!foundation.includes("MS_SITE_ROUTES.solicitud"));
+    assert.ok(!foundation.includes("MS_SITE_ROUTES.planes"));
   });
 
-  test("includes legal link only — planes and solicitud live on motanos page", () => {
-    assert.ok(foundation.includes("MS_SITE_ROUTES.legal"));
+  test("includes legal routes — planes and solicitud stay out of public footer", () => {
+    assert.ok(
+      foundation.includes("MS_SITE_ROUTES.legal") ||
+        foundation.includes("MS_SITE_ROUTES.legalAviso"),
+    );
     assert.ok(!foundation.includes("MS_SITE_ROUTES.solicitud"));
     assert.ok(!foundation.includes("MS_SITE_ROUTES.planes"));
   });

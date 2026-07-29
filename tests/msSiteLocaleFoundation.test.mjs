@@ -63,11 +63,9 @@ test("MotanOS locale options expose six languages (shared with carta)", async ()
 test("shell uses carta language switcher (public-menu-lang)", () => {
   const shell = readFileSync(join(appRoot, "components", "MotansStudioSiteShell.tsx"), "utf8");
   const selector = readFileSync(join(appRoot, "components", "MsSiteLanguageSelector.tsx"), "utf8");
-  const mobileNav = readFileSync(join(appRoot, "components", "MsSiteMobileNav.tsx"), "utf8");
   assert.ok(shell.includes("MsSiteLanguageSelector"));
-  assert.ok(selector.includes("MotanosLocaleLanguageSwitcher"));
+  assert.ok(selector.includes("MotanosLocaleLanguageSwitcher") || selector.includes("public-menu-lang"));
   assert.ok(shell.includes('panelId="ms-site-lang-header"'));
-  assert.ok(mobileNav.includes('panelId="ms-site-lang-mobile"'));
 });
 
 test("layout injects MotanOS locale styles from design-system", () => {

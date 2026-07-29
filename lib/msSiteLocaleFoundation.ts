@@ -26,7 +26,7 @@ export const MS_SITE_NAV_I18N: Record<
   {
     readonly inicio: string;
     readonly servicios: string;
-    readonly proceso: string;
+    readonly estudio: string;
     readonly faq: string;
     readonly motanos: string;
     readonly planes: string;
@@ -41,7 +41,7 @@ export const MS_SITE_NAV_I18N: Record<
   es: {
     inicio: "Inicio",
     servicios: "Qué hacemos",
-    proceso: "Proceso",
+    estudio: "Estudio",
     faq: "FAQ",
     motanos: "MotanOS",
     planes: "Planes",
@@ -55,7 +55,7 @@ export const MS_SITE_NAV_I18N: Record<
   en: {
     inicio: "Home",
     servicios: "What we do",
-    proceso: "Process",
+    estudio: "Studio",
     faq: "FAQ",
     motanos: "MotanOS",
     planes: "Plans",
@@ -69,7 +69,7 @@ export const MS_SITE_NAV_I18N: Record<
   fr: {
     inicio: "Accueil",
     servicios: "Ce que nous faisons",
-    proceso: "Processus",
+    estudio: "Studio",
     faq: "FAQ",
     motanos: "MotanOS",
     planes: "Offres",
@@ -83,7 +83,7 @@ export const MS_SITE_NAV_I18N: Record<
   de: {
     inicio: "Start",
     servicios: "Was wir tun",
-    proceso: "Prozess",
+    estudio: "Studio",
     faq: "FAQ",
     motanos: "MotanOS",
     planes: "Tarife",
@@ -97,7 +97,7 @@ export const MS_SITE_NAV_I18N: Record<
   it: {
     inicio: "Home",
     servicios: "Cosa facciamo",
-    proceso: "Processo",
+    estudio: "Studio",
     faq: "FAQ",
     motanos: "MotanOS",
     planes: "Piani",
@@ -111,7 +111,7 @@ export const MS_SITE_NAV_I18N: Record<
   pt: {
     inicio: "Início",
     servicios: "O que fazemos",
-    proceso: "Processo",
+    estudio: "Estúdio",
     faq: "FAQ",
     motanos: "MotanOS",
     planes: "Planos",
@@ -130,7 +130,7 @@ const NAV_LABEL_KEY_BY_HREF: Record<string, MsSiteNavLabelKey> = {
   "/": "inicio",
   "/servicios": "servicios",
   "/#servicios": "servicios",
-  "/#proceso": "proceso",
+  "/#estudio": "estudio",
   "/#faq": "faq",
   "/motanos": "motanos",
   "/#planes": "planes",

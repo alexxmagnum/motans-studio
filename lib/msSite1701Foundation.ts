@@ -52,9 +52,6 @@ export const MS_SITE_ROUTES = {
   legalPrivacidad: "/legal/privacidad",
   legalCookies: "/legal/cookies",
   legalCondiciones: "/legal/condiciones",
-  legalServicios: "/legal/servicios",
-  legalContacto: "/legal/contacto-legal",
-  legalAccesibilidad: "/legal/accesibilidad",
 } as const;
 
 export type MsSiteRouteKey = keyof typeof MS_SITE_ROUTES;
@@ -75,7 +72,7 @@ export const MS_SITE_NAV_ITEMS: readonly {
 }[] = [
   { href: "/", label: "Inicio", kind: "studio" },
   { href: "/#servicios", label: "Qué hacemos", kind: "studio" },
-  { href: "/#proceso", label: "Proceso", kind: "studio" },
+  { href: "/#estudio", label: "Estudio", kind: "studio" },
   { href: "/motanos", label: "MotanOS", kind: "product" },
   { href: "/#contacto", label: "Contacto", kind: "studio" },
 ];

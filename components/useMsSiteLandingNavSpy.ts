@@ -83,7 +83,6 @@ export function useMsSiteLandingNavSpy(enabled: boolean): string | undefined {
     }
 
     let frame = 0;
-    let delayedUpdate: number | undefined;
 
     const update = (): void => {
       const next = getActiveLandingNavHref();
@@ -107,7 +106,7 @@ export function useMsSiteLandingNavSpy(enabled: boolean): string | undefined {
     };
 
     update();
-    delayedUpdate = window.setTimeout(update, 0);
+    const delayedUpdate = window.setTimeout(update, 0);
     const retryUpdate = window.setTimeout(update, 120);
     const retryUpdateLate = window.setTimeout(update, 400);
 
@@ -117,9 +116,7 @@ export function useMsSiteLandingNavSpy(enabled: boolean): string | undefined {
 
     return () => {
       cancelAnimationFrame(frame);
-      if (delayedUpdate !== undefined) {
-        window.clearTimeout(delayedUpdate);
-      }
+      window.clearTimeout(delayedUpdate);
       window.clearTimeout(retryUpdate);
       window.clearTimeout(retryUpdateLate);
       window.removeEventListener("scroll", scheduleUpdate);

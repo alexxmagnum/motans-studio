@@ -4,6 +4,7 @@
  * Fase 1 — /contacto ya no es experiencia separada.
  * Redirect al ancla de la landing única.
  */
+import Link from "next/link";
 import { useEffect, type ReactElement } from "react";
 
 export default function ContactoLandingRedirectPage(): ReactElement {
@@ -23,7 +24,7 @@ export default function ContactoLandingRedirectPage(): ReactElement {
       }}
     >
       <p>
-        <a href="/#contacto">Ir a Contacto</a>
+        <Link href="/#contacto">Ir a Contacto</Link>
       </p>
     </main>
   );

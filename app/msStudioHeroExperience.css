@@ -53,27 +53,22 @@
   transform: none;
 }
 
-.msh-hero--experience .msh-hero__brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.7rem;
+.msh-hero--experience .msh-hero__brand,
+.msh-hero--experience .msh-eyebrow {
   margin: 0 0 1.85rem;
-  font-family: var(--msh-font-display);
-  font-size: 0.72rem;
-  font-weight: 400;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
   color: var(--msh-hero-faint);
 }
 
-.msh-hero--experience .msh-hero__brand-mark {
+.msh-hero--experience .msh-hero__brand-mark,
+.msh-hero--experience .msh-eyebrow__mark {
   display: block;
   width: 1.65rem;
   height: 1px;
   background: linear-gradient(90deg, #04a2fb 0%, #52ebe6 50%, #a6e10b 100%);
 }
 
-.msh-hero--experience .msh-hero__brand-text {
+.msh-hero--experience .msh-hero__brand-text,
+.msh-hero--experience .msh-eyebrow__text {
   line-height: 1;
 }
 
@@ -557,12 +552,13 @@
     bottom: auto !important;
     left: auto !important;
     z-index: 6;
-    gap: 0.32rem;
-    padding: 0.26rem 0.45rem !important;
+    gap: 0.35rem;
+    min-height: 2.5rem;
+    padding: 0.4rem 0.65rem !important;
     border: 1px solid rgba(255, 255, 255, 0.12) !important;
     background: rgba(0, 0, 0, 0.32) !important;
     color: rgba(255, 255, 255, 0.58) !important;
-    font-size: 0.52rem !important;
+    font-size: 0.58rem !important;
     letter-spacing: 0.05em !important;
   }
 

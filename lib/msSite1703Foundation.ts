@@ -179,8 +179,8 @@ export const MS_SITE_HOSTELERIA_PAGE = {
 } as const;
 
 export const MS_SITE_CONTACT = {
-  title: "Hablemos",
-  lead: "Cuéntanos qué necesitas. Te respondemos desde Motans Studio.",
+  title: "¿En qué podemos ayudarte?",
+  lead: "Cuéntanos qué necesitas. Respondemos en 24–48 h laborables.",
   cta: "Enviar mensaje",
 } as const;
 
@@ -188,10 +188,12 @@ export const MS_SITE_PROJECT_INTENTS: readonly {
   readonly value: string;
   readonly label: string;
 }[] = [
-  { value: "web-only", label: "Solo web" },
+  { value: "web-only", label: "Web" },
   { value: "motanos-only", label: "Solo MotanOS" },
   { value: "web-motanos", label: "Web + MotanOS" },
   { value: "custom-saas", label: "App / SaaS" },
+  { value: "automation", label: "Automatización" },
+  { value: "other", label: "Otro / consultar" },
 ];
 
 /** Intents visibles en formulario público (oculta MotanOS si el flag está off). */
@@ -200,6 +202,3 @@ export const MS_SITE_PROJECT_INTENTS_PUBLIC = MS_SITE_PUBLIC_MOTANOS_VISIBLE
   : MS_SITE_PROJECT_INTENTS.filter(
       (intent) => intent.value !== "motanos-only" && intent.value !== "web-motanos",
     );
-
-export const MS_SITE_FOOTER_TAGLINE =
-  "Webs, apps, SaaS a medida y MotanOS by Motans Studio." as const;

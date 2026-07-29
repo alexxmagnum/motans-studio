@@ -71,7 +71,11 @@ export function LeadForm({
         ? ui.intentWebOnly
         : intent.value === "custom-saas"
           ? ui.intentCustomSaas
-          : intent.label,
+          : intent.value === "automation"
+            ? ui.intentAutomation
+            : intent.value === "other"
+              ? ui.intentOther
+              : intent.label,
   }));
 
   const sectorOptions = [
@@ -165,16 +169,13 @@ export function LeadForm({
   if (status === "success") {
     return (
       <div className="ms-form ms-form__status ms-form__status--success" role="status">
-        <h3 style={{ margin: "0 0 0.5rem", fontFamily: "var(--ms-font-display)" }}>
-          {ui.formSuccessTitle}
-        </h3>
-        <p style={{ margin: 0, fontSize: "0.95rem" }}>
+        <h3 className="ms-form__success-title">{ui.formSuccessTitle}</h3>
+        <p className="ms-form__success-body">
           {ui.formSuccessBody.replace("{name}", formData.name).replace("{email}", formData.email)}
         </p>
         <button
           type="button"
-          className="msh-btn msh-btn--cta"
-          style={{ marginTop: "1.25rem" }}
+          className="msh-btn msh-btn--cta ms-form__success-again"
           onClick={() => {
             setStatus("idle");
             setFormData({
@@ -303,11 +304,18 @@ export function LeadForm({
       <button
         type="submit"
         className={
-          submitVariant === "studio-home" ? "msh-btn msh-btn--cta msh-btn--submit" : "ms-btn ms-btn--primary"
+          submitVariant === "studio-home"
+            ? "msh-btn msh-btn--cta msh-btn--cta-hero-primary msh-btn--submit"
+            : "ms-btn ms-btn--primary"
         }
         disabled={status === "loading"}
       >
         {status === "loading" ? ui.formSending : ui.formSubmit}
+        {submitVariant === "studio-home" && status !== "loading" ? (
+          <span className="msh-btn__arrow" aria-hidden="true">
+            →
+          </span>
+        ) : null}
       </button>
     </form>
   );

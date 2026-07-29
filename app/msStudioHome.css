@@ -39,6 +39,40 @@
   --msh-glow-lime: rgba(166, 225, 11, 0.18);
 }
 
+/* —— Eyebrow de sección (misma pieza que Motans Studio en el hero) —— */
+.msh-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0 0 0.85rem;
+  font-family: var(--msh-font-display, "Instrument Serif", Georgia, serif);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.34);
+}
+
+.msh-eyebrow__mark {
+  display: block;
+  flex-shrink: 0;
+  width: 1.65rem;
+  height: 1px;
+  background: linear-gradient(90deg, #04a2fb 0%, #52ebe6 50%, #a6e10b 100%);
+}
+
+.msh-eyebrow__text {
+  line-height: 1;
+}
+
+/* Acento Motans — última palabra de títulos de sección */
+.msh-title-accent {
+  background: linear-gradient(90deg, #04a2fb 0%, #52ebe6 38%, #34cc68 62%, #a6e10b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 body:has(.ms-page--studio-home),
 body:has(.ms-page--planes) {
   background: var(--msh-bg);
@@ -61,7 +95,7 @@ body:has(.ms-page--planes) {
 .ms-site--dark-premium:has(.ms-page--studio-home) .ms-header__inner,
 .ms-site--dark-premium:has(.ms-page--studio-home) .ms-dp-header__inner {
   min-height: 5.75rem;
-  padding-block: 1.05rem 1.15rem !important;
+  padding-block: 0.35rem !important;
 }
 
 
@@ -72,7 +106,7 @@ body:has(.ms-page--planes) {
   align-items: center;
   gap: 1rem;
   min-height: 5rem;
-  padding-block: 0.65rem !important;
+  padding-block: 0.35rem !important;
 }
 
 .ms-site--dark-premium .msh-brand {
@@ -81,6 +115,7 @@ body:has(.ms-page--planes) {
   align-items: center;
   justify-content: center;
   gap: 0;
+  margin-left: -0.65rem;
   text-decoration: none !important;
   color: var(--msh-ink) !important;
   justify-self: start;
@@ -95,8 +130,8 @@ body:has(.ms-page--planes) {
 .ms-site--dark-premium .msh-brand__mark {
   display: block;
   width: auto;
-  height: 48px;
-  max-width: 96px;
+  height: 4.5rem;
+  max-width: none;
   object-fit: contain;
   object-position: left center;
   background: transparent;
@@ -153,15 +188,29 @@ body:has(.ms-page--planes) {
   align-items: center;
   gap: 0.75rem;
   justify-self: end;
+  height: 2.5rem;
 }
 
 .ms-site--dark-premium .msh-header__locale {
   display: flex;
   align-items: center;
+  height: 100%;
+}
+
+.ms-site--dark-premium .msh-header__locale .public-menu-lang {
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
 .ms-site--dark-premium .msh-header__locale .public-menu-lang__trigger {
+  box-sizing: border-box;
+  width: auto;
+  height: 2.5rem;
+  min-height: 2.5rem;
+  padding: 0 0.35rem 0 0.3rem;
   border-color: rgba(255, 255, 255, 0.28);
+  border-radius: 0.45rem;
   background: rgba(255, 255, 255, 0.06);
   color: #ffffff;
   box-shadow: none;
@@ -171,11 +220,16 @@ body:has(.ms-page--planes) {
 .ms-site--dark-premium .msh-header__locale .public-menu-lang.is-open .public-menu-lang__trigger {
   border-color: rgba(255, 255, 255, 0.5);
   background: rgba(255, 255, 255, 0.12);
+  box-shadow: none;
+}
+
+.ms-site--dark-premium .msh-header__locale .public-menu-lang.is-open .public-menu-lang__trigger {
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .ms-site--dark-premium .msh-header__locale .public-menu-lang__code,
 .ms-site--dark-premium .msh-header__locale .public-menu-lang.is-open .public-menu-lang__code {
-  color: #52ebe6;
+  color: #ffffff;
 }
 
 .ms-site--dark-premium .msh-header__locale .public-menu-lang__chevron {
@@ -220,14 +274,18 @@ body:has(.ms-page--planes) {
 }
 
 .ms-site--dark-premium a.msh-btn--header {
-  padding: 0.6rem 1.25rem;
-  font-size: 0.9375rem;
+  box-sizing: border-box;
+  height: 2.5rem;
+  min-height: 2.5rem;
+  padding: 0 1.15rem;
+  font-size: 1.05rem;
   font-weight: 500;
+  line-height: 1;
 }
 
 .ms-site--dark-premium a.msh-btn--header .msh-btn__arrow--up {
   color: #a6e10b;
-  font-size: 0.95em;
+  font-size: 1.1em;
 }
 
 .ms-site--dark-premium a.msh-btn:hover,
@@ -235,23 +293,128 @@ body:has(.ms-page--planes) {
   box-shadow: 0 0 28px var(--msh-glow-blue), 0 0 14px var(--msh-glow-lime);
 }
 
+/* Hamburguesa: líneas Motans, mismo alto que idioma */
 .ms-site--dark-premium .ms-nav-mobile summary {
-  color: var(--msh-ink) !important;
-  background: rgba(255, 255, 255, 0.06) !important;
-  border: 1px solid var(--msh-border) !important;
+  box-sizing: border-box;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  padding: 0 !important;
+  margin: 0;
+  color: #ffffff !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0.45rem !important;
+  box-shadow: none !important;
+}
+
+.ms-site--dark-premium .ms-nav-mobile summary:hover,
+.ms-site--dark-premium .ms-nav-mobile summary:focus-visible {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.ms-site--dark-premium .ms-nav-mobile summary::before,
+.ms-site--dark-premium .ms-nav-mobile summary::after {
+  content: none !important;
+  display: none !important;
+}
+
+.ms-site--dark-premium .ms-nav-mobile__burger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 1.9rem;
+  height: auto;
+  gap: 0 !important;
+  padding: 0;
+}
+
+.ms-site--dark-premium .ms-nav-mobile__burger span {
+  display: block;
+  flex-shrink: 0;
+  width: 100%;
+  height: 4px;
+  margin: 0;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #04a2fb 0%, #52ebe6 42%, #a6e10b 100%);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.ms-site--dark-premium .ms-nav-mobile__burger span + span {
+  margin-top: 6px !important;
+}
+
+.ms-site--dark-premium .ms-nav-mobile[open] .ms-nav-mobile__burger span:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
+}
+
+.ms-site--dark-premium .ms-nav-mobile[open] .ms-nav-mobile__burger span:nth-child(2) {
+  opacity: 0;
+}
+
+.ms-site--dark-premium .ms-nav-mobile[open] .ms-nav-mobile__burger span:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
 }
 
 .ms-site--dark-premium .ms-nav-mobile__panel {
-  background: #050505 !important;
-  border-color: var(--msh-border) !important;
+  position: absolute !important;
+  top: calc(100% + 0.55rem) !important;
+  right: 0 !important;
+  left: auto !important;
+  z-index: 80;
+  box-sizing: border-box;
+  display: flex !important;
+  flex-direction: column;
+  gap: 0.2rem !important;
+  min-width: 13.5rem;
+  width: max-content;
+  max-width: min(18rem, calc(100vw - 1.5rem));
+  margin: 0 !important;
+  padding: 0.55rem !important;
+  line-height: normal !important;
+  background: #0a0a0a !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: 0.7rem !important;
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(4, 162, 251, 0.06);
 }
 
 .ms-site--dark-premium .ms-nav-mobile__panel a {
-  color: rgba(255, 255, 255, 0.78) !important;
+  display: block !important;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0 !important;
+  padding: 0.75rem 1rem !important;
+  border: none !important;
+  border-radius: 0.5rem !important;
+  background: transparent !important;
+  color: rgba(255, 255, 255, 0.72) !important;
+  font-size: 0.9375rem !important;
+  font-weight: 450 !important;
+  letter-spacing: 0.01em;
+  line-height: 1.25 !important;
+  text-align: left;
+  text-decoration: none !important;
+  white-space: nowrap;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.ms-site--dark-premium .ms-nav-mobile__panel a:hover {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.07) !important;
 }
 
 .ms-site--dark-premium .ms-nav-mobile__panel a[aria-current="page"] {
-  color: var(--msh-ink) !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  background: rgba(82, 235, 230, 0.1) !important;
+  box-shadow: inset 2px 0 0 #52ebe6;
 }
 
 /* —— Shell home —— */
@@ -266,11 +429,14 @@ body:has(.ms-page--planes) {
 /* —— Botones borde degradado (hero + producto MotanOS) —— */
 .ms-site--dark-premium a.msh-btn--cta,
 .ms-site--dark-premium button.msh-btn--cta {
+  box-sizing: border-box;
   margin-top: 0;
   padding: 0.85rem 1.65rem;
-  font-size: 0.9375rem;
+  height: calc(0.85rem * 2 + 1.125rem);
+  font-size: 1.0625rem;
   font-weight: 500;
   letter-spacing: 0.015em;
+  line-height: 1;
 }
 
 .msh-hero__actions {
@@ -628,8 +794,10 @@ body:has(.ms-page--planes) {
 .msh-hero__actions .msh-btn--cta {
   margin-top: 0;
   padding: 0.78rem 1.45rem;
-  font-size: 0.9rem;
+  height: calc(0.78rem * 2 + 1.08rem);
+  font-size: 1.05rem;
   font-weight: 500;
+  line-height: 1;
 }
 
 .ms-site--dark-premium .msh-hero__actions a.msh-btn--cta-hero-primary {
@@ -1438,40 +1606,93 @@ body:has(.ms-page--planes) {
   margin-top: 1.75rem;
 }
 
+.ms-form__success-title {
+  margin: 0 0 0.55rem;
+  font-family: var(--msh-font-display, "Instrument Serif", Georgia, serif);
+  font-size: clamp(1.45rem, 2.4vw, 1.75rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.ms-form__success-body {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.ms-form__success-again {
+  margin-top: 1.35rem;
+}
+
 /* —— Contacto Hablemos —— */
 .ms-page--studio-home .msh-contact {
   background: var(--msh-bg);
-}
-
-.ms-page--studio-home .msh-contact .ms-dp-section__kicker {
-  color: #04a2fb;
+  padding-block: clamp(5rem, 12vh, 8rem) clamp(5.5rem, 13vh, 8.5rem);
 }
 
 .ms-page--studio-home .msh-contact .ms-dp-section__title {
-  font-weight: 600;
+  margin-top: 1rem;
+  max-width: 16ch;
+  font-family: var(--msh-font-display, "Instrument Serif", Georgia, serif);
+  font-size: clamp(2.35rem, 5.4vw, 3.85rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
   color: var(--msh-ink);
 }
 
 .ms-page--studio-home .msh-contact .ms-dp-section__note {
-  color: rgba(255, 255, 255, 0.62);
-  font-size: 1rem;
-  max-width: 42ch;
+  margin-top: 1.25rem;
+  color: rgba(255, 255, 255, 0.56);
+  font-size: clamp(1.02rem, 1.5vw, 1.125rem);
+  line-height: 1.55;
+  max-width: 40ch;
 }
 
 .ms-page--studio-home .msh-contact__trust {
-  margin: 0 0 1.75rem;
+  margin: 0.85rem 0 0;
   max-width: 46ch;
   font-size: 0.9375rem;
   line-height: 1.55;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.ms-page--studio-home .msh-contact__next {
+  margin: 0.55rem 0 2rem;
+  max-width: 44ch;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.36);
 }
 
 .ms-page--studio-home .msh-contact__form-card {
   max-width: 40rem;
-  padding: 1.5rem 1.35rem 1.35rem;
-  border: 1px solid var(--msh-border);
-  border-radius: 0.75rem;
-  background: rgba(255, 255, 255, 0.02);
+  padding: 1.65rem 1.5rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.85rem;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.ms-page--studio-home .msh-contact .ms-form__success-title {
+  margin: 0 0 0.55rem;
+  font-family: var(--msh-font-display, "Instrument Serif", Georgia, serif);
+  font-size: clamp(1.45rem, 2.4vw, 1.75rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--msh-ink);
+}
+
+.ms-page--studio-home .msh-contact .ms-form__success-body {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.ms-page--studio-home .msh-contact .ms-form__success-again {
+  margin-top: 1.35rem;
 }
 
 .ms-page--studio-home .msh-contact .ms-form--premium .ms-form__legend,
@@ -1507,7 +1728,8 @@ body:has(.ms-page--planes) {
   background: rgba(0, 0, 0, 0.35);
   border: 1px solid var(--msh-border);
   color: var(--msh-ink);
-  border-radius: 0.5rem;
+  border-radius: 0.55rem;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
 }
 
 .ms-page--studio-home .msh-contact .ms-form--premium input::placeholder,
@@ -1539,10 +1761,51 @@ body:has(.ms-page--planes) {
   color: rgba(166, 225, 11, 0.95);
 }
 
-.ms-page--studio-home .msh-contact .msh-btn--submit {
-  margin-top: 0.5rem;
+.ms-page--studio-home .msh-contact .msh-btn--submit,
+.ms-page--studio-home .msh-contact button.msh-btn.msh-btn--cta.msh-btn--submit {
+  display: inline-flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.85rem;
   cursor: pointer;
-  font: inherit;
+  padding: 0.78rem 1.45rem;
+  height: calc(0.78rem * 2 + 1.08rem);
+  font-family: inherit;
+  font-size: 1.0625rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.015em;
+  line-height: 1 !important;
+  background: transparent !important;
+}
+
+.ms-page--studio-home .msh-contact .msh-btn--submit::before {
+  inset: -0.5px;
+  background: linear-gradient(90deg, #04a2fb 0%, #52ebe6 38%, #34cc68 62%, #a6e10b 100%);
+}
+
+.ms-page--studio-home .msh-contact .msh-btn--submit::after {
+  inset: 0.5px;
+  background: #000000;
+}
+
+.ms-page--studio-home .msh-contact .msh-btn--submit:hover:not(:disabled) {
+  box-shadow: 0 0 18px rgba(4, 162, 251, 0.18);
+}
+
+.ms-page--studio-home .msh-contact .msh-btn--submit:hover:not(:disabled) .msh-btn__arrow {
+  transform: translateX(3px);
+}
+
+.ms-page--studio-home .msh-contact .msh-btn--submit:disabled {
+  opacity: 0.65;
+  cursor: wait;
+  box-shadow: none;
+}
+
+.ms-page--studio-home .msh-contact .msh-btn--submit .msh-btn__arrow {
+  display: inline-block;
+  transition: transform 0.22s ease;
 }
 
 @media (max-width: 960px) {
@@ -1558,7 +1821,7 @@ body:has(.ms-page--planes) {
   .ms-site--dark-premium .ms-dp-header__inner {
     grid-template-columns: 1fr auto;
     min-height: 4.25rem;
-    padding-block: 0.5rem !important;
+    padding-block: 0.1rem !important;
     gap: 0.75rem;
   }
 
@@ -1566,7 +1829,7 @@ body:has(.ms-page--planes) {
   .ms-site--dark-premium:has(.ms-page--studio-home) .ms-header__inner,
   .ms-site--dark-premium:has(.ms-page--studio-home) .ms-dp-header__inner {
     min-height: 4.25rem;
-    padding-block: 0.5rem !important;
+    padding-block: 0.1rem !important;
     align-items: center;
   }
 
@@ -1574,33 +1837,147 @@ body:has(.ms-page--planes) {
     align-self: center;
     display: inline-flex;
     align-items: center;
+    line-height: 0;
+    /* Aire PNG: tinta de la M = borde de las cards (--msh-page-pad-x) */
+    margin-left: calc(-156 / 1024 * 3.95rem);
   }
 
   .ms-site--dark-premium .msh-brand__mark {
     transform: none;
+    height: 3.95rem !important;
+    width: auto;
+    max-width: none;
   }
 
   .ms-site--dark-premium .msh-header__actions {
     align-self: center;
-    gap: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    height: 2.5rem;
   }
 
   .ms-site--dark-premium .msh-nav {
     display: none !important;
   }
 
+  .ms-site--dark-premium .ms-nav-mobile {
+    display: flex !important;
+    align-items: center;
+    align-self: center;
+    position: relative;
+    flex: 0 0 auto;
+    height: 2.5rem;
+    /* Inset del icono: líneas = borde derecho de las cards */
+    margin: 0 calc((1.9rem - 2.5rem) / 2) 0 0;
+    padding: 0;
+    line-height: 0;
+  }
+
   .ms-site--dark-premium .msh-header__locale {
     display: flex !important;
     align-items: center;
+    flex: 0 0 auto;
+    width: auto;
+    height: 100%;
+  }
+
+  .ms-site--dark-premium .msh-header__locale .public-menu-lang {
+    width: auto;
+    height: 100%;
   }
 
   .ms-site--dark-premium a.msh-btn--header {
-    padding: 0.45rem 0.9rem;
-    font-size: 0.8125rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 7.25rem;
+    height: 2.5rem;
+    min-height: 2.5rem;
+    padding: 0 0.5rem;
+    font-size: 0.95rem;
+    line-height: 1;
+  }
+
+  .ms-site--dark-premium a.msh-btn--header .msh-btn__arrow--up {
+    font-size: 1.1em;
+  }
+
+  .ms-site--dark-premium .msh-header__locale .public-menu-lang__trigger {
+    width: auto;
+    justify-content: center;
+    height: 2.5rem;
+    min-height: 2.5rem;
+    padding: 0 0.35rem 0 0.3rem;
+  }
+
+  .ms-site--dark-premium .ms-nav-mobile summary {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    min-height: 2.5rem;
+    min-width: 2.5rem;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 0;
+    transform: translateY(0);
+  }
+
+  .ms-site--dark-premium .ms-nav-mobile__burger {
+    width: 1.9rem;
+    height: auto;
+    gap: 0 !important;
+  }
+
+  .ms-site--dark-premium .ms-nav-mobile__burger span {
+    height: 4px;
+  }
+
+  .ms-site--dark-premium .ms-nav-mobile__burger span + span {
+    margin-top: 6px !important;
   }
 
   .ms-page--studio-home .ms-dp-section {
     padding: clamp(3rem, 8vw, 4rem) 0;
+  }
+
+  .ms-page--studio-home .msh-contact {
+    padding-block: clamp(3.5rem, 9vh, 5rem) clamp(2.75rem, 7vh, 3.5rem);
+  }
+
+  .ms-page--studio-home .msh-contact .ms-dp-section__title {
+    max-width: none;
+    font-size: clamp(2rem, 8vw, 2.55rem);
+  }
+
+  .ms-page--studio-home .msh-contact .ms-dp-section__note,
+  .ms-page--studio-home .msh-contact__trust,
+  .ms-page--studio-home .msh-contact__next {
+    max-width: none;
+    width: 100%;
+  }
+
+  .ms-page--studio-home .msh-contact .ms-dp-section__note {
+    margin-top: 1.1rem;
+  }
+
+  .ms-page--studio-home .msh-contact__trust {
+    margin-top: 0.7rem;
+  }
+
+  .ms-page--studio-home .msh-contact__next {
+    margin: 0.5rem 0 1.5rem;
+  }
+
+  .ms-page--studio-home .msh-contact__form-card {
+    max-width: none;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1.35rem 1.15rem 1.25rem;
   }
 
   .ms-page--studio-home .ms-dp-section__title {
@@ -1719,8 +2096,8 @@ body:has(.ms-page--planes) {
   }
 
   .ms-site--dark-premium .msh-brand__mark {
-    height: 42px;
-    max-width: 88px;
+    height: 3.95rem !important;
+    max-width: none;
   }
 
   .msh-hero {
@@ -1879,11 +2256,55 @@ body:has(.ms-page--planes) {
     width: 100%;
     justify-content: center;
     padding: 0.62rem 1rem;
-    font-size: 0.8125rem;
+    height: calc(0.62rem * 2 + 0.975rem);
+    font-size: 0.95rem;
+    line-height: 1;
   }
 
   .msh-motanos-hub-actions {
     margin-top: 1.25rem;
+  }
+}
+
+/* —— CTA final (puente Estudio → contacto) —— */
+.ms-page--studio-home .msh-final-cta {
+  padding-block: clamp(5.5rem, 14vh, 9rem);
+}
+
+.ms-page--studio-home .msh-final-cta__shell {
+  max-width: 42rem;
+}
+
+.ms-page--studio-home .msh-final-cta__title {
+  margin-top: 1rem;
+  max-width: 22ch;
+  font-family: var(--msh-font-display, "Instrument Serif", Georgia, serif);
+  font-size: clamp(2.35rem, 5.4vw, 3.85rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+.ms-page--studio-home .msh-final-cta__lead {
+  margin-top: 1.4rem;
+  max-width: 34rem;
+  font-size: clamp(1.05rem, 1.7vw, 1.2rem);
+  line-height: 1.58;
+  color: rgba(255, 255, 255, 0.56);
+}
+
+.ms-page--studio-home .msh-final-cta__actions {
+  margin-top: 2.35rem;
+}
+
+@media (max-width: 719px) {
+  .ms-page--studio-home .msh-final-cta {
+    padding-block: clamp(4rem, 10vh, 5.5rem);
+  }
+
+  .ms-page--studio-home .msh-final-cta__title {
+    max-width: none;
+    font-size: clamp(2rem, 8vw, 2.55rem);
   }
 }
 

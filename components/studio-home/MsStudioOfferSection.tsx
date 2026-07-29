@@ -5,6 +5,8 @@ import { getMsStudioOffer } from "../../lib/msStudioEditorialI18nFoundation.js";
 import { useMsSiteLocale } from "../MsSiteLocaleProvider.js";
 import { MsSiteNavAnchor } from "../MsSiteNavAnchor.js";
 import { MsStudioOfferProductVisual } from "./MsStudioOfferProductVisuals.js";
+import { MsStudioSectionEyebrow } from "./MsStudioSectionEyebrow.js";
+import { MsStudioTitleWithAccent } from "./MsStudioTitleWithAccent.js";
 
 function useOfferReveal(rootRef: RefObject<HTMLElement | null>): void {
   useEffect(() => {
@@ -128,10 +130,10 @@ export function MsStudioOfferSection(): ReactElement {
     <section ref={rootRef} id={offer.anchorId} className="msh-offer" aria-labelledby={titleId}>
       <div className="msh-offer__rail">
         <header className="msh-offer__opening" data-offer-reveal>
+          <MsStudioSectionEyebrow>{offer.title}</MsStudioSectionEyebrow>
           <h2 id={titleId} className="msh-offer__title">
-            {offer.title}
+            <MsStudioTitleWithAccent text={offer.lead} />
           </h2>
-          <p className="msh-offer__lead">{offer.lead}</p>
         </header>
 
         <div className="msh-offer__gallery">
@@ -147,7 +149,9 @@ export function MsStudioOfferSection(): ReactElement {
                 <p className="msh-offer__block-index" aria-hidden="true">
                   {String(index + 1).padStart(2, "0")}
                 </p>
-                <h3 className="msh-offer__block-title">{product.title}</h3>
+                <h3 className="msh-offer__block-title">
+                  <MsStudioTitleWithAccent text={product.title} />
+                </h3>
                 <p className="msh-offer__block-body">{product.body}</p>
               </div>
               <div className="msh-offer__block-stage" data-offer-parallax>

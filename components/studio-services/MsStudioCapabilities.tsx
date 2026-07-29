@@ -13,6 +13,7 @@ import {
 import { useMsSiteLocale } from "../MsSiteLocaleProvider.js";
 import { MsStudioCapabilitiesVisual } from "./MsStudioCapabilitiesVisual.js";
 import { MsCapMotanosStampInteractive } from "./MsCapMotanosStampInteractive.js";
+import { MsStudioSectionEyebrow } from "../studio-home/MsStudioSectionEyebrow.js";
 
 type MsStudioCapabilitiesProps = {
   readonly asPage?: boolean;
@@ -68,7 +69,7 @@ export function MsStudioCapabilities({
     <section className="mscap mscap--v13" id={resolvedSectionId}>
       {hideIntro ? null : (
         <div className="mscap-rail mscap-home-intro" aria-labelledby={sectionTitleId}>
-          <p className="mscap-section__kicker">{ui.capKicker}</p>
+          <MsStudioSectionEyebrow>{ui.capKicker}</MsStudioSectionEyebrow>
           <SectionHeading id={sectionTitleId} className="msh-hero__title mscap-home-intro__title">
             <span className="msh-hero__title-line">{ui.capTitleBefore}</span>
             <span className="msh-hero__title-line">

@@ -3,11 +3,12 @@ import {
   getMsStudioLandingSection,
   type MsStudioLandingSectionId,
 } from "../../lib/msStudioLandingArchitectureFoundation.js";
+import { MsStudioSectionEyebrow } from "./MsStudioSectionEyebrow.js";
 
 type MsStudioLandingSectionSlotProps = {
   readonly sectionId: Exclude<
     MsStudioLandingSectionId,
-    "inicio" | "servicios" | "estudio" | "proceso" | "contacto"
+    "inicio" | "servicios" | "estudio" | "contacto"
   >;
   /** Variante visual mínima con chrome existente (sin diseño nuevo). */
   readonly alt?: boolean;
@@ -56,7 +57,7 @@ export function MsStudioLandingSectionSlot({
       data-landing-slot={section.id}
     >
       <div className="ms-dp-shell">
-        <p className="ms-dp-section__kicker">{copy.kicker}</p>
+        <MsStudioSectionEyebrow>{copy.kicker}</MsStudioSectionEyebrow>
         <h2 id={titleId} className="ms-dp-section__title">
           {copy.title}
         </h2>

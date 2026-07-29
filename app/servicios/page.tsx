@@ -4,6 +4,7 @@
  * Fase 1 — /servicios ya no es experiencia separada.
  * Redirect al ancla de la landing única.
  */
+import Link from "next/link";
 import { useEffect, type ReactElement } from "react";
 
 export default function ServiciosLandingRedirectPage(): ReactElement {
@@ -23,7 +24,7 @@ export default function ServiciosLandingRedirectPage(): ReactElement {
       }}
     >
       <p>
-        <a href="/#servicios">Ir a Qué hacemos</a>
+        <Link href="/#servicios">Ir a Qué hacemos</Link>
       </p>
     </main>
   );

@@ -73,7 +73,13 @@ export function MsSiteMobileNav({ activePath }: MsSiteMobileNavProps): React.Rea
 
   return (
     <details ref={detailsRef} className="ms-nav-mobile">
-      <summary>{nav.menu}</summary>
+      <summary aria-label={nav.menu}>
+        <span className="ms-nav-mobile__burger" aria-hidden="true">
+          <span />
+          <span />
+          <span />
+        </span>
+      </summary>
       <nav className="ms-nav-mobile__panel" aria-label={nav.mobileNav}>
         <MsSiteNavLinks activePath={activePath} className="" />
       </nav>

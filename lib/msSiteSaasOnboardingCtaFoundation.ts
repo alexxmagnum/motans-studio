@@ -38,14 +38,23 @@ export const resolveMotanosClientPublicOrigin = (): string => {
   if (fromEnv.length > 0) {
     return fromEnv.replace(/\/+$/, "");
   }
+  if (process.env.NODE_ENV === "production") {
+    return "";
+  }
   return "http://localhost:3002";
 };
 
-export const buildMotanosClientSaasOnboardingUrl = (): string =>
-  `${resolveMotanosClientPublicOrigin()}${MS_SITE_SAAS_ONBOARDING_ONBOARDING_PATH}`;
+export const buildMotanosClientSaasOnboardingUrl = (): string => {
+  const origin = resolveMotanosClientPublicOrigin();
+  return origin ? `${origin}${MS_SITE_SAAS_ONBOARDING_ONBOARDING_PATH}` : "";
+};
 
-export const buildMotanosClientRegisterUrl = (): string =>
-  `${resolveMotanosClientPublicOrigin()}${MS_SITE_SAAS_ONBOARDING_REGISTER_PATH}`;
+export const buildMotanosClientRegisterUrl = (): string => {
+  const origin = resolveMotanosClientPublicOrigin();
+  return origin ? `${origin}${MS_SITE_SAAS_ONBOARDING_REGISTER_PATH}` : "";
+};
 
-export const buildMotanosClientLoginUrl = (): string =>
-  `${resolveMotanosClientPublicOrigin()}${MS_SITE_SAAS_ONBOARDING_LOGIN_PATH}`;
+export const buildMotanosClientLoginUrl = (): string => {
+  const origin = resolveMotanosClientPublicOrigin();
+  return origin ? `${origin}${MS_SITE_SAAS_ONBOARDING_LOGIN_PATH}` : "";
+};

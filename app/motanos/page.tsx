@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, type ReactElement } from "react";
 
 /**
@@ -23,7 +24,7 @@ export default function MotanOSFrozenRedirectPage(): ReactElement {
       }}
     >
       <p>
-        <a href="/">Ir a Motans Studio</a>
+        <Link href="/">Ir a Motans Studio</Link>
       </p>
     </main>
   );

@@ -143,9 +143,10 @@ body:has(.ms-site--dark-premium) {
 }
 
 .ms-site--dark-premium .ms-nav-mobile summary {
-  color: var(--ms-dp-ink) !important;
-  background: var(--ms-dp-bg-elevated) !important;
-  border-color: var(--ms-dp-border) !important;
+  color: #ffffff !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0.35rem !important;
 }
 
 /* —— Buttons —— */

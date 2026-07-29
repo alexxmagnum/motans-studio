@@ -10,6 +10,7 @@ import {
 import { MS_SITE_HOME_VIDEO_SPLASH_MP4 } from "../../lib/msSiteHomeVideoSplashFoundation.js";
 import { useMsSiteLocale } from "../MsSiteLocaleProvider.js";
 import { MsSiteNavAnchor } from "../MsSiteNavAnchor.js";
+import { MsStudioSectionEyebrow } from "./MsStudioSectionEyebrow.js";
 
 const PANEL = MS_STUDIO_HOME_SCULPTURE;
 
@@ -243,21 +244,19 @@ export function MsStudioHomeHero(): ReactElement {
               className="msh-hero__sound"
               onClick={toggleSound}
               aria-pressed={soundOn}
-              aria-label={soundOn ? ui.heroSoundOff : ui.heroSoundOn}
+              aria-label={soundOn ? ui.heroSoundOn : ui.heroSoundOff}
+              title={soundOn ? ui.heroSoundOn : ui.heroSoundOff}
             >
               <span className="msh-hero__sound-dot" aria-hidden="true" />
               <span className="msh-hero__sound-label">
-                {soundOn ? ui.heroSoundOff : ui.heroSoundOn}
+                {soundOn ? ui.heroSoundOn : ui.heroSoundOff}
               </span>
             </button>
           </div>
         </div>
 
         <div className="msh-hero__content">
-          <p className="msh-hero__brand">
-            <span className="msh-hero__brand-mark" aria-hidden="true" />
-            <span className="msh-hero__brand-text">{hero.badge}</span>
-          </p>
+          <MsStudioSectionEyebrow className="msh-hero__brand">{hero.badge}</MsStudioSectionEyebrow>
 
           <h1 id="msh-hero-title" className="msh-hero__title">
             <span className="msh-hero__title-line">{ui.heroTitleLine1}</span>

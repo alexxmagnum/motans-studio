@@ -39,9 +39,11 @@ describe("MS_SITE_17_03C premium SEO", () => {
     assert.ok(layout.includes('createMsSitePageMetadata("studio")'));
   });
 
-  it("exports sitemap and robots routes", () => {
+  it("exports sitemap, robots and web manifest", () => {
     assert.ok(readFileSync(join(appDir, "sitemap.ts"), "utf-8").includes("MS_SITE_SITEMAP_PATHS"));
     assert.ok(readFileSync(join(appDir, "robots.ts"), "utf-8").includes("sitemap"));
+    assert.ok(existsSync(join(appDir, "manifest.ts")));
+    assert.ok(readFileSync(join(appDir, "manifest.ts"), "utf-8").includes("Motans Studio") || readFileSync(join(appDir, "manifest.ts"), "utf-8").includes("MS_SITE_IDENTITY"));
   });
 
   it("ships favicon and app icons", () => {

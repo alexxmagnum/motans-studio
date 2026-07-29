@@ -6,12 +6,16 @@ import type { Metadata } from "next";
 
 import { MOTANS_CORPORATE_BRAND_ASSETS } from "@motanos/branding";
 import { MS_SITE_PUBLIC_MOTANOS_VISIBLE } from "./msSite1701Foundation.js";
+import {
+  MS_SITE_IDENTITY,
+  MS_SITE_OFFICIAL_ORIGIN,
+} from "./msSiteIdentityFoundation.js";
 
 /** Origen público del site (override en despliegue con NEXT_PUBLIC_MS_SITE_ORIGIN). */
 export const MS_SITE_PUBLIC_ORIGIN =
   (typeof process !== "undefined" &&
     process.env.NEXT_PUBLIC_MS_SITE_ORIGIN?.replace(/\/$/, "")) ||
-  "https://motans.studio";
+  MS_SITE_OFFICIAL_ORIGIN;
 
 export const MS_SITE_SEO = {
   home: {
@@ -127,28 +131,26 @@ export const MS_SITE_SEO = {
     keywords: ["configuración asistida", "onboarding MotanOS", "Motans Studio"],
   },
   legal: {
-    title: "Información legal · Motans Studio",
-    description: MS_SITE_PUBLIC_MOTANOS_VISIBLE
-      ? "Privacidad, cookies y términos de uso del site comercial Motans Studio y MotanOS."
-      : "Centro legal Motans Studio: aviso legal, privacidad, cookies, condiciones y accesibilidad.",
-    path: "/legal",
-    keywords: ["privacidad", "cookies", "términos", "Motans Studio", "aviso legal"],
+    title: "Aviso legal · Motans Studio",
+    description: "Identificación del titular y marco legal del sitio Motans Studio.",
+    path: "/legal/aviso-legal",
+    keywords: ["aviso legal", "Motans Studio"],
   },
   legalAviso: {
     title: "Aviso legal · Motans Studio",
-    description: "Aviso legal e información societaria del sitio Motans Studio.",
+    description: "Identificación del titular y marco legal del sitio Motans Studio.",
     path: "/legal/aviso-legal",
     keywords: ["aviso legal", "Motans Studio"],
   },
   legalPrivacidad: {
     title: "Política de privacidad · Motans Studio",
-    description: "Política de privacidad y tratamiento de datos en Motans Studio.",
+    description: "Tratamiento de datos personales en Motans Studio.",
     path: "/legal/privacidad",
     keywords: ["privacidad", "datos personales", "Motans Studio"],
   },
   legalCookies: {
     title: "Política de cookies · Motans Studio",
-    description: "Política de cookies y gestión del consentimiento en Motans Studio.",
+    description: "Cookies y gestión del consentimiento en Motans Studio.",
     path: "/legal/cookies",
     keywords: ["cookies", "consentimiento", "Motans Studio"],
   },
@@ -157,24 +159,6 @@ export const MS_SITE_SEO = {
     description: "Condiciones de uso del sitio web de Motans Studio.",
     path: "/legal/condiciones",
     keywords: ["condiciones de uso", "términos", "Motans Studio"],
-  },
-  legalServicios: {
-    title: "Política de servicios · Motans Studio",
-    description: "Marco orientativo de prestación de servicios de Motans Studio.",
-    path: "/legal/servicios",
-    keywords: ["servicios", "política de servicios", "Motans Studio"],
-  },
-  legalContacto: {
-    title: "Contacto legal · Motans Studio",
-    description: "Canales de contacto legal y de privacidad de Motans Studio.",
-    path: "/legal/contacto-legal",
-    keywords: ["contacto legal", "privacidad", "Motans Studio"],
-  },
-  legalAccesibilidad: {
-    title: "Accesibilidad · Motans Studio",
-    description: "Compromiso de accesibilidad del sitio Motans Studio.",
-    path: "/legal/accesibilidad",
-    keywords: ["accesibilidad", "WCAG", "Motans Studio"],
   },
 } as const;
 
@@ -192,30 +176,35 @@ export function createMsSitePageMetadata(page: MsSiteSeoPageKey): Metadata {
   const canonical = absoluteUrl(seo.path);
   const ogImagePath = MOTANS_CORPORATE_BRAND_ASSETS.markMsPng.publicPath;
   const ogImageUrl = absoluteUrl(ogImagePath);
+  const brand = MS_SITE_IDENTITY.brand;
 
   return {
-    title: seo.title,
-    description: seo.description,
-    keywords: [...seo.keywords],
-    authors: [{ name: "Motans Studio", url: MS_SITE_PUBLIC_ORIGIN }],
-    creator: "Motans Studio",
-    publisher: "Motans Studio",
     metadataBase: new URL(MS_SITE_PUBLIC_ORIGIN),
+    title: {
+      absolute: seo.title,
+    },
+    description: seo.description,
+    applicationName: brand,
+    category: "technology",
+    keywords: [...seo.keywords],
+    authors: [{ name: brand, url: MS_SITE_PUBLIC_ORIGIN }],
+    creator: brand,
+    publisher: brand,
     alternates: { canonical },
     icons: {
       icon: [
         { url: "/favicon.ico", sizes: "any" },
-        { url: ogImagePath, type: "image/png", sizes: "32x32" },
-        { url: ogImagePath, type: "image/png", sizes: "192x192" },
+        { url: "/icon.png", type: "image/png", sizes: "32x32" },
+        { url: "/icon.png", type: "image/png", sizes: "192x192" },
       ],
-      apple: [{ url: ogImagePath, type: "image/png", sizes: "180x180" }],
-      shortcut: "/favicon.ico",
+      apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "180x180" }],
+      shortcut: ["/favicon.ico"],
     },
     openGraph: {
       title: seo.title,
       description: seo.description,
       url: canonical,
-      siteName: "Motans Studio",
+      siteName: brand,
       locale: MS_SITE_OG_LOCALE,
       type: "website",
       images: [
@@ -236,6 +225,10 @@ export function createMsSitePageMetadata(page: MsSiteSeoPageKey): Metadata {
     robots: {
       index: true,
       follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+      },
     },
   };
 }
@@ -243,11 +236,34 @@ export function createMsSitePageMetadata(page: MsSiteSeoPageKey): Metadata {
 const MS_SITE_HOME_ORGANIZATION_JSON_LD = {
   "@type": "Organization",
   "@id": `${MS_SITE_PUBLIC_ORIGIN}/#organization`,
-  name: "Motans Studio",
+  name: MS_SITE_IDENTITY.brand,
+  legalName: MS_SITE_IDENTITY.legalName,
   url: MS_SITE_PUBLIC_ORIGIN,
-  logo: `${MS_SITE_PUBLIC_ORIGIN}${MOTANS_CORPORATE_BRAND_ASSETS.markMsPng.publicPath}`,
-  email: "info@motans.studio",
+  logo: {
+    "@type": "ImageObject",
+    url: `${MS_SITE_PUBLIC_ORIGIN}${MOTANS_CORPORATE_BRAND_ASSETS.markMsPng.publicPath}`,
+    width: MOTANS_CORPORATE_BRAND_ASSETS.markMsPng.width ?? 1024,
+    height: MOTANS_CORPORATE_BRAND_ASSETS.markMsPng.height ?? 1024,
+  },
+  email: MS_SITE_IDENTITY.email,
+  telephone: MS_SITE_IDENTITY.phone,
   description: MS_SITE_SEO.home.description,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: MS_SITE_IDENTITY.address.streetAddress,
+    postalCode: MS_SITE_IDENTITY.address.postalCode,
+    addressLocality: MS_SITE_IDENTITY.address.addressLocality,
+    addressRegion: MS_SITE_IDENTITY.address.addressRegion,
+    addressCountry: MS_SITE_IDENTITY.address.addressCountry,
+  },
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer service",
+    email: MS_SITE_IDENTITY.email,
+    telephone: MS_SITE_IDENTITY.phone,
+    areaServed: "ES",
+    availableLanguage: ["es", "en"],
+  },
   ...(MS_SITE_PUBLIC_MOTANOS_VISIBLE
     ? {
         brand: {
@@ -308,16 +324,10 @@ export const MS_SITE_HOME_JSON_LD = {
 
 export const MS_SITE_SITEMAP_PATHS: readonly string[] = [
   "/",
-  "/servicios",
-  "/contacto",
-  "/legal",
   "/legal/aviso-legal",
   "/legal/privacidad",
   "/legal/cookies",
   "/legal/condiciones",
-  "/legal/servicios",
-  "/legal/contacto-legal",
-  "/legal/accesibilidad",
   ...(MS_SITE_PUBLIC_MOTANOS_VISIBLE
     ? (["/motanos", "/motanos/hosteleria", "/planes", "/solicitud"] as const)
     : ([] as const)),

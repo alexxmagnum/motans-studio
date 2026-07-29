@@ -3,16 +3,21 @@
 // Fase 17 — IMPLEMENTATION_FASE_17_COMMERCIAL_SITE_MINIMAL_PUBLISHABLE
 // Fase 7A — integración explícita: NEXT_PUBLIC_API_URL vacío ≠ configurado.
 
+import { MS_SITE_IDENTITY } from "./msSiteIdentityFoundation.js";
+
 /**
  * Base URL de la API pública de leads.
- * - Producción: definir `NEXT_PUBLIC_API_URL` (ej. https://api.motans.studio)
- * - Local sin env: fallback de desarrollo `http://localhost:3002`
- * - Cadena vacía en .env se trata como no configurada → usa el fallback local
+ * - Producción: definir `NEXT_PUBLIC_API_URL` (ej. https://api.motansstudio.com)
+ * - Desarrollo local: fallback `http://localhost:3002` solo fuera de production
+ * - Cadena vacía en .env se trata como no configurada
  */
 function resolveMsSiteApiBaseUrl(): string {
   const raw = process.env.NEXT_PUBLIC_API_URL?.trim();
   if (raw) {
     return raw.replace(/\/$/, "");
+  }
+  if (process.env.NODE_ENV === "production") {
+    return "";
   }
   return "http://localhost:3002";
 }
@@ -91,14 +96,22 @@ const readValidationErrors = (
 };
 
 const CONNECTION_ERROR_MESSAGE = MS_SITE_API_URL_CONFIGURED
-  ? "Error de conexión. Inténtalo de nuevo o escríbenos a info@motans.studio."
-  : "El servicio de contacto no está disponible todavía. Escríbenos a info@motans.studio.";
+  ? `Error de conexión. Inténtalo de nuevo o escríbenos a ${MS_SITE_IDENTITY.email}.`
+  : `El servicio de contacto no está disponible todavía. Escríbenos a ${MS_SITE_IDENTITY.email}.`;
 
 async function apiPostPublic<TSuccess extends Record<string, unknown>>(
   path: string,
   body: unknown,
   mapSuccess: (payload: Record<string, unknown>) => TSuccess,
 ): Promise<ApiResult<TSuccess>> {
+  if (!API_BASE_URL) {
+    return {
+      ok: false,
+      error: CONNECTION_ERROR_MESSAGE,
+      validationErrors: undefined,
+    };
+  }
+
   const fallbackFetch = (globalThis as { fetch?: FetchLikeFn }).fetch;
   if (fallbackFetch === undefined) {
     return {

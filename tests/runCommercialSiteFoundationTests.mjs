@@ -22,6 +22,7 @@ const testFiles = [
   join(__dirname, "commercialLandingClaimsGuard.test.mjs"),
   join(__dirname, "msSite1701Foundation.test.mjs"),
   join(__dirname, "msSiteFooterFoundation.test.mjs"),
+  join(__dirname, "msSiteIdentityFoundation.test.mjs"),
   join(__dirname, "msSite1703Foundation.test.mjs"),
   join(__dirname, "msSiteLocaleFoundation.test.mjs"),
   join(__dirname, "msSiteLandingNavFoundation.test.mjs"),

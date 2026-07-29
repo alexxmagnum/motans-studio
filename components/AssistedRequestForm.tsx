@@ -3,6 +3,7 @@
 import type React from "react";
 import { useState, useCallback } from "react";
 import { submitAssistedRequest } from "../lib/apiClient.js";
+import { MS_SITE_IDENTITY } from "../lib/msSiteIdentityFoundation.js";
 
 // Assisted Request Form - Connected to real API
 // Uses domains/commercial createAssistedRequest via public-commercial API endpoint
@@ -191,7 +192,9 @@ export function AssistedRequestForm({ onSuccess }: AssistedRequestFormProps): Re
           ayudarte a configurar MotanOS en <strong>{formData.businessName}</strong>.
         </p>
         <p style={{ color: "#666", fontSize: "0.75rem" }}>
-          Mientras tanto, puedes escribirnos directamente a <strong>info@motans.studio</strong> o llamarnos.
+          Mientras tanto, puedes escribirnos directamente a{" "}
+          <strong>{MS_SITE_IDENTITY.email}</strong> o llamarnos al{" "}
+          <strong>{MS_SITE_IDENTITY.phone}</strong>.
         </p>
         <button
           onClick={() => {
@@ -239,7 +242,8 @@ export function AssistedRequestForm({ onSuccess }: AssistedRequestFormProps): Re
             fontSize: "0.875rem",
           }}
         >
-          {errorMessage || "Hubo un error. Inténtalo de nuevo o contacta directamente con info@motans.studio"}
+          {errorMessage ||
+            `Hubo un error. Inténtalo de nuevo o contacta directamente con ${MS_SITE_IDENTITY.email}`}
         </div>
       )}
 

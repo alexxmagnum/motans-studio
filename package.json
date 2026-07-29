@@ -8,8 +8,8 @@
     "dev:fast": "next dev --port 3001 --hostname 0.0.0.0",
     "build": "next build",
     "preview": "npx --yes serve@14 out -l 3001",
-    "start": "next dev --port 3001",
-    "lint": "echo \"No lint configured yet\"",
+    "start": "pnpm preview",
+    "lint": "eslint . --max-warnings 0",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "test": "node tests/runCommercialSiteFoundationTests.mjs"
   },
@@ -22,9 +22,12 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.6",
     "@types/node": "^20.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^15.5.22",
     "typescript": "^5.8.3"
   },
   "engines": {

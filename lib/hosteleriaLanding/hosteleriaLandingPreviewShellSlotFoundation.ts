@@ -141,14 +141,6 @@ const toCheck = (checkId: string, passed: boolean, message: string): HosteleriaL
   message,
 });
 
-const slugifyNoticeId = (label: string): string =>
-  label
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
-
 const createRegionFromPreviewSection = (
   section: HosteleriaLandingPreviewSection,
 ): HosteleriaLandingPreviewShellSlotRegion => ({

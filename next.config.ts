@@ -13,6 +13,7 @@ const nextConfig: NextConfig = {
     "@motanos/i18n",
   ],
   output: "export",
+  poweredByHeader: false,
   images: {
     unoptimized: true,
   },
@@ -26,6 +27,18 @@ const nextConfig: NextConfig = {
       { source: "/solicitud/:path*", destination: "/", permanent: true },
       { source: "/motans", destination: "/", permanent: true },
       { source: "/motans/:path*", destination: "/", permanent: true },
+      { source: "/legal", destination: "/legal/aviso-legal", permanent: true },
+      { source: "/legal/servicios", destination: "/legal/aviso-legal", permanent: true },
+      {
+        source: "/legal/contacto-legal",
+        destination: "/legal/privacidad",
+        permanent: true,
+      },
+      {
+        source: "/legal/accesibilidad",
+        destination: "/legal/aviso-legal",
+        permanent: true,
+      },
     ];
   },
   webpack: (config) => {

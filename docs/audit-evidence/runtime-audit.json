@@ -1,0 +1,259 @@
+{
+  "generatedAt": "2026-07-26T13:29:03.056Z",
+  "browser": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+  "detailed": [
+    {
+      "vp": {
+        "name": "390",
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "title": "Motans Studio · Software a medida, desarrollo web, SaaS e IA",
+        "hasIconLink": false,
+        "brandNameDisplay": "absent",
+        "overflowX": false,
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "footerRuleCount": 36,
+        "footer": {
+          "bg": "rgb(0, 0, 0)",
+          "color": "rgba(255, 255, 255, 0.55)",
+          "display": "block",
+          "font": "Inter, \"Segoe UI Variable\", \"Segoe UI\", system-ui, sans-serif",
+          "padTop": "44px",
+          "shellDisplay": "grid",
+          "shellCols": "350px",
+          "listStyle": "outside none none",
+          "listDisplay": "grid",
+          "liListStyle": "none",
+          "sample": "Motans StudioSoftware con precisión de estudio: webs, SaaS, automatización e inteligencia artificial para empresas exigentes.info@motans.studioEspañaLinkedInXGitHubExplorarInicioQu"
+        },
+        "slots": [
+          {
+            "id": "entrega",
+            "text": "EntregaQué recibe el clienteOwnership, código y documentación — detalle en una próxima fase."
+          },
+          {
+            "id": "tecnologias",
+            "text": "TecnologíasTecnologíasStack y criterio técnico — detalle en una próxima fase."
+          },
+          {
+            "id": "faq",
+            "text": "FAQPreguntas frecuentesRespuestas claras — detalle en una próxima fase."
+          }
+        ],
+        "h1": "Construimos softwarecon precisión de estudiopara empresas exigentes.",
+        "hrefHash": 3
+      },
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ],
+      "failed": []
+    },
+    {
+      "vp": {
+        "name": "768",
+        "width": 768,
+        "height": 1024
+      },
+      "metrics": {
+        "title": "Motans Studio · Software a medida, desarrollo web, SaaS e IA",
+        "hasIconLink": false,
+        "brandNameDisplay": "absent",
+        "overflowX": false,
+        "scrollWidth": 768,
+        "innerWidth": 768,
+        "footerRuleCount": 36,
+        "footer": {
+          "bg": "rgb(0, 0, 0)",
+          "color": "rgba(255, 255, 255, 0.55)",
+          "display": "block",
+          "font": "Inter, \"Segoe UI Variable\", \"Segoe UI\", system-ui, sans-serif",
+          "padTop": "56px",
+          "shellDisplay": "grid",
+          "shellCols": "350px 350px",
+          "listStyle": "outside none none",
+          "listDisplay": "grid",
+          "liListStyle": "none",
+          "sample": "Motans StudioSoftware con precisión de estudio: webs, SaaS, automatización e inteligencia artificial para empresas exigentes.info@motans.studioEspañaLinkedInXGitHubExplorarInicioQu"
+        },
+        "slots": [
+          {
+            "id": "entrega",
+            "text": "EntregaQué recibe el clienteOwnership, código y documentación — detalle en una próxima fase."
+          },
+          {
+            "id": "tecnologias",
+            "text": "TecnologíasTecnologíasStack y criterio técnico — detalle en una próxima fase."
+          },
+          {
+            "id": "faq",
+            "text": "FAQPreguntas frecuentesRespuestas claras — detalle en una próxima fase."
+          }
+        ],
+        "h1": "Construimos softwarecon precisión de estudiopara empresas exigentes.",
+        "hrefHash": 3
+      },
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ],
+      "failed": []
+    },
+    {
+      "vp": {
+        "name": "1440",
+        "width": 1440,
+        "height": 900
+      },
+      "metrics": {
+        "title": "Motans Studio · Software a medida, desarrollo web, SaaS e IA",
+        "hasIconLink": false,
+        "brandNameDisplay": "absent",
+        "overflowX": false,
+        "scrollWidth": 1440,
+        "innerWidth": 1440,
+        "footerRuleCount": 36,
+        "footer": {
+          "bg": "rgb(0, 0, 0)",
+          "color": "rgba(255, 255, 255, 0.55)",
+          "display": "block",
+          "font": "Inter, \"Segoe UI Variable\", \"Segoe UI\", system-ui, sans-serif",
+          "padTop": "56px",
+          "shellDisplay": "grid",
+          "shellCols": "346.172px 247.281px 247.266px 247.266px",
+          "listStyle": "outside none none",
+          "listDisplay": "grid",
+          "liListStyle": "none",
+          "sample": "Motans StudioSoftware con precisión de estudio: webs, SaaS, automatización e inteligencia artificial para empresas exigentes.info@motans.studioEspañaLinkedInXGitHubExplorarInicioQu"
+        },
+        "slots": [
+          {
+            "id": "entrega",
+            "text": "EntregaQué recibe el clienteOwnership, código y documentación — detalle en una próxima fase."
+          },
+          {
+            "id": "tecnologias",
+            "text": "TecnologíasTecnologíasStack y criterio técnico — detalle en una próxima fase."
+          },
+          {
+            "id": "faq",
+            "text": "FAQPreguntas frecuentesRespuestas claras — detalle en una próxima fase."
+          }
+        ],
+        "h1": "Construimos softwarecon precisión de estudiopara empresas exigentes.",
+        "hrefHash": 3
+      },
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ],
+      "failed": []
+    }
+  ],
+  "overflow": [
+    {
+      "name": "320",
+      "width": 320,
+      "height": 720,
+      "overflowX": true,
+      "scrollWidth": 355,
+      "innerWidth": 320
+    },
+    {
+      "name": "360",
+      "width": 360,
+      "height": 740,
+      "overflowX": false,
+      "scrollWidth": 360,
+      "innerWidth": 360
+    },
+    {
+      "name": "375",
+      "width": 375,
+      "height": 812,
+      "overflowX": false,
+      "scrollWidth": 375,
+      "innerWidth": 375
+    },
+    {
+      "name": "390",
+      "width": 390,
+      "height": 844,
+      "overflowX": false,
+      "scrollWidth": 390,
+      "innerWidth": 390
+    },
+    {
+      "name": "400",
+      "width": 400,
+      "height": 844,
+      "overflowX": false,
+      "scrollWidth": 400,
+      "innerWidth": 400
+    },
+    {
+      "name": "430",
+      "width": 430,
+      "height": 932,
+      "overflowX": false,
+      "scrollWidth": 430,
+      "innerWidth": 430
+    },
+    {
+      "name": "768",
+      "width": 768,
+      "height": 1024,
+      "overflowX": false,
+      "scrollWidth": 768,
+      "innerWidth": 768
+    },
+    {
+      "name": "1024",
+      "width": 1024,
+      "height": 768,
+      "overflowX": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024
+    },
+    {
+      "name": "1280",
+      "width": 1280,
+      "height": 800,
+      "overflowX": true,
+      "scrollWidth": 1314,
+      "innerWidth": 1280
+    },
+    {
+      "name": "1440",
+      "width": 1440,
+      "height": 900,
+      "overflowX": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440
+    },
+    {
+      "name": "1920",
+      "width": 1920,
+      "height": 1080,
+      "overflowX": false,
+      "scrollWidth": 1920,
+      "innerWidth": 1920
+    }
+  ],
+  "consent": {
+    "banner": true,
+    "buttons": [
+      "Aceptar todas",
+      "Rechazar todas",
+      "Configurar preferencias"
+    ],
+    "prefsStillOpenAfterEsc": false
+  },
+  "legal": {
+    "title": "Aviso legal · Motans Studio",
+    "editar": 2,
+    "banner": "Plantilla editable — contenido orientativo pendiente de revisión legal profesional. No constituye asesoramiento jurídico.",
+    "titleFont": "\"Instrument Serif\", \"Iowan Old Style\", \"Palatino Linotype\", Georgia, serif",
+    "hasLegalRoot": true
+  }
+}

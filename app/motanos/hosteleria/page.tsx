@@ -1,15 +1,30 @@
-import type React from "react";
-import type { Metadata } from "next";
-import { MsHosteleriaLandingV1 } from "../../../components/hosteleria/MsHosteleriaLandingV1.js";
-import { createMsSitePageMetadata } from "../../../lib/msSite1703SeoFoundation.js";
-import "../../msHosteleriaLanding.css";
+"use client";
 
-export const metadata: Metadata = createMsSitePageMetadata("hosteleria");
+import { useEffect, type ReactElement } from "react";
 
-export default function MotanOSHosteleriaPage(): React.ReactElement {
+/**
+ * Fase 0 — MotanOS Hostelería congelado en superficie pública.
+ * Redirect a Motans Studio home.
+ */
+export default function MotanOSHosteleriaFrozenRedirectPage(): ReactElement {
+  useEffect(() => {
+    window.location.replace("/");
+  }, []);
+
   return (
-    <div className="ms-page ms-page--hosteleria-landing">
-      <MsHosteleriaLandingV1 />
-    </div>
+    <main
+      className="ms-page"
+      style={{
+        minHeight: "50vh",
+        display: "grid",
+        placeItems: "center",
+        padding: "2rem",
+        textAlign: "center",
+      }}
+    >
+      <p>
+        <a href="/">Ir a Motans Studio</a>
+      </p>
+    </main>
   );
 }

@@ -1,14 +1,30 @@
-import type React from "react";
-import type { Metadata } from "next";
-import { MsMotanosPlansSection } from "../../components/plans/MsMotanosPlansSection.js";
-import { createMsSitePageMetadata } from "../../lib/msSite1703SeoFoundation.js";
+"use client";
 
-export const metadata: Metadata = createMsSitePageMetadata("planes");
+import { useEffect, type ReactElement } from "react";
 
-export default function PlanesPage(): React.ReactElement {
+/**
+ * Fase 0 — Planes MotanOS congelados en superficie pública.
+ * Redirect a Motans Studio home.
+ */
+export default function PlanesFrozenRedirectPage(): ReactElement {
+  useEffect(() => {
+    window.location.replace("/");
+  }, []);
+
   return (
-    <div className="ms-page ms-page--studio-home ms-page--planes">
-      <MsMotanosPlansSection variant="page" />
-    </div>
+    <main
+      className="ms-page"
+      style={{
+        minHeight: "50vh",
+        display: "grid",
+        placeItems: "center",
+        padding: "2rem",
+        textAlign: "center",
+      }}
+    >
+      <p>
+        <a href="/">Ir a Motans Studio</a>
+      </p>
+    </main>
   );
 }

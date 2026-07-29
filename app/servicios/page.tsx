@@ -1,18 +1,30 @@
-import type React from "react";
-import type { Metadata } from "next";
-import { MsStudioCapabilities } from "../../components/studio-services/MsStudioCapabilities.js";
-import { createMsSitePageMetadata } from "../../lib/msSite1703SeoFoundation.js";
-import { MS_SITE_PUBLIC_MOTANOS_VISIBLE } from "../../lib/msSite1701Foundation.js";
+"use client";
 
-export const metadata: Metadata = createMsSitePageMetadata("servicios");
+/**
+ * Fase 1 — /servicios ya no es experiencia separada.
+ * Redirect al ancla de la landing única.
+ */
+import { useEffect, type ReactElement } from "react";
 
-export default function ServiciosPage(): React.ReactElement {
+export default function ServiciosLandingRedirectPage(): ReactElement {
+  useEffect(() => {
+    window.location.replace("/#servicios");
+  }, []);
+
   return (
-    <div className="ms-page ms-page--landing ms-page--studio-services">
-      <MsStudioCapabilities
-        asPage
-        excludeBlockIds={MS_SITE_PUBLIC_MOTANOS_VISIBLE ? [] : ["motanos"]}
-      />
-    </div>
+    <main
+      className="ms-page"
+      style={{
+        minHeight: "50vh",
+        display: "grid",
+        placeItems: "center",
+        padding: "2rem",
+        textAlign: "center",
+      }}
+    >
+      <p>
+        <a href="/#servicios">Ir a Qué hacemos</a>
+      </p>
+    </main>
   );
 }

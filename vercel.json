@@ -2,5 +2,15 @@
   "framework": "nextjs",
   "buildCommand": "pnpm build",
   "outputDirectory": "out",
-  "installCommand": "pnpm install"
+  "installCommand": "pnpm install",
+  "redirects": [
+    { "source": "/motanos", "destination": "/", "permanent": true },
+    { "source": "/motanos/:path*", "destination": "/", "permanent": true },
+    { "source": "/planes", "destination": "/", "permanent": true },
+    { "source": "/planes/:path*", "destination": "/", "permanent": true },
+    { "source": "/solicitud", "destination": "/", "permanent": true },
+    { "source": "/solicitud/:path*", "destination": "/", "permanent": true },
+    { "source": "/motans", "destination": "/", "permanent": true },
+    { "source": "/motans/:path*", "destination": "/", "permanent": true }
+  ]
 }

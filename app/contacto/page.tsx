@@ -1,14 +1,30 @@
-import type React from "react";
-import type { Metadata } from "next";
-import { MsHomeContact } from "../../components/home/MsHomeContact.js";
-import { createMsSitePageMetadata } from "../../lib/msSite1703SeoFoundation.js";
+"use client";
 
-export const metadata: Metadata = createMsSitePageMetadata("contacto");
+/**
+ * Fase 1 — /contacto ya no es experiencia separada.
+ * Redirect al ancla de la landing única.
+ */
+import { useEffect, type ReactElement } from "react";
 
-export default function ContactoPage(): React.ReactElement {
+export default function ContactoLandingRedirectPage(): ReactElement {
+  useEffect(() => {
+    window.location.replace("/#contacto");
+  }, []);
+
   return (
-    <div className="ms-page ms-page--landing ms-page--studio-home">
-      <MsHomeContact asPage />
-    </div>
+    <main
+      className="ms-page"
+      style={{
+        minHeight: "50vh",
+        display: "grid",
+        placeItems: "center",
+        padding: "2rem",
+        textAlign: "center",
+      }}
+    >
+      <p>
+        <a href="/#contacto">Ir a Contacto</a>
+      </p>
+    </main>
   );
 }

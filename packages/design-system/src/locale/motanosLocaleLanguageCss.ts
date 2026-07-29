@@ -148,13 +148,13 @@ export const MOTANOS_LOCALE_LANGUAGE_SWITCHER_CSS = `
 
 .public-menu-lang__panel {
   position: absolute;
-  top: calc(100% + 0.4rem);
+  top: calc(100% + 0.45rem);
   right: 0;
   z-index: 85;
-  width: min(16.5rem, calc(100vw - 1.5rem));
-  padding: 0.75rem;
+  width: min(17.5rem, calc(100vw - 1.5rem));
+  padding: 0.55rem;
   border: 1px solid var(--public-menu-line, rgba(28, 24, 20, 0.12));
-  border-radius: 0.65rem;
+  border-radius: 0.85rem;
   background: var(--public-menu-surface-elevated, #fffdf9);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.7) inset,
@@ -175,8 +175,9 @@ export const MOTANOS_LOCALE_LANGUAGE_SWITCHER_CSS = `
 }
 
 .public-menu-lang__soon {
-  margin: 0 0 0.65rem;
-  font-size: 0.72rem;
+  margin: 0 0 0.55rem;
+  padding: 0 0.15rem;
+  font-size: 0.7rem;
   line-height: 1.45;
   color: var(--public-menu-muted, #6b6258);
 }
@@ -187,33 +188,35 @@ export const MOTANOS_LOCALE_LANGUAGE_SWITCHER_CSS = `
   padding: 0;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.4rem;
+  gap: 0.35rem;
 }
 
 .public-menu-lang__option {
   position: relative;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.1rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
   width: 100%;
-  min-height: 3.1rem;
-  padding: 0.5rem 0.55rem 0.45rem;
+  min-height: 2.65rem;
+  padding: 0.55rem 0.65rem;
   border: 1px solid var(--public-menu-line, rgba(28, 24, 20, 0.1));
-  border-radius: 0.5rem;
+  border-radius: 0.6rem;
   background: var(--public-menu-surface, #fffdf9);
-  text-align: left;
+  text-align: center;
   cursor: pointer;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  box-shadow: none;
   transition:
     border-color var(--motanos-interaction-duration) var(--motanos-interaction-ease),
     background var(--motanos-interaction-duration) var(--motanos-interaction-ease),
-    transform 120ms var(--motanos-interaction-ease);
+    transform 120ms var(--motanos-interaction-ease),
+    box-shadow var(--motanos-interaction-duration) var(--motanos-interaction-ease);
 }
 
 .public-menu-lang__option:hover {
-  border-color: rgba(45, 154, 244, 0.4);
-  background: rgba(45, 154, 244, 0.05);
+  border-color: rgba(4, 162, 251, 0.4);
+  background: rgba(4, 162, 251, 0.06);
 }
 
 .public-menu-lang__option:active {
@@ -223,29 +226,30 @@ export const MOTANOS_LOCALE_LANGUAGE_SWITCHER_CSS = `
 .public-menu-lang__option.is-active {
   border-color: transparent;
   color: #fff;
-  background: linear-gradient(
-    135deg,
-    var(--motanos-brand-cyan, #2d9af4) 0%,
-    #3a8fc9 52%,
-    var(--motanos-brand-lime, #b8e62e) 140%
-  );
-  box-shadow: 0 8px 22px rgba(45, 154, 244, 0.28);
+  background: linear-gradient(90deg, #04a2fb 0%, #52ebe6 42%, #a6e10b 100%);
+  box-shadow: 0 8px 22px rgba(4, 162, 251, 0.28);
 }
 
 .public-menu-lang__option.is-primary:not(.is-active) {
-  border-color: rgba(45, 154, 244, 0.28);
+  border-color: rgba(4, 162, 251, 0.22);
 }
 
 .public-menu-lang__option-head {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
+  gap: 0.45rem;
   min-width: 0;
+  width: 100%;
 }
 
 .public-menu-lang__option-flag.public-menu-lang__flag-svg {
-  width: 1.35rem;
-  height: 0.9rem;
+  width: 1.2rem;
+  height: 0.8rem;
+  flex-shrink: 0;
+  border-radius: 0.12rem;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(28, 24, 20, 0.12);
 }
 
 .public-menu-lang__option-flag.public-menu-lang__flag-svg svg {
@@ -255,34 +259,17 @@ export const MOTANOS_LOCALE_LANGUAGE_SWITCHER_CSS = `
 }
 
 .public-menu-lang__option-name {
-  font-size: 0.9rem;
-  font-weight: 600;
-  line-height: 1.25;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
   color: var(--public-menu-ink, #1c1814);
+  text-align: center;
 }
 
 .public-menu-lang__option.is-active .public-menu-lang__option-name {
   color: #fff;
-  opacity: 0.98;
-}
-
-.public-menu-lang__option-badge {
-  position: absolute;
-  top: 0.35rem;
-  right: 0.35rem;
-  padding: 0.1rem 0.35rem;
-  border-radius: 999px;
-  background: rgba(45, 154, 244, 0.12);
-  font-size: 0.48rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--motanos-brand-cyan, #2d9af4);
-}
-
-.public-menu-lang__option.is-active .public-menu-lang__option-badge {
-  background: rgba(255, 255, 255, 0.22);
-  color: #fff;
+  opacity: 1;
 }
 
 
@@ -317,6 +304,43 @@ export const MOTANOS_LOCALE_LANGUAGE_SWITCHER_CSS = `
 
 .ms-header .public-menu-lang__flag-svg {
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.22);
+}
+
+/* Panel idioma — Motans Studio (header oscuro) */
+.ms-header .public-menu-lang__panel,
+.ms-site--dark-premium .public-menu-lang__panel {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: #0c0c0c;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+    0 18px 48px rgba(0, 0, 0, 0.55);
+}
+
+.ms-header .public-menu-lang__option,
+.ms-site--dark-premium .public-menu-lang__option {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.ms-header .public-menu-lang__option:hover,
+.ms-site--dark-premium .public-menu-lang__option:hover {
+  border-color: rgba(4, 162, 251, 0.45);
+  background: rgba(4, 162, 251, 0.1);
+}
+
+.ms-header .public-menu-lang__option-name,
+.ms-site--dark-premium .public-menu-lang__option-name {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.ms-header .public-menu-lang__option-flag.public-menu-lang__flag-svg,
+.ms-site--dark-premium .public-menu-lang__option-flag.public-menu-lang__flag-svg {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18);
+}
+
+.ms-header .public-menu-lang__soon,
+.ms-site--dark-premium .public-menu-lang__soon {
+  color: rgba(255, 255, 255, 0.45);
 }
 `;
 

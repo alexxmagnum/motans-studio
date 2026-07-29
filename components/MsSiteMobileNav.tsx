@@ -3,7 +3,6 @@
 import type React from "react";
 import { useEffect, useRef } from "react";
 import { useMsSiteLocale } from "./MsSiteLocaleProvider.js";
-import { MsSiteLanguageSelector } from "./MsSiteLanguageSelector.js";
 import { MsSiteNavLinks } from "./MsSiteNavLinks.js";
 
 export interface MsSiteMobileNavProps {
@@ -75,11 +74,7 @@ export function MsSiteMobileNav({ activePath }: MsSiteMobileNavProps): React.Rea
   return (
     <details ref={detailsRef} className="ms-nav-mobile">
       <summary>{nav.menu}</summary>
-      <nav className="ms-nav-mobile__panel" aria-label="Principal móvil">
-        <div className="ms-nav-mobile__locale">
-          <span className="ms-nav-mobile__locale-label">{nav.language}</span>
-          <MsSiteLanguageSelector panelId="ms-site-lang-mobile" />
-        </div>
+      <nav className="ms-nav-mobile__panel" aria-label={nav.mobileNav}>
         <MsSiteNavLinks activePath={activePath} className="" />
       </nav>
     </details>

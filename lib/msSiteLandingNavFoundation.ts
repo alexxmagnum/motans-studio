@@ -1,11 +1,19 @@
 /**
- * Navegación landing home — scroll spy solo en secciones de la home.
+ * Navegación landing home — scroll spy + active state (Fase 1 chassis).
  */
 
-export const MS_SITE_LANDING_NAV_SECTIONS = [{ id: "inicio", navHref: "/" }] as const;
+import {
+  MS_STUDIO_LANDING_MOUNTED_SECTION_IDS,
+  MS_STUDIO_LANDING_SECTIONS,
+} from "./msStudioLandingArchitectureFoundation.js";
 
-const LEGACY_SERVICIOS_HREFS = ["/#servicios", "#servicios"] as const;
-const LEGACY_CONTACTO_HREFS = ["/#contacto", "#contacto"] as const;
+/** Solo secciones montadas en el DOM — evita spy/anclas muertas. */
+export const MS_SITE_LANDING_NAV_SECTIONS = MS_STUDIO_LANDING_SECTIONS.filter((section) =>
+  (MS_STUDIO_LANDING_MOUNTED_SECTION_IDS as readonly string[]).includes(section.id),
+).map((section) => ({
+  id: section.id,
+  navHref: section.navHref,
+})) as readonly { readonly id: string; readonly navHref: string }[];
 
 export function isMsSiteNavItemActive(href: string, activePath: string | undefined): boolean {
   if (!activePath) {
@@ -16,25 +24,35 @@ export function isMsSiteNavItemActive(href: string, activePath: string | undefin
     return activePath === "/" || activePath === "/#inicio" || activePath === "#inicio";
   }
 
+  if (href.startsWith("/#")) {
+    const hash = href.slice(1);
+    return (
+      activePath === href ||
+      activePath === hash ||
+      activePath === `/${hash}` ||
+      activePath.endsWith(hash)
+    );
+  }
+
+  if (href.startsWith("#")) {
+    return activePath === href || activePath === `/${href}` || activePath === `/#${href.slice(1)}`;
+  }
+
+  // Rutas legacy /servicios /contacto — activas si el hash equivalente está en vista.
   if (href === "/servicios") {
     return (
       activePath === "/servicios" ||
-      activePath.startsWith("/servicios/") ||
-      LEGACY_SERVICIOS_HREFS.includes(activePath as (typeof LEGACY_SERVICIOS_HREFS)[number])
+      activePath === "/#servicios" ||
+      activePath === "#servicios"
     );
   }
 
   if (href === "/contacto") {
     return (
       activePath === "/contacto" ||
-      activePath.startsWith("/contacto/") ||
-      LEGACY_CONTACTO_HREFS.includes(activePath as (typeof LEGACY_CONTACTO_HREFS)[number])
+      activePath === "/#contacto" ||
+      activePath === "#contacto"
     );
-  }
-
-  if (href.startsWith("/#")) {
-    const hashHref = href.slice(1);
-    return activePath === href || activePath === hashHref;
   }
 
   return activePath === href || activePath.startsWith(`${href}/`);

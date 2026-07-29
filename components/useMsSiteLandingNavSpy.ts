@@ -1,18 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  MS_SITE_LANDING_NAV_SECTIONS,
-} from "../lib/msSiteLandingNavFoundation.js";
+import { MS_SITE_LANDING_NAV_SECTIONS } from "../lib/msSiteLandingNavFoundation.js";
 import {
   getLandingCardTopOffsetPx,
+  scrollLandingToAnchor,
   syncLandingScrollPaddingTop,
 } from "../lib/msSiteLandingScroll.js";
 
 function getActiveLandingNavHref(): string {
   const activationLine = getLandingCardTopOffsetPx() + 48;
   const viewportBand = window.innerHeight * 0.72;
-  let active: string = MS_SITE_LANDING_NAV_SECTIONS[0].navHref;
+  let active: string = MS_SITE_LANDING_NAV_SECTIONS[0]?.navHref ?? "/";
 
   for (const section of MS_SITE_LANDING_NAV_SECTIONS) {
     const element = document.getElementById(section.id);
@@ -22,8 +21,7 @@ function getActiveLandingNavHref(): string {
 
     const rect = element.getBoundingClientRect();
     const passedTop = rect.top <= activationLine;
-    const intersectsViewport =
-      rect.bottom > activationLine && rect.top < viewportBand;
+    const intersectsViewport = rect.bottom > activationLine && rect.top < viewportBand;
 
     if (passedTop || intersectsViewport) {
       active = section.navHref;
@@ -76,6 +74,14 @@ export function useMsSiteLandingNavSpy(enabled: boolean): string | undefined {
 
     syncLandingScrollPaddingTop();
 
+    const initialHash = window.location.hash.replace("#", "");
+    if (initialHash) {
+      window.requestAnimationFrame(() => {
+        scrollLandingToAnchor(initialHash);
+      });
+      window.setTimeout(() => scrollLandingToAnchor(initialHash), 120);
+    }
+
     let frame = 0;
     let delayedUpdate: number | undefined;
 
@@ -91,6 +97,12 @@ export function useMsSiteLandingNavSpy(enabled: boolean): string | undefined {
     };
 
     const onHashChange = (): void => {
+      const hash = window.location.hash.replace("#", "");
+      if (hash) {
+        scrollLandingToAnchor(hash);
+      } else {
+        scrollLandingToAnchor("inicio");
+      }
       scheduleUpdate();
     };
 

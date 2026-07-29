@@ -38,6 +38,34 @@ const MS_SITE_PAGE_BACK_BY_PATH: Record<string, MsSitePageBackTarget> = {
     href: MS_SITE_ROUTES.home,
     label: MS_SITE_PAGE_BACK_LABEL,
   },
+  [MS_SITE_ROUTES.legalAviso]: {
+    href: MS_SITE_ROUTES.legal,
+    label: "Volver a legales",
+  },
+  [MS_SITE_ROUTES.legalPrivacidad]: {
+    href: MS_SITE_ROUTES.legal,
+    label: "Volver a legales",
+  },
+  [MS_SITE_ROUTES.legalCookies]: {
+    href: MS_SITE_ROUTES.legal,
+    label: "Volver a legales",
+  },
+  [MS_SITE_ROUTES.legalCondiciones]: {
+    href: MS_SITE_ROUTES.legal,
+    label: "Volver a legales",
+  },
+  [MS_SITE_ROUTES.legalServicios]: {
+    href: MS_SITE_ROUTES.legal,
+    label: "Volver a legales",
+  },
+  [MS_SITE_ROUTES.legalContacto]: {
+    href: MS_SITE_ROUTES.legal,
+    label: "Volver a legales",
+  },
+  [MS_SITE_ROUTES.legalAccesibilidad]: {
+    href: MS_SITE_ROUTES.legal,
+    label: "Volver a legales",
+  },
 };
 
 export function getMsSitePageBack(pathname: string): MsSitePageBackTarget | null {

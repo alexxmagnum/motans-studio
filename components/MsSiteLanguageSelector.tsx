@@ -20,7 +20,6 @@ export function MsSiteLanguageSelector({
       setLocale={setLocale}
       panelId={panelId}
       listboxAriaLabel={nav.chooseLanguage}
-      primaryBadgeLabel={nav.primaryLocale}
       triggerAriaLabel={`${nav.language}: ${nav.chooseLanguage}`}
     />
   );

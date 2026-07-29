@@ -26,87 +26,101 @@ export const MS_SITE_NAV_I18N: Record<
   {
     readonly inicio: string;
     readonly servicios: string;
+    readonly proceso: string;
+    readonly faq: string;
     readonly motanos: string;
     readonly planes: string;
     readonly configuracionAsistida: string;
     readonly contacto: string;
     readonly menu: string;
+    readonly mobileNav: string;
     readonly language: string;
     readonly chooseLanguage: string;
-    readonly primaryLocale: string;
   }
 > = {
   es: {
     inicio: "Inicio",
     servicios: "Qué hacemos",
+    proceso: "Proceso",
+    faq: "FAQ",
     motanos: "MotanOS",
     planes: "Planes",
     configuracionAsistida: "Configuración asistida",
     contacto: "Contacto",
     menu: "Menú",
+    mobileNav: "Navegación principal",
     language: "Idioma",
     chooseLanguage: "Elegir idioma",
-    primaryLocale: "Principal",
   },
   en: {
     inicio: "Home",
     servicios: "What we do",
+    proceso: "Process",
+    faq: "FAQ",
     motanos: "MotanOS",
     planes: "Plans",
     configuracionAsistida: "Assisted setup",
     contacto: "Contact",
     menu: "Menu",
+    mobileNav: "Primary navigation",
     language: "Language",
     chooseLanguage: "Choose language",
-    primaryLocale: "Primary",
   },
   fr: {
     inicio: "Accueil",
     servicios: "Ce que nous faisons",
+    proceso: "Processus",
+    faq: "FAQ",
     motanos: "MotanOS",
     planes: "Offres",
     configuracionAsistida: "Configuration assistée",
     contacto: "Contact",
     menu: "Menu",
+    mobileNav: "Navigation principale",
     language: "Langue",
     chooseLanguage: "Choisir la langue",
-    primaryLocale: "Principal",
   },
   de: {
     inicio: "Start",
     servicios: "Was wir tun",
+    proceso: "Prozess",
+    faq: "FAQ",
     motanos: "MotanOS",
     planes: "Tarife",
     configuracionAsistida: "Begleitete Einrichtung",
     contacto: "Kontakt",
     menu: "Menü",
+    mobileNav: "Hauptnavigation",
     language: "Sprache",
     chooseLanguage: "Sprache wählen",
-    primaryLocale: "Haupt",
   },
   it: {
     inicio: "Home",
     servicios: "Cosa facciamo",
+    proceso: "Processo",
+    faq: "FAQ",
     motanos: "MotanOS",
     planes: "Piani",
     configuracionAsistida: "Configurazione assistita",
     contacto: "Contatto",
     menu: "Menu",
+    mobileNav: "Navigazione principale",
     language: "Lingua",
     chooseLanguage: "Scegli lingua",
-    primaryLocale: "Principale",
   },
   pt: {
     inicio: "Início",
     servicios: "O que fazemos",
+    proceso: "Processo",
+    faq: "FAQ",
     motanos: "MotanOS",
     planes: "Planos",
     configuracionAsistida: "Configuração assistida",
     contacto: "Contacto",
     menu: "Menu",
+    mobileNav: "Navegação principal",
     language: "Idioma",
     chooseLanguage: "Escolher idioma",
-    primaryLocale: "Principal",
   },
 };
 
@@ -116,6 +130,8 @@ const NAV_LABEL_KEY_BY_HREF: Record<string, MsSiteNavLabelKey> = {
   "/": "inicio",
   "/servicios": "servicios",
   "/#servicios": "servicios",
+  "/#proceso": "proceso",
+  "/#faq": "faq",
   "/motanos": "motanos",
   "/#planes": "planes",
   "/solicitud": "configuracionAsistida",

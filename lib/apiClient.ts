@@ -1,9 +1,30 @@
 // API Client for Commercial Site
 // Conecta los formularios a los endpoints públicos reales (sin auth).
 // Fase 17 — IMPLEMENTATION_FASE_17_COMMERCIAL_SITE_MINIMAL_PUBLISHABLE
+// Fase 7A — integración explícita: NEXT_PUBLIC_API_URL vacío ≠ configurado.
 
-/** Optional public API. Empty/unset falls back to local default; set NEXT_PUBLIC_API_URL in .env.local. */
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3002";
+/**
+ * Base URL de la API pública de leads.
+ * - Producción: definir `NEXT_PUBLIC_API_URL` (ej. https://api.motans.studio)
+ * - Local sin env: fallback de desarrollo `http://localhost:3002`
+ * - Cadena vacía en .env se trata como no configurada → usa el fallback local
+ */
+function resolveMsSiteApiBaseUrl(): string {
+  const raw = process.env.NEXT_PUBLIC_API_URL?.trim();
+  if (raw) {
+    return raw.replace(/\/$/, "");
+  }
+  return "http://localhost:3002";
+}
+
+export const MS_SITE_API_BASE_URL = resolveMsSiteApiBaseUrl();
+
+/** True solo si el despliegue definió explícitamente NEXT_PUBLIC_API_URL. */
+export const MS_SITE_API_URL_CONFIGURED = Boolean(
+  process.env.NEXT_PUBLIC_API_URL?.trim(),
+);
+
+const API_BASE_URL = MS_SITE_API_BASE_URL;
 
 export type ApiResult<T> =
   | { ok: true; data: T }
@@ -69,6 +90,10 @@ const readValidationErrors = (
   return raw as Array<{ field: string; message: string }>;
 };
 
+const CONNECTION_ERROR_MESSAGE = MS_SITE_API_URL_CONFIGURED
+  ? "Error de conexión. Inténtalo de nuevo o escríbenos a info@motans.studio."
+  : "El servicio de contacto no está disponible todavía. Escríbenos a info@motans.studio.";
+
 async function apiPostPublic<TSuccess extends Record<string, unknown>>(
   path: string,
   body: unknown,
@@ -78,7 +103,7 @@ async function apiPostPublic<TSuccess extends Record<string, unknown>>(
   if (fallbackFetch === undefined) {
     return {
       ok: false,
-      error: "Fetch no disponible en este entorno.",
+      error: "No se pudo conectar. Inténtalo de nuevo.",
       validationErrors: undefined,
     };
   }
@@ -110,17 +135,16 @@ async function apiPostPublic<TSuccess extends Record<string, unknown>>(
     if (!response.ok || payload.success !== true) {
       return {
         ok: false,
-        error: String(payload.message ?? "Error desconocido"),
+        error: String(payload.message ?? "Hubo un error. Inténtalo de nuevo."),
         validationErrors: readValidationErrors(payload),
       };
     }
 
     return { ok: true, data: mapSuccess(payload) };
-  } catch (error) {
-    console.error(`[apiClient] POST ${path} error:`, error);
+  } catch {
     return {
       ok: false,
-      error: "Error de conexión. Intenta de nuevo.",
+      error: CONNECTION_ERROR_MESSAGE,
       validationErrors: undefined,
     };
   }

@@ -60,22 +60,24 @@ export const MS_SITE_ROUTES = {
 export type MsSiteRouteKey = keyof typeof MS_SITE_ROUTES;
 
 /**
- * Visibilidad pública de MotanOS (fase temporal).
- * `false` = ocultar MotanOS en nav/home/footer/experiencia studio.
- * Arquitectura, rutas y foundations se conservan para reactivar.
+ * Visibilidad pública de MotanOS.
+ * `false` = MotanOS fuera de superficie pública (nav, home, footer, CTAs, SEO indexable).
+ * Fase 0: congelado — no vender ni generar expectativa de producto.
+ * Arquitectura y foundations se conservan para reactivar más adelante.
  */
 export const MS_SITE_PUBLIC_MOTANOS_VISIBLE = false as const;
 
-/** Navegación principal — referencia dark premium (catálogo completo, incl. MotanOS). */
+/** Navegación principal — landing única por anclas (Fase 1). MotanOS fuera de nav pública. */
 export const MS_SITE_NAV_ITEMS: readonly {
   readonly href: string;
   readonly label: string;
   readonly kind: "studio" | "product" | "vertical" | "cta";
 }[] = [
   { href: "/", label: "Inicio", kind: "studio" },
-  { href: "/servicios", label: "Qué hacemos", kind: "studio" },
+  { href: "/#servicios", label: "Qué hacemos", kind: "studio" },
+  { href: "/#proceso", label: "Proceso", kind: "studio" },
   { href: "/motanos", label: "MotanOS", kind: "product" },
-  { href: "/contacto", label: "Contacto", kind: "studio" },
+  { href: "/#contacto", label: "Contacto", kind: "studio" },
 ];
 
 /** Nav visible en shell: filtra MotanOS cuando `MS_SITE_PUBLIC_MOTANOS_VISIBLE` es false. */
@@ -147,7 +149,7 @@ export const MS_SITE_STUDIO_SERVICES: readonly {
   {
     id: "saas",
     title: "SaaS a medida",
-    description: "Plataformas multi-tenant, permisos y escalabilidad — como MotanOS.",
+    description: "Plataformas multi-tenant, permisos y escalabilidad a medida del negocio.",
   },
   {
     id: "automation",
@@ -157,7 +159,7 @@ export const MS_SITE_STUDIO_SERVICES: readonly {
   {
     id: "digital-products",
     title: "Productos digitales",
-    description: "Ecosistemas conectados: carta, operaciones, staff y crecimiento modular.",
+    description: "Software y ecosistemas conectados diseñados para operar y crecer con claridad.",
   },
 ];
 

@@ -19,7 +19,6 @@ export interface MotanosLocaleLanguageSwitcherProps {
   readonly soonNotice?: string | undefined;
   readonly triggerAriaLabel?: string | undefined;
   readonly listboxAriaLabel?: string | undefined;
-  readonly primaryBadgeLabel?: string | undefined;
   /** Stable id for SSR/static export hydration (avoids useId drift across duplicate instances). */
   readonly panelId?: string | undefined;
 }
@@ -33,7 +32,6 @@ export function MotanosLocaleLanguageSwitcher({
   soonNotice,
   triggerAriaLabel,
   listboxAriaLabel = "Seleccionar idioma",
-  primaryBadgeLabel = "Principal",
   panelId: panelIdProp,
 }: MotanosLocaleLanguageSwitcherProps): ReactNode {
   const [open, setOpen] = useState(false);
@@ -139,9 +137,6 @@ export function MotanosLocaleLanguageSwitcher({
                         {option.nativeLabel}
                       </span>
                     </span>
-                    {option.isPrimary ? (
-                      <span className="public-menu-lang__option-badge">{primaryBadgeLabel}</span>
-                    ) : null}
                   </button>
                 </li>
               );

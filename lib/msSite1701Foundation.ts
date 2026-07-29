@@ -48,6 +48,13 @@ export const MS_SITE_ROUTES = {
   planes: "/planes",
   solicitud: "/solicitud",
   legal: "/legal",
+  legalAviso: "/legal/aviso-legal",
+  legalPrivacidad: "/legal/privacidad",
+  legalCookies: "/legal/cookies",
+  legalCondiciones: "/legal/condiciones",
+  legalServicios: "/legal/servicios",
+  legalContacto: "/legal/contacto-legal",
+  legalAccesibilidad: "/legal/accesibilidad",
 } as const;
 
 export type MsSiteRouteKey = keyof typeof MS_SITE_ROUTES;

@@ -1,0 +1,171 @@
+/* Motans Studio — páginas legales (Fase 6) */
+
+.ms-legal {
+  width: min(100%, 48rem);
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 3.5rem) var(--msh-page-pad-x, clamp(1.75rem, 4.5vw, 3rem)) 4rem;
+  color: rgba(255, 255, 255, 0.78);
+  font-family: var(--msh-font, Inter, system-ui, sans-serif);
+}
+
+.ms-legal__kicker {
+  margin: 0 0 0.55rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.ms-legal__title {
+  margin: 0 0 0.75rem;
+  font-family: var(--msh-font-display, "Instrument Serif", Georgia, serif);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: #fff;
+}
+
+.ms-legal__desc {
+  margin: 0 0 1.25rem;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.ms-legal__banner {
+  margin: 0 0 2rem;
+  padding: 0.95rem 1.05rem;
+  border: 1px solid rgba(166, 225, 11, 0.28);
+  border-radius: 0.75rem;
+  background: rgba(166, 225, 11, 0.08);
+  color: rgba(230, 255, 190, 0.92);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.ms-legal__section + .ms-legal__section {
+  margin-top: 2rem;
+}
+
+.ms-legal__heading {
+  margin: 0 0 0.75rem;
+  font-size: 1.15rem;
+  color: #fff;
+}
+
+.ms-legal__p {
+  margin: 0 0 0.75rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.ms-legal__list {
+  margin: 0.35rem 0 0.85rem;
+  padding-left: 1.25rem;
+  color: rgba(255, 255, 255, 0.62);
+  line-height: 1.55;
+}
+
+.ms-legal__list li + li {
+  margin-top: 0.35rem;
+}
+
+.ms-legal__edit-note {
+  margin: 0.5rem 0 0;
+  font-size: 0.8125rem;
+  color: rgba(82, 235, 230, 0.85);
+}
+
+.ms-legal__hub-grid {
+  display: grid;
+  gap: 0.85rem;
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 720px) {
+  .ms-legal__hub-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.ms-legal__hub-card {
+  display: grid;
+  gap: 0.35rem;
+  padding: 1.1rem 1.15rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.9rem;
+  background: rgba(255, 255, 255, 0.03);
+  text-decoration: none !important;
+  transition:
+    border-color 0.18s ease,
+    background 0.18s ease,
+    transform 0.18s ease;
+}
+
+.ms-legal__hub-card:hover {
+  border-color: rgba(82, 235, 230, 0.35);
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-1px);
+}
+
+.ms-legal__hub-kicker {
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.ms-legal__hub-title {
+  font-size: 1.05rem;
+  color: #fff;
+}
+
+.ms-legal__hub-desc {
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.ms-legal__related {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ms-legal__related-title {
+  margin: 0 0 0.75rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.ms-legal__related-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 1rem;
+}
+
+.ms-legal__related-list a {
+  color: rgba(82, 235, 230, 0.9) !important;
+  text-decoration: none !important;
+}
+
+.ms-legal__related-list a:hover {
+  color: #fff !important;
+}
+
+.ms-legal a:focus-visible,
+.ms-legal__hub-card:focus-visible {
+  outline: 2px solid rgba(82, 235, 230, 0.85);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ms-legal__hub-card {
+    transition: none;
+  }
+}

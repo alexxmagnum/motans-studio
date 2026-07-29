@@ -17,7 +17,7 @@ export const MS_SITE_SEO = {
   home: {
     title: "Motans Studio · Software a medida, desarrollo web, SaaS e IA",
     description:
-      "Motans Studio diseña y construye productos digitales premium: software a medida, desarrollo web, plataformas SaaS, automatización empresarial e inteligencia artificial. Consultoría tecnológica y transformación digital para empresas.",
+      "Motans Studio construye software a medida, webs, plataformas SaaS, automatización e inteligencia artificial. Productos digitales hechos para operar — con precisión de estudio.",
     path: "/",
     keywords: [
       "Motans Studio",
@@ -27,8 +27,6 @@ export const MS_SITE_SEO = {
       "desarrollo SaaS",
       "automatización empresarial",
       "inteligencia artificial",
-      "transformación digital",
-      "consultoría tecnológica",
       "plataformas digitales",
       "desarrollo web premium",
       "software para empresas",
@@ -37,7 +35,7 @@ export const MS_SITE_SEO = {
   studio: {
     title: "Motans Studio · Software a medida, desarrollo web, SaaS e IA",
     description:
-      "Motans Studio diseña y construye productos digitales premium: software a medida, desarrollo web, plataformas SaaS, automatización empresarial e inteligencia artificial. Consultoría tecnológica y transformación digital para empresas.",
+      "Motans Studio construye software a medida, webs, plataformas SaaS, automatización e inteligencia artificial. Productos digitales hechos para operar — con precisión de estudio.",
     path: "/",
     keywords: [
       "Motans Studio",
@@ -47,26 +45,36 @@ export const MS_SITE_SEO = {
       "desarrollo SaaS",
       "automatización empresarial",
       "inteligencia artificial",
-      "transformación digital",
-      "consultoría tecnológica",
       "plataformas digitales",
     ],
   },
   servicios: {
     title: "Servicios digitales · Motans Studio",
-    description:
-      "Desarrollo web, diseño web, plataformas SaaS, automatización, software a medida y productos digitales por Motans Studio. MotanOS — sistema operativo para negocios.",
+    description: MS_SITE_PUBLIC_MOTANOS_VISIBLE
+      ? "Desarrollo web, diseño web, plataformas SaaS, automatización, software a medida y productos digitales por Motans Studio. MotanOS — sistema operativo para negocios."
+      : "Software a medida, diseño UX/UI, plataformas SaaS, automatización e inteligencia artificial por Motans Studio.",
     path: "/servicios",
-    keywords: [
-      "Motans Studio",
-      "desarrollo web",
-      "diseño web",
-      "plataformas SaaS",
-      "automatización",
-      "software a medida",
-      "productos digitales",
-      "MotanOS",
-    ],
+    keywords: MS_SITE_PUBLIC_MOTANOS_VISIBLE
+      ? [
+          "Motans Studio",
+          "desarrollo web",
+          "diseño web",
+          "plataformas SaaS",
+          "automatización",
+          "software a medida",
+          "productos digitales",
+          "MotanOS",
+        ]
+      : [
+          "Motans Studio",
+          "desarrollo web",
+          "diseño UX/UI",
+          "plataformas SaaS",
+          "automatización",
+          "software a medida",
+          "inteligencia artificial",
+          "productos digitales",
+        ],
   },
   motanos: {
     title: "MotanOS · Sistema operativo para negocios | Motans Studio",
@@ -91,8 +99,8 @@ export const MS_SITE_SEO = {
   contacto: {
     title: "Contacto · Motans Studio",
     description: MS_SITE_PUBLIC_MOTANOS_VISIBLE
-      ? "Contacta con Motans Studio: webs, apps y MotanOS para hostelería. Cuéntanos tu proyecto y te orientamos."
-      : "Contacta con Motans Studio: desarrollo web, plataformas SaaS, automatización e inteligencia artificial. Cuéntanos tu proyecto y te orientamos.",
+      ? "Hablemos con Motans Studio: webs, apps y MotanOS para hostelería. Cuéntanos tu proyecto."
+      : "Hablemos con Motans Studio: software a medida, plataformas SaaS, automatización e inteligencia artificial. Cuéntanos tu proyecto.",
     path: "/contacto",
     keywords: MS_SITE_PUBLIC_MOTANOS_VISIBLE
       ? ["contacto Motans Studio", "demo MotanOS", "presupuesto"]
@@ -120,10 +128,53 @@ export const MS_SITE_SEO = {
   },
   legal: {
     title: "Información legal · Motans Studio",
-    description:
-      "Privacidad, cookies y términos de uso del site comercial Motans Studio y MotanOS.",
+    description: MS_SITE_PUBLIC_MOTANOS_VISIBLE
+      ? "Privacidad, cookies y términos de uso del site comercial Motans Studio y MotanOS."
+      : "Centro legal Motans Studio: aviso legal, privacidad, cookies, condiciones y accesibilidad.",
     path: "/legal",
-    keywords: ["privacidad", "cookies", "términos", "Motans Studio"],
+    keywords: ["privacidad", "cookies", "términos", "Motans Studio", "aviso legal"],
+  },
+  legalAviso: {
+    title: "Aviso legal · Motans Studio",
+    description: "Aviso legal e información societaria del sitio Motans Studio.",
+    path: "/legal/aviso-legal",
+    keywords: ["aviso legal", "Motans Studio"],
+  },
+  legalPrivacidad: {
+    title: "Política de privacidad · Motans Studio",
+    description: "Política de privacidad y tratamiento de datos en Motans Studio.",
+    path: "/legal/privacidad",
+    keywords: ["privacidad", "datos personales", "Motans Studio"],
+  },
+  legalCookies: {
+    title: "Política de cookies · Motans Studio",
+    description: "Política de cookies y gestión del consentimiento en Motans Studio.",
+    path: "/legal/cookies",
+    keywords: ["cookies", "consentimiento", "Motans Studio"],
+  },
+  legalCondiciones: {
+    title: "Condiciones de uso · Motans Studio",
+    description: "Condiciones de uso del sitio web de Motans Studio.",
+    path: "/legal/condiciones",
+    keywords: ["condiciones de uso", "términos", "Motans Studio"],
+  },
+  legalServicios: {
+    title: "Política de servicios · Motans Studio",
+    description: "Marco orientativo de prestación de servicios de Motans Studio.",
+    path: "/legal/servicios",
+    keywords: ["servicios", "política de servicios", "Motans Studio"],
+  },
+  legalContacto: {
+    title: "Contacto legal · Motans Studio",
+    description: "Canales de contacto legal y de privacidad de Motans Studio.",
+    path: "/legal/contacto-legal",
+    keywords: ["contacto legal", "privacidad", "Motans Studio"],
+  },
+  legalAccesibilidad: {
+    title: "Accesibilidad · Motans Studio",
+    description: "Compromiso de accesibilidad del sitio Motans Studio.",
+    path: "/legal/accesibilidad",
+    keywords: ["accesibilidad", "WCAG", "Motans Studio"],
   },
 } as const;
 
@@ -135,10 +186,12 @@ function absoluteUrl(path: string): string {
   return path === "/" ? MS_SITE_PUBLIC_ORIGIN : `${MS_SITE_PUBLIC_ORIGIN}${path}`;
 }
 
-/** Metadata Next.js coherente por página (título, OG, Twitter, canonical). */
+/** Metadata Next.js coherente por página (título, OG, Twitter, canonical, icons). */
 export function createMsSitePageMetadata(page: MsSiteSeoPageKey): Metadata {
   const seo = MS_SITE_SEO[page];
   const canonical = absoluteUrl(seo.path);
+  const ogImagePath = MOTANS_CORPORATE_BRAND_ASSETS.markMsPng.publicPath;
+  const ogImageUrl = absoluteUrl(ogImagePath);
 
   return {
     title: seo.title,
@@ -149,6 +202,15 @@ export function createMsSitePageMetadata(page: MsSiteSeoPageKey): Metadata {
     publisher: "Motans Studio",
     metadataBase: new URL(MS_SITE_PUBLIC_ORIGIN),
     alternates: { canonical },
+    icons: {
+      icon: [
+        { url: "/favicon.ico", sizes: "any" },
+        { url: ogImagePath, type: "image/png", sizes: "32x32" },
+        { url: ogImagePath, type: "image/png", sizes: "192x192" },
+      ],
+      apple: [{ url: ogImagePath, type: "image/png", sizes: "180x180" }],
+      shortcut: "/favicon.ico",
+    },
     openGraph: {
       title: seo.title,
       description: seo.description,
@@ -156,11 +218,20 @@ export function createMsSitePageMetadata(page: MsSiteSeoPageKey): Metadata {
       siteName: "Motans Studio",
       locale: MS_SITE_OG_LOCALE,
       type: "website",
+      images: [
+        {
+          url: ogImageUrl,
+          width: MOTANS_CORPORATE_BRAND_ASSETS.markMsPng.width ?? 1024,
+          height: MOTANS_CORPORATE_BRAND_ASSETS.markMsPng.height ?? 1024,
+          alt: MOTANS_CORPORATE_BRAND_ASSETS.markMsPng.alt,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: seo.title,
       description: seo.description,
+      images: [ogImageUrl],
     },
     robots: {
       index: true,
@@ -238,10 +309,16 @@ export const MS_SITE_HOME_JSON_LD = {
 export const MS_SITE_SITEMAP_PATHS: readonly string[] = [
   "/",
   "/servicios",
-  "/motanos",
-  "/motanos/hosteleria",
   "/contacto",
-  "/planes",
-  "/solicitud",
   "/legal",
+  "/legal/aviso-legal",
+  "/legal/privacidad",
+  "/legal/cookies",
+  "/legal/condiciones",
+  "/legal/servicios",
+  "/legal/contacto-legal",
+  "/legal/accesibilidad",
+  ...(MS_SITE_PUBLIC_MOTANOS_VISIBLE
+    ? (["/motanos", "/motanos/hosteleria", "/planes", "/solicitud"] as const)
+    : ([] as const)),
 ];

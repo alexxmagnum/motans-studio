@@ -1,0 +1,299 @@
+/* Motans Studio — footer premium (Fase 6)
+ * Scope: .ms-studio-footer (como .msh-work / .msh-why).
+ * No depender de .ms-site--dark-premium para layout crítico.
+ */
+
+.ms-studio-footer {
+  margin-top: 0;
+  padding: 3.5rem 0 1.75rem;
+  background-color: #000000;
+  background-image: radial-gradient(
+    ellipse 80% 50% at 50% 0%,
+    rgba(4, 162, 251, 0.08),
+    transparent 55%
+  );
+  color: rgba(255, 255, 255, 0.55);
+  font-family: var(--msh-font, Inter, system-ui, sans-serif);
+  font-size: 0.875rem;
+  text-align: left;
+  border-top: none;
+}
+
+.ms-studio-footer ul,
+.ms-studio-footer ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ms-studio-footer li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ms-studio-footer a {
+  text-decoration: none;
+}
+
+.ms-studio-footer__hairline {
+  height: 1px;
+  width: 100%;
+  margin: 0 auto 2.5rem;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(4, 162, 251, 0.28) 22%,
+    rgba(82, 235, 230, 0.28) 50%,
+    rgba(166, 225, 11, 0.28) 78%,
+    transparent 100%
+  );
+}
+
+.ms-studio-footer__shell {
+  box-sizing: border-box;
+  width: min(100%, var(--msh-max, 80rem));
+  margin: 0 auto;
+  padding-inline: var(--msh-page-pad-x, clamp(1.75rem, 4.5vw, 3rem));
+  display: grid;
+  gap: 2rem 1.75rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 720px) {
+  .ms-studio-footer__shell {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1080px) {
+  .ms-studio-footer__shell {
+    grid-template-columns: minmax(14rem, 1.4fr) repeat(3, minmax(0, 1fr));
+    gap: 2.25rem 2rem;
+  }
+}
+
+.ms-studio-footer__brand-name {
+  margin: 0 0 0.65rem;
+  font-family: var(--msh-font-display, "Instrument Serif", Georgia, serif);
+  font-size: clamp(1.65rem, 2.4vw, 2rem);
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.ms-studio-footer__tagline {
+  margin: 0;
+  max-width: 28rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.ms-studio-footer__contact-block {
+  margin-top: 1.25rem;
+}
+
+.ms-studio-footer__contact-link {
+  color: rgba(82, 235, 230, 0.95);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.ms-studio-footer__contact-link:hover {
+  color: #fff;
+}
+
+.ms-studio-footer__location {
+  margin: 0.35rem 0 0;
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.ms-studio-footer__social {
+  list-style: none;
+  margin: 1.35rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.ms-studio-footer__social-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.25rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.62);
+  text-decoration: none;
+  font-size: 0.8125rem;
+  transition:
+    color 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease;
+}
+
+.ms-studio-footer__social-link:hover {
+  color: #fff;
+  border-color: rgba(82, 235, 230, 0.45);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.ms-studio-footer__social-link[aria-disabled="true"] {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.ms-studio-footer__col-title {
+  margin: 0 0 0.85rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.ms-studio-footer__col-title--spaced {
+  margin-top: 1.5rem;
+}
+
+.ms-studio-footer__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.ms-studio-footer__link {
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  transition: color 0.18s ease;
+}
+
+.ms-studio-footer__link:hover {
+  color: #fff;
+}
+
+.ms-studio-footer__tech {
+  color: rgba(255, 255, 255, 0.48);
+}
+
+.ms-studio-footer__legal-bar {
+  box-sizing: border-box;
+  width: min(100%, var(--msh-max, 80rem));
+  margin: 2.5rem auto 0;
+  padding: 1.15rem var(--msh-page-pad-x, clamp(1.75rem, 4.5vw, 3rem)) 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.ms-studio-footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.45rem;
+}
+
+.ms-studio-footer__legal-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.ms-studio-footer__sep {
+  color: rgba(255, 255, 255, 0.2);
+  user-select: none;
+}
+
+.ms-studio-footer__legal-link,
+.ms-studio-footer__legal-btn {
+  color: rgba(255, 255, 255, 0.48);
+  text-decoration: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  transition: color 0.18s ease;
+}
+
+.ms-studio-footer__legal-link:hover,
+.ms-studio-footer__legal-btn:hover {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.ms-studio-footer__meta {
+  box-sizing: border-box;
+  width: min(100%, var(--msh-max, 80rem));
+  margin: 1.25rem auto 0;
+  padding-inline: var(--msh-page-pad-x, clamp(1.75rem, 4.5vw, 3rem));
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem 1.25rem;
+}
+
+.ms-studio-footer__copy,
+.ms-studio-footer__lockup {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.ms-studio-footer__lockup {
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.28);
+}
+
+.ms-studio-footer__status {
+  margin: 0;
+  margin-left: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem 1.35rem;
+}
+
+.ms-studio-footer__status > div {
+  display: flex;
+  gap: 0.4rem;
+  align-items: baseline;
+}
+
+.ms-studio-footer__status dt {
+  margin: 0;
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.32);
+}
+
+.ms-studio-footer__status dd {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.ms-studio-footer__status-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: #34cc68;
+  box-shadow: 0 0 0 3px rgba(52, 204, 104, 0.18);
+}
+
+.ms-studio-footer a:focus-visible,
+.ms-studio-footer button:focus-visible {
+  outline: 2px solid rgba(82, 235, 230, 0.85);
+  outline-offset: 3px;
+}
+
+@media (max-width: 719px) {
+  .ms-studio-footer {
+    padding-top: 2.75rem;
+  }
+
+  .ms-studio-footer__status {
+    margin-left: 0;
+    width: 100%;
+  }
+}

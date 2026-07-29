@@ -14,6 +14,7 @@ import { MsSiteMobileNav } from "./MsSiteMobileNav.js";
 import { MsSiteNavAnchor } from "./MsSiteNavAnchor.js";
 import { MsSiteNavLinks } from "./MsSiteNavLinks.js";
 import { MsStudioFooter } from "./MsStudioFooter.js";
+import { MsSiteConsentProvider } from "./MsSiteConsentProvider.js";
 import { MsSiteLegacyHashRedirect } from "./MsSiteLegacyHashRedirect.js";
 import { useMsSiteLandingNavSpy } from "./useMsSiteLandingNavSpy.js";
 
@@ -33,49 +34,51 @@ function MotansStudioSiteShellChrome({
 
   return (
     <div className="ms-site ms-site--dark-premium">
-      <header className="ms-header ms-dp-header">
-        <div className="ms-header__inner ms-dp-header__inner">
-          <MsSiteNavAnchor
-            href={MS_SITE_ROUTES.home}
-            className="msh-brand"
-            aria-label="Motans Studio — home"
-          >
-            <img
-              src={MS_STUDIO_HOME_LOGO.fallbackPath}
-              alt={MS_STUDIO_HOME_LOGO.alt}
-              className="msh-brand__mark"
-              height={MS_STUDIO_HOME_LOGO.height}
-              width={MS_STUDIO_HOME_LOGO.width}
-              decoding="async"
-            />
-            <span className="msh-brand__name">
-              {`${MS_STUDIO_HOME_BRAND_WORDMARK.primary} ${MS_STUDIO_HOME_BRAND_WORDMARK.secondary}`}
-            </span>
-          </MsSiteNavAnchor>
-
-          <nav className="ms-nav-desktop msh-nav" aria-label="Principal">
-            <MsSiteNavLinks activePath={activePath} className="msh-nav__link" />
-          </nav>
-
-          <div className="msh-header__actions">
-            <MsSiteNavAnchor href={MS_STUDIO_HOME_HEADER_CTA.href} className="msh-btn msh-btn--header">
-              {ui.hablemos}
-              <span className="msh-btn__arrow msh-btn__arrow--up" aria-hidden="true">
-                ↗
+      <MsSiteConsentProvider>
+        <header className="ms-header ms-dp-header">
+          <div className="ms-header__inner ms-dp-header__inner">
+            <MsSiteNavAnchor
+              href={MS_SITE_ROUTES.home}
+              className="msh-brand"
+              aria-label="Motans Studio — home"
+            >
+              <img
+                src={MS_STUDIO_HOME_LOGO.fallbackPath}
+                alt={MS_STUDIO_HOME_LOGO.alt}
+                className="msh-brand__mark"
+                height={MS_STUDIO_HOME_LOGO.height}
+                width={MS_STUDIO_HOME_LOGO.width}
+                decoding="async"
+              />
+              <span className="msh-brand__name">
+                {`${MS_STUDIO_HOME_BRAND_WORDMARK.primary} ${MS_STUDIO_HOME_BRAND_WORDMARK.secondary}`}
               </span>
             </MsSiteNavAnchor>
-            <div className="msh-header__locale">
-              <MsSiteLanguageSelector panelId="ms-site-lang-header" />
+
+            <nav className="ms-nav-desktop msh-nav" aria-label="Principal">
+              <MsSiteNavLinks activePath={activePath} className="msh-nav__link" />
+            </nav>
+
+            <div className="msh-header__actions">
+              <MsSiteNavAnchor href={MS_STUDIO_HOME_HEADER_CTA.href} className="msh-btn msh-btn--header">
+                {ui.hablemos}
+                <span className="msh-btn__arrow msh-btn__arrow--up" aria-hidden="true">
+                  ↗
+                </span>
+              </MsSiteNavAnchor>
+              <div className="msh-header__locale">
+                <MsSiteLanguageSelector panelId="ms-site-lang-header" />
+              </div>
+              <MsSiteMobileNav activePath={activePath} />
             </div>
-            <MsSiteMobileNav activePath={activePath} />
           </div>
-        </div>
-      </header>
+        </header>
 
-      <MsSiteLegacyHashRedirect />
-      {children}
+        <MsSiteLegacyHashRedirect />
+        {children}
 
-      <MsStudioFooter />
+        <MsStudioFooter />
+      </MsSiteConsentProvider>
     </div>
   );
 }

@@ -11,6 +11,10 @@ import "./msStudioHome.css";
 import "./msSiteHomeSplash.css";
 import "./msStudioServices.css";
 import "./msStudioStampSplash.css";
+/* Fase 6 — confianza / legales / footer (después del home para no pisar hero) */
+import "./msSiteConsent.css";
+import "./msStudioFooter.css";
+import "./msSiteLegal.css";
 
 export const metadata: Metadata = createMsSitePageMetadata("studio");
 

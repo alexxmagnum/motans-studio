@@ -21,7 +21,7 @@ export const MS_SITE_SEO = {
   home: {
     title: "Motans Studio · Software a medida, desarrollo web, SaaS e IA",
     description:
-      "Motans Studio construye software a medida, webs, plataformas SaaS, automatización e inteligencia artificial. Productos digitales hechos para operar — con precisión de estudio.",
+      "Motans Studio: software a medida, desarrollo web, SaaS, automatización e IA. Productos digitales claros, hechos para operar con precisión de estudio.",
     path: "/",
     keywords: [
       "Motans Studio",
@@ -223,11 +223,12 @@ export function createMsSitePageMetadata(page: MsSiteSeoPageKey): Metadata {
         },
       ],
     },
+    // No twitter:site / twitter:creator: no hay cuenta oficial de X/Twitter documentada.
     twitter: {
       card: "summary_large_image",
       title: seo.title,
       description: seo.description,
-      images: [ogImageUrl],
+      images: [{ url: ogImageUrl, alt: MS_SITE_OG_IMAGE.alt }],
     },
     robots: {
       index: true,
@@ -302,6 +303,45 @@ export const MS_SITE_MOTANOS_SOFTWARE_JSON_LD = {
   url: `${MS_SITE_PUBLIC_ORIGIN}/motanos`,
 } as const;
 
+/** Servicios reales de Motans Studio — nodos Service (sin precios, reviews ni claims inventados). */
+const MS_SITE_HOME_SERVICES_JSON_LD = [
+  {
+    "@type": "Service",
+    "@id": `${MS_SITE_PUBLIC_ORIGIN}/#service-software-a-medida`,
+    name: "Software a medida",
+    provider: { "@id": `${MS_SITE_PUBLIC_ORIGIN}/#organization` },
+    areaServed: "ES",
+  },
+  {
+    "@type": "Service",
+    "@id": `${MS_SITE_PUBLIC_ORIGIN}/#service-desarrollo-web`,
+    name: "Desarrollo web",
+    provider: { "@id": `${MS_SITE_PUBLIC_ORIGIN}/#organization` },
+    areaServed: "ES",
+  },
+  {
+    "@type": "Service",
+    "@id": `${MS_SITE_PUBLIC_ORIGIN}/#service-plataformas-saas`,
+    name: "Plataformas SaaS",
+    provider: { "@id": `${MS_SITE_PUBLIC_ORIGIN}/#organization` },
+    areaServed: "ES",
+  },
+  {
+    "@type": "Service",
+    "@id": `${MS_SITE_PUBLIC_ORIGIN}/#service-automatizacion`,
+    name: "Automatización",
+    provider: { "@id": `${MS_SITE_PUBLIC_ORIGIN}/#organization` },
+    areaServed: "ES",
+  },
+  {
+    "@type": "Service",
+    "@id": `${MS_SITE_PUBLIC_ORIGIN}/#service-inteligencia-artificial`,
+    name: "Inteligencia Artificial",
+    provider: { "@id": `${MS_SITE_PUBLIC_ORIGIN}/#organization` },
+    areaServed: "ES",
+  },
+] as const;
+
 export const MS_SITE_HOME_JSON_LD = {
   "@context": "https://schema.org",
   "@graph": [
@@ -325,6 +365,7 @@ export const MS_SITE_HOME_JSON_LD = {
       about: { "@id": `${MS_SITE_PUBLIC_ORIGIN}/#organization` },
       inLanguage: "es-ES",
     },
+    ...MS_SITE_HOME_SERVICES_JSON_LD,
     ...(MS_SITE_PUBLIC_MOTANOS_VISIBLE ? [MS_SITE_MOTANOS_SOFTWARE_JSON_LD] : []),
   ],
 } as const;

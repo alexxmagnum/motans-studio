@@ -4,6 +4,7 @@ packages:
 
 allowBuilds:
   sharp: true
+  unrs-resolver: true
 
 # Local file: vendors are intentional
 blockExoticSubdeps: false

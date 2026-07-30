@@ -22,7 +22,12 @@ import "./msSiteConsent.css";
 import "./msStudioFooter.css";
 import "./msSiteLegal.css";
 
-export const metadata: Metadata = createMsSitePageMetadata("studio");
+export const metadata: Metadata = {
+  ...createMsSitePageMetadata("studio"),
+  verification: {
+    google: "ZmUZhGMSCbPPt-6MTlMtXiPdhhuj0vSv7xtB6OUraWc",
+  },
+};
 
 export const viewport: Viewport = {
   themeColor: [

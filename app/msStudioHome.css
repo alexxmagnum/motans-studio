@@ -691,7 +691,7 @@ body:has(.ms-page--planes) {
 
 .msh-hero__title {
   margin: 0;
-  font-family: var(--msh-font-display);
+  font-family: var(--msh-font);
   font-size: clamp(2.5rem, 4.4vw, 3.75rem);
   font-weight: 400;
   font-style: normal;

@@ -79,7 +79,7 @@
 
 .msh-hero--experience .msh-hero__title {
   margin: 0;
-  font-family: var(--msh-font-display);
+  font-family: var(--msh-font);
   font-size: clamp(2.85rem, 5vw, 4.25rem);
   font-weight: 400;
   font-style: normal;

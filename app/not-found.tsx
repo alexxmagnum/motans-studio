@@ -31,7 +31,7 @@ export default function NotFound(): React.ReactElement {
         <h1
           style={{
             margin: "0 0 1rem",
-            fontFamily: 'var(--msh-font-display, "Instrument Serif", Georgia, serif)',
+            fontFamily: 'var(--msh-font, Inter, system-ui, sans-serif)',
             fontSize: "clamp(2rem, 5vw, 3rem)",
             fontWeight: 400,
             lineHeight: 1.15,

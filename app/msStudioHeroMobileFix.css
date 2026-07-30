@@ -138,6 +138,17 @@
     margin-top: 1.35rem !important;
   }
 
+  /* English — extra air under the hero so Offer kicker stays below the fold on phone */
+  html[lang="en"] .msh-hero.msh-hero--experience,
+  html[lang="en"] .msh-hero.msh-hero--experience.msh-hero--copy-fixed,
+  html[lang="en"] section.msh-hero.msh-hero--experience {
+    padding-bottom: 3rem !important;
+  }
+
+  html[lang="en"] .msh-hero.msh-hero--experience .msh-hero__actions {
+    padding-bottom: 0.75rem !important;
+  }
+
   .msh-hero.msh-hero--experience .msh-hero__actions {
     margin-top: 1.75rem !important;
     margin-bottom: 0 !important;

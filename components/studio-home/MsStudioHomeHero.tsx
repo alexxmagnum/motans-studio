@@ -34,6 +34,7 @@ export function MsStudioHomeHero(): ReactElement {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const playbackLocked = useRef(false);
   const badgeRevealed = useRef(false);
+  const gestureDetachRef = useRef<(() => void) | null>(null);
   const [entered, setEntered] = useState(false);
   const [soundOn, setSoundOn] = useState(true);
   const [badgePhase, setBadgePhase] = useState<HeroBadgePhase>("hidden");
@@ -77,15 +78,22 @@ export function MsStudioHomeHero(): ReactElement {
       window.removeEventListener("touchstart", onGesture, true);
       window.removeEventListener("keydown", onGesture, true);
       gestureArmed = false;
+      gestureDetachRef.current = null;
     };
 
-    const onGesture = (): void => {
+    const onGesture = (event: Event): void => {
       if (disposed || playbackLocked.current) {
         detachGesture();
         return;
       }
+      // El botón de sonido gestiona su propio gesto — no interceptar el primer toque
+      const target = event.target;
+      if (target instanceof Element && target.closest(".msh-hero__sound")) {
+        return;
+      }
       applySoundOn(video);
-      void video.play()
+      void video
+        .play()
         .then(() => {
           if (!disposed) {
             playbackLocked.current = true;
@@ -102,6 +110,7 @@ export function MsStudioHomeHero(): ReactElement {
       }
       gestureArmed = true;
       setSoundOn(false);
+      gestureDetachRef.current = detachGesture;
       window.addEventListener("pointerdown", onGesture, true);
       window.addEventListener("touchstart", onGesture, true);
       window.addEventListener("keydown", onGesture, true);
@@ -115,7 +124,8 @@ export function MsStudioHomeHero(): ReactElement {
       video.loop = false;
       video.playsInline = true;
       applySoundOn(video);
-      void video.play()
+      void video
+        .play()
         .then(() => {
           if (!disposed) {
             playbackLocked.current = true;
@@ -175,7 +185,13 @@ export function MsStudioHomeHero(): ReactElement {
       return;
     }
 
-    if (soundOn) {
+    // Este toque ya es el gesto del usuario — quitar el fallback global
+    gestureDetachRef.current?.();
+
+    // Fuente de verdad: el vídeo (evita desync UI ↔ muted que obliga a dos toques)
+    const currentlyAudible = !video.muted;
+
+    if (currentlyAudible) {
       video.muted = true;
       setSoundOn(false);
       return;
@@ -247,10 +263,37 @@ export function MsStudioHomeHero(): ReactElement {
               aria-label={soundOn ? ui.heroSoundOn : ui.heroSoundOff}
               title={soundOn ? ui.heroSoundOn : ui.heroSoundOff}
             >
-              <span className="msh-hero__sound-dot" aria-hidden="true" />
-              <span className="msh-hero__sound-label">
-                {soundOn ? ui.heroSoundOn : ui.heroSoundOff}
-              </span>
+              {soundOn ? (
+                <svg
+                  className="msh-hero__sound-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M11 4.702a.705.705 0 0 0-1.203-.498L5.365 7H2.5A1.5 1.5 0 0 0 1 8.5v7A1.5 1.5 0 0 0 2.5 17h2.865l4.432 2.796A.705.705 0 0 0 11 19.298z" />
+                  <path d="M16 9a5 5 0 0 1 0 6" />
+                  <path d="M19.364 18.364a9 9 0 0 0 0-12.728" />
+                </svg>
+              ) : (
+                <svg
+                  className="msh-hero__sound-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M11 4.702a.705.705 0 0 0-1.203-.498L5.365 7H2.5A1.5 1.5 0 0 0 1 8.5v7A1.5 1.5 0 0 0 2.5 17h2.865l4.432 2.796A.705.705 0 0 0 11 19.298z" />
+                  <line x1="22" x2="16" y1="9" y2="15" />
+                  <line x1="16" x2="22" y1="9" y2="15" />
+                </svg>
+              )}
             </button>
           </div>
         </div>

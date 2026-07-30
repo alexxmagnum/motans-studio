@@ -1,5 +1,6 @@
 import type React from "react";
 import type { Metadata, Viewport } from "next";
+import { Instrument_Serif, Inter } from "next/font/google";
 import { MotansStudioSiteShell } from "../components/MotansStudioSiteShell.js";
 import { MsSitePageBackLink } from "../components/MsSitePageBackLink.js";
 import { MsSiteMotanosLangStyles } from "../components/MsSiteMotanosLangStyles.js";
@@ -11,16 +12,28 @@ import "./msStudioHome.css";
 import "./msStudioFactory.css";
 import "./msStudioOffer.css";
 import "./msSiteHomeSplash.css";
-import "./msStudioServices.css";
-import "./msStudioStampSplash.css";
 /* Experience last — otherwise splash.css wins on video size */
 import "./msStudioHeroExperience.css";
 /* Kill-switch móvil: anula caps desktop que filtraban a phone */
 import "./msStudioHeroMobileFix.css";
-/* Fase 6 — confianza / legales / footer (después del home para no pisar hero) */
+/* Fase 6 — confianza / footer (después del home para no pisar hero) */
 import "./msSiteConsent.css";
 import "./msStudioFooter.css";
-import "./msSiteLegal.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-instrument-serif",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   ...createMsSitePageMetadata("studio"),
@@ -45,7 +58,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>): React.ReactElement {
   return (
-    <html lang="es" suppressHydrationWarning>
+    <html
+      lang="es"
+      className={`${inter.variable} ${instrumentSerif.variable}`}
+      suppressHydrationWarning
+    >
       <body style={{ margin: 0 }}>
         <MsSiteMotanosLangStyles />
         <a href="#main-content" className="ms-skip">

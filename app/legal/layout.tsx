@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import "../msSiteLegal.css";
 
 /**
  * Hub y stubs legales redirect — no indexar.

@@ -43,7 +43,7 @@ function MotansStudioSiteShellChrome({
               aria-label="Motans Studio — home"
             >
               <img
-                src={MS_STUDIO_HOME_LOGO.fallbackPath}
+                src={MS_STUDIO_HOME_LOGO.path}
                 alt={MS_STUDIO_HOME_LOGO.alt}
                 className="msh-brand__mark"
                 height={MS_STUDIO_HOME_LOGO.height}

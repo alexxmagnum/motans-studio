@@ -1,7 +1,5 @@
 /* Motans Studio HOME — build: 2026-06-24-v27 (hero title Instrument Serif) */
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap");
-
 :root {
   --msh-bg: #000000;
   --msh-ink: #ffffff;
@@ -10,8 +8,8 @@
   --msh-border: rgba(255, 255, 255, 0.07);
   --msh-max: 80rem;
   --msh-page-pad-x: clamp(1.75rem, 4.5vw, 3rem);
-  --msh-font: Inter, "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
-  --msh-font-display: "Instrument Serif", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --msh-font: var(--font-inter), "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
+  --msh-font-display: var(--font-instrument-serif), "Iowan Old Style", "Palatino Linotype", Georgia, serif;
 }
 
 /* Paleta extraída del logo Motans (cyan → turquesa → lima) */

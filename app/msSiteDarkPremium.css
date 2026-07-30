@@ -1,7 +1,5 @@
 /* MOTANS_STUDIO_DARK_PREMIUM_REFERENCE — pixel match mockup fundador */
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
-
 :root {
   --ms-dp-bg: #000000;
   --ms-dp-bg-elevated: #0a0a0a;
@@ -18,7 +16,7 @@
   --ms-dp-gradient: linear-gradient(90deg, #04a2fb 0%, #52ebe6 38%, #34cc68 62%, #a6e10b 100%);
   --ms-dp-gradient-vertical: linear-gradient(180deg, #04a2fb 0%, #52ebe6 42%, #a6e10b 100%);
   --ms-dp-max: 76rem;
-  --ms-dp-font: Inter, "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
+  --ms-dp-font: var(--font-inter), "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
 }
 
 body:has(.ms-site--dark-premium) {

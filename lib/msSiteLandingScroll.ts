@@ -43,10 +43,15 @@ export function getLandingCardTopOffsetPx(): number {
   return measureLandingCardTopOffsetPx();
 }
 
+function landingScrollBehavior(): ScrollBehavior {
+  if (typeof window === "undefined") {
+    return "auto";
+  }
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+}
+
 export function scrollLandingToTop(): void {
-  window.scrollTo(0, 0);
-  document.documentElement.scrollTop = 0;
-  document.body.scrollTop = 0;
+  window.scrollTo({ top: 0, left: 0, behavior: landingScrollBehavior() });
 }
 
 export function scrollLandingToAnchor(anchorId: string): void {
@@ -65,7 +70,7 @@ export function scrollLandingToAnchor(anchorId: string): void {
   const offset = getLandingCardTopOffsetPx();
   const top = target.getBoundingClientRect().top + window.scrollY - offset;
 
-  window.scrollTo({ top: Math.max(0, top), left: 0, behavior: "auto" });
+  window.scrollTo({ top: Math.max(0, top), left: 0, behavior: landingScrollBehavior() });
 }
 
 export function syncLandingScrollPaddingTop(): void {

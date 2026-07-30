@@ -1,8 +1,5 @@
 {
-  "framework": "nextjs",
-  "buildCommand": "pnpm build",
-  "outputDirectory": "out",
-  "installCommand": "pnpm install",
+  
   "redirects": [
     { "source": "/motanos", "destination": "/", "permanent": true },
     { "source": "/motanos/:path*", "destination": "/", "permanent": true },

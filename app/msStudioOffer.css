@@ -1865,6 +1865,28 @@
     border-radius: 0.9rem;
   }
 
+  /* Automation — bajar el dibujo sin mover el canvas (evita el corte feo del overflow) */
+  .msh-offer__block--automation .msh-prod-auto__canvas {
+    transform: none;
+  }
+
+  .msh-offer__block--automation .msh-prod-auto__grid,
+  .msh-offer__block--automation .msh-prod-auto__wires,
+  .msh-offer__block--automation .msh-prod-auto__node {
+    transform: translateY(2rem);
+  }
+
+  /* Filter solapa Transform en phone y se ve como un corte — ocultarlo aquí */
+  .msh-offer__block--automation .msh-prod-auto__canvas > .msh-prod-auto__node:nth-child(5) {
+    display: none;
+  }
+
+  /* Integrations — un poco de aire abajo para que HRIS/BI no queden pegados al borde */
+  .msh-offer__block--integrations .msh-prod-integ__stage {
+    transform: scale(0.9);
+    transform-origin: 50% 36%;
+  }
+
   .msh-offer__close {
     flex-direction: column;
     align-items: flex-start;
@@ -1881,6 +1903,19 @@
 
   .msh-prod-web__kpi strong {
     font-size: 1.05rem;
+  }
+}
+
+/* Desktop — Atlas e Integraciones: aire abajo para que no queden cortadas */
+@media (min-width: 769px) {
+  .msh-offer__block--ai .msh-prod-ai {
+    transform: scale(0.93);
+    transform-origin: 50% 0%;
+  }
+
+  .msh-offer__block--integrations .msh-prod-integ__stage {
+    transform: scale(0.88);
+    transform-origin: 50% 38%;
   }
 }
 

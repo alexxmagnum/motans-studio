@@ -39,18 +39,22 @@
   --msh-glow-lime: rgba(166, 225, 11, 0.18);
 }
 
-/* —— Eyebrow de sección (misma pieza que Motans Studio en el hero) —— */
+/* —— Eyebrow de sección (tipografía original = .ms-dp-section__kicker / Inter) —— */
 .msh-eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 0.7rem;
   margin: 0 0 0.85rem;
-  font-family: var(--msh-font-display, "Instrument Serif", Georgia, serif);
+  font-family: var(--msh-font, Inter, system-ui, sans-serif);
   font-size: 0.72rem;
-  font-weight: 400;
-  letter-spacing: 0.18em;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.34);
+}
+
+.ms-page--studio-home .msh-eyebrow:not(.msh-hero__brand) {
+  letter-spacing: 0.14em;
 }
 
 .msh-eyebrow__mark {
@@ -1608,11 +1612,11 @@ body:has(.ms-page--planes) {
 
 .ms-form__success-title {
   margin: 0 0 0.55rem;
-  font-family: var(--msh-font-display, "Instrument Serif", Georgia, serif);
+  font-family: var(--msh-font, Inter, system-ui, sans-serif);
   font-size: clamp(1.45rem, 2.4vw, 1.75rem);
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: normal;
 }
 
 .ms-form__success-body {
@@ -1634,10 +1638,10 @@ body:has(.ms-page--planes) {
 .ms-page--studio-home .msh-contact .ms-dp-section__title {
   margin-top: 1rem;
   max-width: 16ch;
-  font-family: var(--msh-font-display, "Instrument Serif", Georgia, serif);
+  font-family: var(--msh-font, Inter, system-ui, sans-serif);
   font-size: clamp(2.35rem, 5.4vw, 3.85rem);
-  font-weight: 400;
-  line-height: 1.08;
+  font-weight: 600;
+  line-height: normal;
   letter-spacing: -0.03em;
   color: var(--msh-ink);
 }
@@ -1676,11 +1680,11 @@ body:has(.ms-page--planes) {
 
 .ms-page--studio-home .msh-contact .ms-form__success-title {
   margin: 0 0 0.55rem;
-  font-family: var(--msh-font-display, "Instrument Serif", Georgia, serif);
+  font-family: var(--msh-font, Inter, system-ui, sans-serif);
   font-size: clamp(1.45rem, 2.4vw, 1.75rem);
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: normal;
   color: var(--msh-ink);
 }
 
@@ -2278,10 +2282,10 @@ body:has(.ms-page--planes) {
 .ms-page--studio-home .msh-final-cta__title {
   margin-top: 1rem;
   max-width: 22ch;
-  font-family: var(--msh-font-display, "Instrument Serif", Georgia, serif);
+  font-family: var(--msh-font, Inter, system-ui, sans-serif);
   font-size: clamp(2.35rem, 5.4vw, 3.85rem);
-  font-weight: 400;
-  line-height: 1.08;
+  font-weight: 600;
+  line-height: normal;
   letter-spacing: -0.03em;
 }
 

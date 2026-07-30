@@ -48,8 +48,8 @@
   font-family: var(--msh-font-display, "Instrument Serif", Georgia, serif);
   font-size: clamp(1.85rem, 3.2vw, 2.35rem);
   font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 1.08;
+  letter-spacing: -0.01em;
+  line-height: normal;
   background: linear-gradient(90deg, #04a2fb 0%, #52ebe6 38%, #34cc68 62%, #a6e10b 100%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -163,10 +163,10 @@ a.ms-studio-footer__contact:hover .ms-studio-footer__contact-icon {
   background-clip: text;
   color: transparent;
   font: inherit;
-  font-family: var(--msh-font-display, "Instrument Serif", Georgia, serif);
+  font-family: var(--msh-font, Inter, system-ui, sans-serif);
   font-size: clamp(1.05rem, 1.6vw, 1.2rem);
-  font-weight: 400;
-  letter-spacing: -0.015em;
+  font-weight: 600;
+  letter-spacing: -0.01em;
   line-height: 1.2;
   cursor: pointer;
   transition: opacity 0.2s ease;

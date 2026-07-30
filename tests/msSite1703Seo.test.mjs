@@ -47,8 +47,23 @@ describe("MS_SITE_17_03C premium SEO", () => {
   });
 
   it("ships favicon and app icons", () => {
+    const root = join(__dirname, "..");
     assert.ok(existsSync(join(appDir, "favicon.ico")));
     assert.ok(existsSync(join(appDir, "icon.png")));
     assert.ok(existsSync(join(appDir, "apple-icon.png")));
+    assert.ok(existsSync(join(root, "public", "icon-192.png")));
+    assert.ok(existsSync(join(root, "public", "icon-512.png")));
+    assert.ok(existsSync(join(root, "public", "apple-touch-icon.png")));
+    assert.ok(existsSync(join(root, "public", "brand", "og-motans-studio.png")));
+  });
+
+  it("SEO foundation uses 1200x630 OG image and PNG icons", () => {
+    const seo = readFileSync(join(libDir, "msSite1703SeoFoundation.ts"), "utf-8");
+    assert.ok(seo.includes("/brand/og-motans-studio.png"));
+    assert.ok(seo.includes("1200"));
+    assert.ok(seo.includes("630"));
+    assert.ok(seo.includes("/icon-192.png"));
+    assert.ok(seo.includes("/icon-512.png"));
+    assert.ok(seo.includes("/apple-touch-icon.png"));
   });
 });

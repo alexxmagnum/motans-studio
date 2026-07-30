@@ -11,7 +11,7 @@ export const MOTANS_CORPORATE_BRAND_ASSET_HASHES = {
   stamp: "c8fed4036b0631b59445c49c1d938925b296086b4279d9976e28facbd139efe2",
   iconM: "90356a71b00dbe825a453d6898db995e6e4f10817c8de39720aa46b22d06d49e",
   markMsWebp: "184d47269d69df0ce4a7502d45dbe3602e400fc8d88c619a77012cb9728c2a34",
-  markMsPng: "115614534901feb3cd538cd3bf1308aaf247e9560500f8bdf1d1681560a18acd",
+  markMsPng: "b4418ccde9a64bba5b649a9e16d2420fb6656548571efed9254b2f6f80022fe8",
 };
 
 export const MOTANS_CORPORATE_BRAND_ASSETS = {
@@ -51,7 +51,7 @@ export const MOTANS_CORPORATE_BRAND_ASSETS = {
     packagePath: "public/motans/motans-ms.png",
     publicPath: MOTANS_CORPORATE_MARK_MS_PNG_PUBLIC_PATH,
     sha256: MOTANS_CORPORATE_BRAND_ASSET_HASHES.markMsPng,
-    sizeBytes: 80_774,
+    sizeBytes: 448_895,
     width: 1024,
     height: 1024,
     allowedUse: ["fallback", "og", "metadata"],

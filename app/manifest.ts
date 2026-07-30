@@ -1,12 +1,9 @@
 import type { MetadataRoute } from "next";
-import { MOTANS_CORPORATE_BRAND_ASSETS } from "@motanos/branding";
 import { MS_SITE_IDENTITY } from "../lib/msSiteIdentityFoundation.js";
 
 export const dynamic = "force-static";
 
 export default function manifest(): MetadataRoute.Manifest {
-  const icon = MOTANS_CORPORATE_BRAND_ASSETS.markMsPng.publicPath;
-
   return {
     id: "/",
     name: MS_SITE_IDENTITY.brand,
@@ -24,25 +21,19 @@ export default function manifest(): MetadataRoute.Manifest {
     categories: ["business", "productivity"],
     icons: [
       {
-        src: icon,
+        src: "/icon-192.png",
         sizes: "192x192",
         type: "image/png",
         purpose: "any",
       },
       {
-        src: icon,
+        src: "/icon-512.png",
         sizes: "512x512",
         type: "image/png",
         purpose: "any",
       },
       {
-        src: "/icon.png",
-        sizes: "192x192",
-        type: "image/png",
-        purpose: "any",
-      },
-      {
-        src: "/apple-icon.png",
+        src: "/apple-touch-icon.png",
         sizes: "180x180",
         type: "image/png",
         purpose: "any",

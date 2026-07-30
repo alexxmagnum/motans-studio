@@ -166,6 +166,14 @@ export type MsSiteSeoPageKey = keyof typeof MS_SITE_SEO;
 
 const MS_SITE_OG_LOCALE = "es_ES" as const;
 
+/** Open Graph / Twitter share image — 1200×630 (not the square mark). */
+export const MS_SITE_OG_IMAGE = {
+  path: "/brand/og-motans-studio.png",
+  width: 1200,
+  height: 630,
+  alt: "Motans Studio — software a medida, desarrollo web, SaaS e IA",
+} as const;
+
 function absoluteUrl(path: string): string {
   return path === "/" ? MS_SITE_PUBLIC_ORIGIN : `${MS_SITE_PUBLIC_ORIGIN}${path}`;
 }
@@ -174,8 +182,7 @@ function absoluteUrl(path: string): string {
 export function createMsSitePageMetadata(page: MsSiteSeoPageKey): Metadata {
   const seo = MS_SITE_SEO[page];
   const canonical = absoluteUrl(seo.path);
-  const ogImagePath = MOTANS_CORPORATE_BRAND_ASSETS.markMsPng.publicPath;
-  const ogImageUrl = absoluteUrl(ogImagePath);
+  const ogImageUrl = absoluteUrl(MS_SITE_OG_IMAGE.path);
   const brand = MS_SITE_IDENTITY.brand;
 
   return {
@@ -194,10 +201,10 @@ export function createMsSitePageMetadata(page: MsSiteSeoPageKey): Metadata {
     icons: {
       icon: [
         { url: "/favicon.ico", sizes: "any" },
-        { url: "/icon.png", type: "image/png", sizes: "32x32" },
-        { url: "/icon.png", type: "image/png", sizes: "192x192" },
+        { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
+        { url: "/icon-512.png", type: "image/png", sizes: "512x512" },
       ],
-      apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "180x180" }],
+      apple: [{ url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" }],
       shortcut: ["/favicon.ico"],
     },
     openGraph: {
@@ -210,9 +217,9 @@ export function createMsSitePageMetadata(page: MsSiteSeoPageKey): Metadata {
       images: [
         {
           url: ogImageUrl,
-          width: MOTANS_CORPORATE_BRAND_ASSETS.markMsPng.width ?? 1024,
-          height: MOTANS_CORPORATE_BRAND_ASSETS.markMsPng.height ?? 1024,
-          alt: MOTANS_CORPORATE_BRAND_ASSETS.markMsPng.alt,
+          width: MS_SITE_OG_IMAGE.width,
+          height: MS_SITE_OG_IMAGE.height,
+          alt: MS_SITE_OG_IMAGE.alt,
         },
       ],
     },

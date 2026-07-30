@@ -4,7 +4,10 @@ import { MsSiteLegalDocument } from "../../../components/MsSiteLegalDocument.js"
 import { getMsSiteLegalPage } from "../../../lib/msSiteLegalFoundation.js";
 import { createMsSitePageMetadata } from "../../../lib/msSite1703SeoFoundation.js";
 
-export const metadata: Metadata = createMsSitePageMetadata("legalAviso");
+export const metadata: Metadata = {
+  ...createMsSitePageMetadata("legalAviso"),
+  robots: { index: false, follow: true },
+};
 
 export default function LegalAvisoPage(): React.ReactElement {
   return <MsSiteLegalDocument page={getMsSiteLegalPage("aviso-legal")} />;

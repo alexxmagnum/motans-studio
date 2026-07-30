@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import { submitLead } from "../lib/apiClient.js";
 import { MS_SITE_PROJECT_INTENTS, MS_SITE_PROJECT_INTENTS_PUBLIC } from "../lib/msSite1703Foundation.js";
 import { useMsSiteLocale } from "./MsSiteLocaleProvider.js";
@@ -27,15 +27,17 @@ interface LeadFormErrors {
 
 function validateLeadForm(data: LeadFormData, ui: MsSiteUiCopy): LeadFormErrors {
   const errors: LeadFormErrors = {};
+  const name = data.name.trim();
+  const email = data.email.trim();
 
-  if (!data.name.trim() || data.name.trim().length < 2) {
+  if (!name || name.length < 2) {
     errors.name = ui.formRequiredName;
   }
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!data.email.trim()) {
+  if (!email) {
     errors.email = ui.formRequiredEmail;
-  } else if (!emailRegex.test(data.email)) {
+  } else if (!emailRegex.test(email)) {
     errors.email = ui.formInvalidEmail;
   }
 
@@ -43,7 +45,7 @@ function validateLeadForm(data: LeadFormData, ui: MsSiteUiCopy): LeadFormErrors 
     errors.projectIntent = ui.formRequiredIntent;
   }
 
-  if (data.message.length > 500) {
+  if (data.message.trim().length > 500) {
     errors.message = ui.formMessageTooLong;
   }
 
@@ -94,9 +96,12 @@ export function LeadForm({
     message: "",
   });
   const [sector, setSector] = useState("");
+  /** Honeypot — bots lo rellenan; humanos no lo ven. */
+  const [companyUrl, setCompanyUrl] = useState("");
   const [errors, setErrors] = useState<LeadFormErrors>({});
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const inFlightRef = useRef(false);
 
   const updateField = useCallback(
     (field: keyof LeadFormData, value: string) => {
@@ -113,12 +118,24 @@ export function LeadForm({
       e.preventDefault();
       setErrorMessage("");
 
+      if (inFlightRef.current || status === "loading") {
+        return;
+      }
+
       const validationErrors = validateLeadForm(formData, ui);
       if (Object.keys(validationErrors).length > 0) {
         setErrors(validationErrors);
         return;
       }
 
+      // Bot filled the honeypot — fake success, no API call
+      if (companyUrl.trim()) {
+        setStatus("success");
+        onSuccess?.();
+        return;
+      }
+
+      inFlightRef.current = true;
       setStatus("loading");
 
       const intentLabel =
@@ -133,8 +150,8 @@ export function LeadForm({
       ].filter(Boolean);
 
       const result = await submitLead({
-        name: formData.name,
-        email: formData.email,
+        name: formData.name.trim(),
+        email: formData.email.trim(),
         businessName: formData.businessName.trim() || "Por definir en conversación",
         businessType: sector || "general",
         message: messageParts.join("\n"),
@@ -144,6 +161,7 @@ export function LeadForm({
         setStatus("success");
         onSuccess?.();
       } else {
+        inFlightRef.current = false;
         setStatus("error");
         setErrorMessage(result.error);
         if (result.validationErrors) {
@@ -163,7 +181,7 @@ export function LeadForm({
         }
       }
     },
-    [formData, onSuccess, sector, ui, intentOptions],
+    [companyUrl, formData, intentOptions, onSuccess, sector, status, ui],
   );
 
   if (status === "success") {
@@ -177,6 +195,7 @@ export function LeadForm({
           type="button"
           className="msh-btn msh-btn--cta ms-form__success-again"
           onClick={() => {
+            inFlightRef.current = false;
             setStatus("idle");
             setFormData({
               name: "",
@@ -186,6 +205,7 @@ export function LeadForm({
               message: "",
             });
             setSector("");
+            setCompanyUrl("");
           }}
         >
           {ui.formSendAnother}
@@ -204,6 +224,20 @@ export function LeadForm({
           {errorMessage || ui.formErrorGeneric}
         </div>
       )}
+
+      {/* Honeypot: oculto visualmente; no anunciado a AT para no confundir. */}
+      <div className="ms-sr-only" aria-hidden="true">
+        <label htmlFor="lead-company-url">Company website</label>
+        <input
+          id="lead-company-url"
+          type="text"
+          name="company_url"
+          value={companyUrl}
+          onChange={(e) => setCompanyUrl(e.target.value)}
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
 
       <fieldset className={fieldClass("projectIntent")}>
         <legend className={isPremium ? "ms-form__legend" : undefined}>

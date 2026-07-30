@@ -79,6 +79,7 @@ type FetchLikeFn = (
     readonly method?: "POST";
     readonly headers?: Record<string, string>;
     readonly body?: string;
+    readonly signal?: AbortSignal;
   },
 ) => Promise<FetchLikeResponse>;
 
@@ -98,6 +99,9 @@ const readValidationErrors = (
 const CONNECTION_ERROR_MESSAGE = MS_SITE_API_URL_CONFIGURED
   ? `Error de conexión. Inténtalo de nuevo o escríbenos a ${MS_SITE_IDENTITY.email}.`
   : `El servicio de contacto no está disponible todavía. Escríbenos a ${MS_SITE_IDENTITY.email}.`;
+
+/** Evita peticiones colgadas en redes inestables. */
+const MS_SITE_API_TIMEOUT_MS = 15_000;
 
 async function apiPostPublic<TSuccess extends Record<string, unknown>>(
   path: string,
@@ -126,6 +130,7 @@ async function apiPostPublic<TSuccess extends Record<string, unknown>>(
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
+      signal: AbortSignal.timeout(MS_SITE_API_TIMEOUT_MS),
     });
 
     const payload = await response.json();

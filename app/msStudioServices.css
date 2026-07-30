@@ -44,6 +44,13 @@
   padding-block: clamp(2rem, 5vh, 3rem) clamp(1.75rem, 4vh, 2.5rem);
 }
 
+/* Tipografía exacta de .mscap-section__kicker (84c033a) sobre el eyebrow actual */
+.mscap .msh-eyebrow,
+.ms-page--studio-home .mscap .msh-eyebrow {
+  font-weight: 600;
+  letter-spacing: 0.18em;
+}
+
 .mscap-home-intro__title {
   width: min(100%, 46rem);
   max-width: none;

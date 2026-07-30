@@ -49,7 +49,6 @@
   font-size: clamp(1.85rem, 3.2vw, 2.35rem);
   font-weight: 400;
   letter-spacing: -0.01em;
-  line-height: normal;
   background: linear-gradient(90deg, #04a2fb 0%, #52ebe6 38%, #34cc68 62%, #a6e10b 100%);
   -webkit-background-clip: text;
   background-clip: text;

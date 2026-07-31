@@ -192,7 +192,7 @@
 
   .msh-hero--experience .msh-hero__figure.msh-hero__figure--hero-video {
     position: relative;
-    transform: translateX(12rem);
+    transform: translateX(12.5rem);
     /* Difumina solo el corte inferior (alfa), sin nublar la imagen */
     -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 84%, transparent 100%) !important;
     mask-image: linear-gradient(to bottom, #000 0%, #000 84%, transparent 100%) !important;

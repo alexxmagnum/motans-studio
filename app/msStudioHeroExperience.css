@@ -5,8 +5,8 @@
 
 .msh-hero--experience {
   --msh-hero-ink: #ffffff;
-  --msh-hero-muted: rgba(255, 255, 255, 0.62);
-  --msh-hero-faint: rgba(255, 255, 255, 0.38);
+  --msh-hero-muted: rgba(255, 255, 255, 0.78);
+  --msh-hero-faint: rgba(255, 255, 255, 0.55);
   --msh-hero-line: rgba(255, 255, 255, 0.12);
   position: relative;
   isolation: isolate;

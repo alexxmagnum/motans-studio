@@ -3,8 +3,8 @@
 :root {
   --msh-bg: #000000;
   --msh-ink: #ffffff;
-  --msh-muted: rgba(255, 255, 255, 0.5);
-  --msh-muted-soft: rgba(255, 255, 255, 0.38);
+  --msh-muted: rgba(255, 255, 255, 0.72);
+  --msh-muted-soft: rgba(255, 255, 255, 0.58);
   --msh-border: rgba(255, 255, 255, 0.07);
   --msh-max: 80rem;
   --msh-page-pad-x: clamp(1.75rem, 4.5vw, 3rem);
@@ -47,7 +47,7 @@
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.34);
+  color: rgba(255, 255, 255, 0.52);
 }
 
 /* Home override = .ms-page--studio-home .ms-dp-section__kicker (letter-spacing only) */
@@ -1624,13 +1624,13 @@ body:has(.ms-page--planes) {
   margin-top: 1.35rem;
 }
 
-/* —— Contacto Hablemos —— */
-.ms-page--studio-home .msh-contact {
+/* —— Contacto Hablemos (legacy hooks; premium layout lives in msStudioContactForm.css) —— */
+.ms-page--studio-home .msh-contact:not(.msh-contact--premium) {
   background: var(--msh-bg);
   padding-block: clamp(5rem, 12vh, 8rem) clamp(5.5rem, 13vh, 8.5rem);
 }
 
-.ms-page--studio-home .msh-contact .ms-dp-section__title {
+.ms-page--studio-home .msh-contact:not(.msh-contact--premium) .ms-dp-section__title {
   margin-top: 1rem;
   max-width: 16ch;
   font-size: clamp(2.35rem, 5.4vw, 3.85rem);
@@ -1638,7 +1638,7 @@ body:has(.ms-page--planes) {
   color: var(--msh-ink);
 }
 
-.ms-page--studio-home .msh-contact .ms-dp-section__note {
+.ms-page--studio-home .msh-contact:not(.msh-contact--premium) .ms-dp-section__note {
   margin-top: 1.25rem;
   color: rgba(255, 255, 255, 0.56);
   font-size: clamp(1.02rem, 1.5vw, 1.125rem);
@@ -1646,7 +1646,7 @@ body:has(.ms-page--planes) {
   max-width: 40ch;
 }
 
-.ms-page--studio-home .msh-contact__trust {
+.ms-page--studio-home .msh-contact:not(.msh-contact--premium) .msh-contact__trust {
   margin: 0.85rem 0 0;
   max-width: 46ch;
   font-size: 0.9375rem;
@@ -1654,7 +1654,7 @@ body:has(.ms-page--planes) {
   color: rgba(255, 255, 255, 0.42);
 }
 
-.ms-page--studio-home .msh-contact__next {
+.ms-page--studio-home .msh-contact:not(.msh-contact--premium) .msh-contact__next {
   margin: 0.55rem 0 2rem;
   max-width: 44ch;
   font-size: 0.875rem;
@@ -1662,7 +1662,7 @@ body:has(.ms-page--planes) {
   color: rgba(255, 255, 255, 0.36);
 }
 
-.ms-page--studio-home .msh-contact__form-card {
+.ms-page--studio-home .msh-contact:not(.msh-contact--premium) .msh-contact__form-card {
   max-width: 40rem;
   padding: 1.65rem 1.5rem 1.5rem;
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -1690,7 +1690,7 @@ body:has(.ms-page--planes) {
 
 .ms-page--studio-home .msh-contact .ms-form--premium .ms-form__legend,
 .ms-page--studio-home .msh-contact .ms-form--premium label {
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .ms-page--studio-home .msh-contact .ms-form--premium .ms-intent {
@@ -1727,7 +1727,7 @@ body:has(.ms-page--planes) {
 
 .ms-page--studio-home .msh-contact .ms-form--premium input::placeholder,
 .ms-page--studio-home .msh-contact .ms-form--premium textarea::placeholder {
-  color: rgba(255, 255, 255, 0.28);
+  color: rgba(255, 255, 255, 0.58);
 }
 
 .ms-page--studio-home .msh-contact .ms-form--premium input:focus,

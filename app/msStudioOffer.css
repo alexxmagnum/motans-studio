@@ -5,8 +5,8 @@
 
 .msh-offer {
   --msh-offer-ink: #ffffff;
-  --msh-offer-muted: rgba(255, 255, 255, 0.56);
-  --msh-offer-faint: rgba(255, 255, 255, 0.34);
+  --msh-offer-muted: rgba(255, 255, 255, 0.74);
+  --msh-offer-faint: rgba(255, 255, 255, 0.55);
   --msh-offer-line: rgba(255, 255, 255, 0.09);
   --msh-offer-panel: #0c0d10;
   --msh-offer-panel-2: #111318;
@@ -27,7 +27,7 @@
   max-width: var(--msh-max, 80rem);
   margin-inline: auto;
   padding-inline: var(--msh-page-pad-x, clamp(1.75rem, 4.5vw, 3rem));
-  padding-block: clamp(4.75rem, 12vh, 8rem) clamp(4.25rem, 10vh, 7.5rem);
+  padding-block: clamp(2rem, 5vh, 3.25rem) clamp(4.25rem, 10vh, 7.5rem);
 }
 
 .msh-offer [data-offer-reveal] {
@@ -125,9 +125,9 @@
 
 .msh-offer__block-body {
   margin: 0.65rem auto 0;
-  font-size: 0.92rem;
-  line-height: 1.55;
-  color: var(--msh-offer-muted);
+  font-size: 0.95rem;
+  line-height: 1.58;
+  color: rgba(255, 255, 255, 0.78);
   max-width: 28rem;
 }
 
@@ -191,22 +191,27 @@
 /* —— Close —— */
 .msh-offer__close {
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 1rem 1.75rem;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.15rem;
   margin-top: clamp(3.5rem, 8vh, 5.5rem);
   padding-top: clamp(1.75rem, 3.5vh, 2.5rem);
   border-top: 1px solid var(--msh-offer-line);
+  text-align: center;
 }
 
 .msh-offer__close-line {
   margin: 0;
-  max-width: 34rem;
-  font-size: clamp(1.2rem, 2.1vw, 1.45rem);
-  font-family: var(--msh-font-display, "Instrument Serif", Georgia, serif);
-  line-height: 1.3;
-  letter-spacing: -0.02em;
-  color: rgba(255, 255, 255, 0.84);
+  max-width: 36rem;
+  font-family: var(--msh-font, Inter, system-ui, sans-serif);
+  font-size: clamp(0.98rem, 1.45vw, 1.085rem);
+  font-weight: 450;
+  line-height: 1.6;
+  letter-spacing: -0.011em;
+  color: rgba(255, 255, 255, 0.78);
+  text-wrap: pretty;
 }
 
 .msh-offer__close-cta {
@@ -1835,7 +1840,7 @@
 
 @media (max-width: 768px) {
   .msh-offer__rail {
-    padding-block: 3.25rem 3.75rem;
+    padding-block: 2rem 3.75rem;
   }
 
   .msh-offer__opening {
@@ -1889,8 +1894,9 @@
 
   .msh-offer__close {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     margin-top: 2.75rem;
+    text-align: center;
   }
 
   .msh-prod-web__filters {

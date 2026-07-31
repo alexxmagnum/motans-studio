@@ -5,8 +5,8 @@
 
 .msh-factory {
   --msh-factory-ink: #ffffff;
-  --msh-factory-muted: rgba(255, 255, 255, 0.56);
-  --msh-factory-faint: rgba(255, 255, 255, 0.34);
+  --msh-factory-muted: rgba(255, 255, 255, 0.74);
+  --msh-factory-faint: rgba(255, 255, 255, 0.55);
   --msh-factory-line: rgba(255, 255, 255, 0.1);
   --msh-factory-cyan: #04a2fb;
   --msh-factory-turq: #52ebe6;
@@ -26,7 +26,7 @@
   max-width: var(--msh-max, 80rem);
   margin-inline: auto;
   padding-inline: var(--msh-page-pad-x, clamp(1.75rem, 4.5vw, 3rem));
-  padding-block: clamp(4.5rem, 11vh, 7.5rem) clamp(4rem, 9vh, 6.5rem);
+  padding-block: clamp(2rem, 5vh, 3.25rem) clamp(4rem, 9vh, 6.5rem);
 }
 
 .msh-factory__opening {
@@ -55,8 +55,77 @@
   position: relative;
 }
 
-.msh-factory__energy {
-  display: none;
+.msh-factory__journey {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  overflow: visible;
+  opacity: 0;
+  transition: opacity 500ms ease;
+}
+
+.msh-factory__journey.is-ready {
+  opacity: 1;
+}
+
+.msh-factory__journey-track {
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.28;
+}
+
+.msh-factory__journey-beam {
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: calc(100 - (var(--factory-progress, 0) * 100));
+  filter: drop-shadow(0 0 6px rgba(52, 204, 104, 0.35));
+  opacity: 0.2;
+  transition: stroke-dashoffset 850ms cubic-bezier(0.22, 1, 0.36, 1), opacity 500ms ease;
+}
+
+.msh-factory__journey.is-lit .msh-factory__journey-beam {
+  opacity: 1;
+}
+
+.msh-factory__journey-pulse {
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 10 90;
+  stroke-dashoffset: 100;
+  opacity: 0;
+  filter:
+    drop-shadow(0 0 6px rgba(4, 162, 251, 0.85))
+    drop-shadow(0 0 12px rgba(166, 225, 11, 0.55));
+}
+
+.msh-factory__journey.is-ready .msh-factory__journey-pulse {
+  opacity: 1;
+  animation: msh-factory-pulse-run 5.2s linear infinite;
+}
+
+.msh-factory__journey-head {
+  opacity: 0;
+  fill: #efffb0;
+}
+
+.msh-factory__journey.is-ready .msh-factory__journey-head {
+  opacity: 1;
+}
+
+@keyframes msh-factory-pulse-run {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 .msh-factory__line {
@@ -65,6 +134,8 @@
   padding: 0;
   display: grid;
   gap: 0.85rem;
+  position: relative;
+  z-index: 1;
 }
 
 .msh-factory__stage {
@@ -136,6 +207,8 @@
   --msh-stage-mix: calc(var(--msh-stage-level) * var(--msh-stage-heat) * 100%);
   --msh-stage-wash: calc(var(--msh-stage-level) * var(--msh-stage-heat) * 14%);
   --msh-stage-glow: calc(var(--msh-stage-level) * var(--msh-stage-heat) * 18%);
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 2.75rem 1fr;
   grid-template-areas:
@@ -203,7 +276,7 @@
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.15;
-  color: rgba(255, 255, 255, 0.78);
+  color: rgba(255, 255, 255, 0.88);
   transition: color 700ms ease, background 700ms ease;
 }
 
@@ -219,12 +292,12 @@
   max-width: 34rem;
   font-size: 0.9rem;
   line-height: 1.45;
-  color: rgba(255, 255, 255, 0.48);
+  color: rgba(255, 255, 255, 0.68);
   transition: color 700ms ease;
 }
 
 .msh-factory__stage.is-active .msh-factory__stage-blurb {
-  color: rgba(255, 255, 255, 0.62);
+  color: rgba(255, 255, 255, 0.84);
 }
 
 .msh-factory__stage-rail {
@@ -254,25 +327,7 @@
 }
 
 .msh-factory__connector {
-  display: block;
-  width: 1px;
-  height: 0.75rem;
-  margin: 0.1rem auto;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.06),
-    color-mix(in srgb, var(--msh-factory-cyan) 45%, transparent),
-    color-mix(in srgb, var(--msh-factory-lime) 35%, transparent)
-  );
-  opacity: 0.3;
-  transform: scaleY(0.5);
-  transform-origin: top center;
-  transition: opacity 700ms ease, transform 700ms ease;
-}
-
-.msh-factory__stage.is-active .msh-factory__connector {
-  opacity: 1;
-  transform: scaleY(1);
+  display: none;
 }
 
 /* Evolución — climax Motans */
@@ -344,66 +399,18 @@
     display: none;
   }
 
-  .msh-factory__energy {
-    display: block;
-    position: absolute;
-    inset: 22% 3% 30%;
-    pointer-events: none;
-    z-index: 0;
+  .msh-factory__journey-track {
+    stroke-width: 2;
+    opacity: 0.24;
   }
 
-  .msh-factory__line {
-    position: relative;
-    z-index: 1;
+  .msh-factory__journey-beam {
+    stroke-width: 2.75;
   }
 
-  .msh-factory__energy-track {
-    position: absolute;
-    inset: 42% 4% auto;
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.04),
-      rgba(255, 255, 255, 0.12),
-      rgba(255, 255, 255, 0.04)
-    );
-  }
-
-  .msh-factory__energy-beam {
-    --beam-start: 4%;
-    --beam-end: 96%;
-    --beam-w: 14%;
-    position: absolute;
-    top: 42%;
-    left: var(--beam-start);
-    width: var(--beam-w);
-    height: 2px;
-    border-radius: 999px;
-    background: linear-gradient(90deg, transparent, var(--msh-factory-cyan), var(--msh-factory-lime));
-    opacity: 0;
-  }
-
-  .msh-factory__energy.is-lit .msh-factory__energy-beam {
-    opacity: 1;
-    animation: msh-factory-beam 5.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  }
-
-  .msh-factory__energy-return {
-    position: absolute;
-    right: 6%;
-    bottom: 8%;
-    width: 28%;
-    height: 28%;
-    border: 1px solid transparent;
-    border-right-color: rgba(166, 225, 11, 0.16);
-    border-bottom-color: rgba(4, 162, 251, 0.14);
-    border-radius: 0 0 1.25rem 0;
-    opacity: 0;
-    transition: opacity 1s ease;
-  }
-
-  .msh-factory[data-factory-motion="complete"] .msh-factory__energy-return {
-    opacity: 1;
+  .msh-factory__journey-pulse {
+    stroke-width: 4;
+    stroke-dasharray: 8 92;
   }
 }
 
@@ -419,7 +426,7 @@
 
 @media (max-width: 719px) {
   .msh-factory__rail {
-    padding-block: clamp(3.5rem, 9vh, 5rem) clamp(3.25rem, 8vh, 4.5rem);
+    padding-block: clamp(2rem, 5vh, 2.75rem) clamp(3.25rem, 8vh, 4.5rem);
   }
 
   .msh-factory__opening {
@@ -456,22 +463,14 @@
   .msh-factory__stage-blurb {
     font-size: 0.86rem;
   }
-}
 
-@keyframes msh-factory-beam {
-  0% {
-    left: var(--beam-start);
-    opacity: 0;
+  .msh-factory__journey-track {
+    stroke-width: 2.25;
+    opacity: 0.32;
   }
-  14% {
-    opacity: 1;
-  }
-  86% {
-    opacity: 1;
-  }
-  100% {
-    left: calc(var(--beam-end) - var(--beam-w));
-    opacity: 0;
+
+  .msh-factory__journey-beam {
+    stroke-width: 2.75;
   }
 }
 
@@ -488,20 +487,13 @@
     transition: none;
   }
 
-  .msh-factory__energy-beam {
-    opacity: 0.85;
-    left: var(--beam-start, 4%);
-    width: calc(var(--factory-progress, 1) * (var(--beam-end, 96%) - var(--beam-start, 4%)));
-    max-width: calc(var(--beam-end, 96%) - var(--beam-start, 4%));
+  .msh-factory__journey-beam {
+    transition: none;
+  }
+
+  .msh-factory__journey-pulse,
+  .msh-factory__journey-head {
     animation: none !important;
-  }
-
-  .msh-factory__energy-return {
-    opacity: 1;
-  }
-
-  .msh-factory__connector {
-    opacity: 0.85;
-    transform: none;
+    opacity: 0 !important;
   }
 }

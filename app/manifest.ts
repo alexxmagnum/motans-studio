@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     id: "/",
     name: MS_SITE_IDENTITY.brand,
-    short_name: "Motans",
+    short_name: "Motans Studio",
     description:
       "Software a medida, plataformas SaaS, automatización e integraciones para empresas.",
     start_url: "/",

@@ -39,4 +39,4 @@ await mkdir(join(testDistPath, "node_modules", "@motanos"), { recursive: true })
 // Commercial-site solo usa los foundations del propio repo
 // No necesita shims externos para los tests de foundation
 
-console.log("[commercial-site test runtime] Setup complete.");
+console.log("[motans-studio-website] Test runtime setup complete.");

@@ -21,7 +21,7 @@ const testFiles = [
   join(__dirname, "hosteleriaLandingPreviewRouteBoundaryFoundation.test.js"),
 ];
 
-console.log("[commercial-site tests] Running foundation tests...");
+console.log("[motans-studio-website] Running foundation tests...");
 
 let passed = 0;
 let failed = 0;
@@ -32,17 +32,17 @@ const stream = run({
 
 stream.on("test:fail", (test: unknown) => {
   const t = test as { name: string };
-  console.error(`[commercial-site tests] FAIL: ${t.name}`);
+  console.error(`[motans-studio-website] FAIL: ${t.name}`);
   failed++;
 });
 
 stream.on("test:pass", (test: unknown) => {
   const t = test as { name: string };
-  console.log(`[commercial-site tests] PASS: ${t.name}`);
+  console.log(`[motans-studio-website] PASS: ${t.name}`);
   passed++;
 });
 
 stream.on("end", () => {
-  console.log(`\n[commercial-site tests] Results: ${passed} passed, ${failed} failed`);
+  console.log(`\n[motans-studio-website] Results: ${passed} passed, ${failed} failed`);
   process.exit(failed > 0 ? 1 : 0);
 });

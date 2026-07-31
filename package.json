@@ -1,8 +1,26 @@
 {
-  "name": "motans-studio",
+  "name": "motans-studio-website",
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "description": "Motans Studio Website — public commercial site for Motans Studio (MotanOS product).",
+  "author": "Motans Studio <info@motansstudio.com>",
+  "homepage": "https://www.motansstudio.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexxmagnum/motans-studio-website.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alexxmagnum/motans-studio-website/issues",
+    "email": "info@motansstudio.com"
+  },
+  "keywords": [
+    "motans-studio",
+    "motanos",
+    "nextjs",
+    "commercial-website",
+    "saas"
+  ],
   "scripts": {
     "dev": "node scripts/dev-fresh.mjs",
     "dev:fast": "next dev --port 3001 --hostname 0.0.0.0",

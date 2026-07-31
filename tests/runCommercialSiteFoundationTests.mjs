@@ -38,7 +38,7 @@ const testFiles = [
   join(__dirname, "msStudioServices.test.mjs"),
 ];
 
-console.log("[motans-studio tests] Running foundation tests...");
+console.log("[motans-studio-website] Running foundation tests...");
 
 let passed = 0;
 let failed = 0;
@@ -46,12 +46,12 @@ let failed = 0;
 const stream = run({ files: testFiles });
 
 stream.on("test:fail", (test) => {
-  console.error(`[motans-studio tests] FAIL: ${test.name}`);
+  console.error(`[motans-studio-website] FAIL: ${test.name}`);
   failed += 1;
 });
 
 stream.on("test:pass", (test) => {
-  console.log(`[motans-studio tests] PASS: ${test.name}`);
+  console.log(`[motans-studio-website] PASS: ${test.name}`);
   passed += 1;
 });
 
@@ -61,13 +61,13 @@ stream.on("end", () => {
   const exitCode = totalFailed > 0 ? 1 : 0;
 
   console.log(
-    `\n[motans-studio tests] Results: ${passed} passed, ${totalFailed} failed (stream.failed=${streamFailed})`,
+    `\n[motans-studio-website] Results: ${passed} passed, ${totalFailed} failed (stream.failed=${streamFailed})`,
   );
 
   process.exit(exitCode);
 });
 
 stream.on("error", (error) => {
-  console.error("[motans-studio tests] Runner error:", error);
+  console.error("[motans-studio-website] Runner error:", error);
   process.exit(1);
 });

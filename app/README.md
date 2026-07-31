@@ -1,6 +1,6 @@
 # app
 
-Objetivo: contener la app Next.js del site comercial publico de MotanOS.
+Objetivo: contener la app Next.js del sitio público de Motans Studio (producto principal: MotanOS).
 
 ## Estado heredado
 

@@ -28,10 +28,13 @@ function json(status: number, body: JsonBody): NextResponse {
 }
 
 function resolveFromAddress(): string {
+  // Production: set RESEND_FROM_EMAIL=Motans Studio <info@motansstudio.com>
+  // (domain verified in Resend). See docs/BRANDING.md.
   const configured = process.env.RESEND_FROM_EMAIL?.trim();
   if (configured) {
     return configured;
   }
+  // Local/dev only — Resend onboarding sender. Not Motans Studio production branding.
   return "Motans Studio <onboarding@resend.dev>";
 }
 

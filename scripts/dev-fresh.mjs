@@ -14,13 +14,13 @@ function removeDir(path) {
     return;
   }
   rmSync(path, { recursive: true, force: true });
-  console.log(`[motans-studio] removed: ${path}`);
+  console.log(`[motans-studio-website] removed: ${path}`);
 }
 
 removeDir(join(appRoot, ".next"));
 removeDir(join(appRoot, "node_modules", ".cache"));
 
-console.log("[motans-studio] starting next dev (clean cache)…");
+console.log("[motans-studio-website] starting next dev (clean cache)…");
 
 const child = spawn(
   "next",

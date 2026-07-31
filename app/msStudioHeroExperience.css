@@ -56,12 +56,12 @@
 .msh-hero--experience .msh-hero__brand,
 .msh-hero--experience .msh-eyebrow {
   margin: 0 0 1.85rem;
-  font-family: var(--msh-font-display);
+  font-family: var(--msh-font, Inter, system-ui, sans-serif);
   font-size: 0.72rem;
-  font-weight: 400;
-  letter-spacing: 0.18em;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--msh-hero-faint);
+  color: rgba(255, 255, 255, 0.52);
 }
 
 .msh-hero--experience .msh-hero__brand-mark,

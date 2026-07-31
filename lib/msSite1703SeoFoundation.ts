@@ -19,7 +19,7 @@ export const MS_SITE_PUBLIC_ORIGIN =
 
 export const MS_SITE_SEO = {
   home: {
-    title: "Motans Studio · Software a medida, desarrollo web, SaaS e IA",
+    title: "Motans Studio",
     description:
       "Motans Studio: software a medida, desarrollo web, SaaS, automatización e IA. Productos digitales claros, hechos para operar con precisión de estudio.",
     path: "/",
@@ -37,7 +37,7 @@ export const MS_SITE_SEO = {
     ],
   },
   studio: {
-    title: "Motans Studio · Software a medida, desarrollo web, SaaS e IA",
+    title: "Motans Studio",
     description:
       "Motans Studio construye software a medida, webs, plataformas SaaS, automatización e inteligencia artificial. Productos digitales hechos para operar — con precisión de estudio.",
     path: "/",

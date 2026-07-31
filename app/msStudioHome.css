@@ -51,7 +51,7 @@
 }
 
 /* Home override = .ms-page--studio-home .ms-dp-section__kicker (letter-spacing only) */
-.ms-page--studio-home .msh-eyebrow:not(.msh-hero__brand) {
+.ms-page--studio-home .msh-eyebrow {
   letter-spacing: 0.14em;
 }
 

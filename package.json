@@ -7,8 +7,8 @@
     "dev": "node scripts/dev-fresh.mjs",
     "dev:fast": "next dev --port 3001 --hostname 0.0.0.0",
     "build": "next build",
-    "preview": "npx --yes serve@14 out -l 3001",
-    "start": "pnpm preview",
+    "preview": "next start --port 3001 --hostname 0.0.0.0",
+    "start": "next start --port 3001 --hostname 0.0.0.0",
     "lint": "eslint . --max-warnings 0",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "test": "node tests/runCommercialSiteFoundationTests.mjs"
@@ -19,7 +19,8 @@
     "@motanos/i18n": "file:./packages/i18n",
     "next": "^15.0.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "resend": "^6.18.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.6",

@@ -1,15 +1,12 @@
 // API Client for Commercial Site
-// Conecta los formularios a los endpoints públicos reales (sin auth).
-// Fase 17 — IMPLEMENTATION_FASE_17_COMMERCIAL_SITE_MINIMAL_PUBLISHABLE
-// Fase 7A — integración explícita: NEXT_PUBLIC_API_URL vacío ≠ configurado.
+// Contacto público → Route Handler same-origin `/api/contact` (Resend, server-only).
+// Assisted requests still target optional external NEXT_PUBLIC_API_URL (legacy).
 
 import { MS_SITE_IDENTITY } from "./msSiteIdentityFoundation.js";
 
 /**
- * Base URL de la API pública de leads.
- * - Producción: definir `NEXT_PUBLIC_API_URL` (ej. https://api.motansstudio.com)
- * - Desarrollo local: fallback `http://localhost:3002` solo fuera de production
- * - Cadena vacía en .env se trata como no configurada
+ * Base URL for legacy assisted-request API (optional).
+ * Contact form does not use this — it posts to `/api/contact`.
  */
 function resolveMsSiteApiBaseUrl(): string {
   const raw = process.env.NEXT_PUBLIC_API_URL?.trim();
@@ -45,7 +42,13 @@ export type LeadRequest = {
   email: string;
   businessName: string;
   businessType: string;
+  projectIntent: string;
+  projectIntentLabel: string;
+  sector: string;
+  sectorLabel: string;
   message: string | undefined;
+  /** Honeypot — must stay empty for humans. */
+  companyUrl?: string;
 };
 
 export type AssistedRequest = {
@@ -96,26 +99,21 @@ const readValidationErrors = (
   return raw as Array<{ field: string; message: string }>;
 };
 
-const CONNECTION_ERROR_MESSAGE = MS_SITE_API_URL_CONFIGURED
-  ? `Error de conexión. Inténtalo de nuevo o escríbenos a ${MS_SITE_IDENTITY.email}.`
+const CONNECTION_ERROR_MESSAGE = `Error de conexión. Inténtalo de nuevo o escríbenos a ${MS_SITE_IDENTITY.email}.`;
+
+const ASSISTED_CONNECTION_ERROR_MESSAGE = MS_SITE_API_URL_CONFIGURED
+  ? CONNECTION_ERROR_MESSAGE
   : `El servicio de contacto no está disponible todavía. Escríbenos a ${MS_SITE_IDENTITY.email}.`;
 
 /** Evita peticiones colgadas en redes inestables. */
 const MS_SITE_API_TIMEOUT_MS = 15_000;
 
-async function apiPostPublic<TSuccess extends Record<string, unknown>>(
-  path: string,
+async function apiPostJson<TSuccess extends Record<string, unknown>>(
+  url: string,
   body: unknown,
   mapSuccess: (payload: Record<string, unknown>) => TSuccess,
+  connectionErrorMessage: string,
 ): Promise<ApiResult<TSuccess>> {
-  if (!API_BASE_URL) {
-    return {
-      ok: false,
-      error: CONNECTION_ERROR_MESSAGE,
-      validationErrors: undefined,
-    };
-  }
-
   const fallbackFetch = (globalThis as { fetch?: FetchLikeFn }).fetch;
   if (fallbackFetch === undefined) {
     return {
@@ -126,14 +124,24 @@ async function apiPostPublic<TSuccess extends Record<string, unknown>>(
   }
 
   try {
-    const response = await fallbackFetch(`${API_BASE_URL}${path}`, {
+    const response = await fallbackFetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
       signal: AbortSignal.timeout(MS_SITE_API_TIMEOUT_MS),
     });
 
-    const payload = await response.json();
+    let payload: unknown;
+    try {
+      payload = await response.json();
+    } catch {
+      return {
+        ok: false,
+        error: "Respuesta inválida del servidor.",
+        validationErrors: undefined,
+      };
+    }
+
     if (!isObject(payload)) {
       return {
         ok: false,
@@ -162,21 +170,54 @@ async function apiPostPublic<TSuccess extends Record<string, unknown>>(
   } catch {
     return {
       ok: false,
-      error: CONNECTION_ERROR_MESSAGE,
+      error: connectionErrorMessage,
       validationErrors: undefined,
     };
   }
 }
 
+async function apiPostPublic<TSuccess extends Record<string, unknown>>(
+  path: string,
+  body: unknown,
+  mapSuccess: (payload: Record<string, unknown>) => TSuccess,
+): Promise<ApiResult<TSuccess>> {
+  if (!API_BASE_URL) {
+    return {
+      ok: false,
+      error: ASSISTED_CONNECTION_ERROR_MESSAGE,
+      validationErrors: undefined,
+    };
+  }
+
+  return apiPostJson(
+    `${API_BASE_URL}${path}`,
+    body,
+    mapSuccess,
+    ASSISTED_CONNECTION_ERROR_MESSAGE,
+  );
+}
+
+/** Public contact form → Next.js Route Handler (Resend). */
 export async function submitLead(request: LeadRequest): Promise<ApiResult<LeadResponse>> {
-  return apiPostPublic("/api/public/leads", {
-    ...request,
-    source: "commercial_site",
-    submittedAt: new Date().toISOString(),
-  }, (payload) => ({
-    leadId: String(payload.leadId ?? ""),
-    message: String(payload.message ?? "Lead recibido"),
-  }));
+  return apiPostJson(
+    "/api/contact",
+    {
+      name: request.name,
+      email: request.email,
+      businessName: request.businessName,
+      projectIntent: request.projectIntent,
+      projectIntentLabel: request.projectIntentLabel,
+      sector: request.sector,
+      sectorLabel: request.sectorLabel,
+      message: request.message ?? "",
+      companyUrl: request.companyUrl ?? "",
+    },
+    (payload) => ({
+      leadId: String(payload.leadId ?? ""),
+      message: String(payload.message ?? "Mensaje recibido"),
+    }),
+    CONNECTION_ERROR_MESSAGE,
+  );
 }
 
 export async function submitAssistedRequest(

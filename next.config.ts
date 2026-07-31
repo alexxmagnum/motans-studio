@@ -2,9 +2,8 @@ import type { NextConfig } from "next";
 
 /**
  * Fase 0: rutas MotanOS / planes / solicitud redirigen a home (superficie studio-only).
- * Con `output: "export"`, Next no aplica `redirects` en el export estático;
- * Vercel usa `vercel.json`. Las páginas en `app/motanos|planes|solicitud` también
- * redirigen en cliente para preview local / estático.
+ * Sin `output: "export"` para permitir Route Handlers (contacto / Resend).
+ * `vercel.json` refuerza redirects/headers en Vercel; Next también aplica `redirects`.
  */
 const nextConfig: NextConfig = {
   transpilePackages: [
@@ -12,7 +11,6 @@ const nextConfig: NextConfig = {
     "@motanos/branding",
     "@motanos/i18n",
   ],
-  output: "export",
   poweredByHeader: false,
   images: {
     unoptimized: true,

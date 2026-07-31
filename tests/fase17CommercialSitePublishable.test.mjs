@@ -27,9 +27,9 @@ describe("Fase 17 commercial site publishable", () => {
     assert.ok(seo.includes('"/legal/aviso-legal"'));
   });
 
-  it("should wire lead and assisted forms to public API paths", () => {
+  it("should wire lead form to contact route and assisted to public API path", () => {
     const client = readFileSync(join(root, "lib", "apiClient.ts"), "utf-8");
-    assert.ok(client.includes("/api/public/leads"));
+    assert.ok(client.includes("/api/contact"));
     assert.ok(client.includes("/api/public/assisted-requests"));
     assert.ok(client.includes("payload.success === false"));
   });

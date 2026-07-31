@@ -143,18 +143,29 @@ export function LeadForm({
         MS_SITE_PROJECT_INTENTS.find((i) => i.value === formData.projectIntent)?.label ??
         formData.projectIntent;
 
-      const messageParts = [
-        `[Proyecto: ${intentLabel}]`,
-        sector ? `[Sector: ${sector}]` : "",
-        formData.message.trim(),
-      ].filter(Boolean);
+      const sectorLabel = sector
+        ? sector === "hosteleria"
+          ? ui.sectorHospitality
+          : sector === "retail"
+            ? ui.sectorRetail
+            : sector === "servicios"
+              ? ui.sectorServices
+              : sector === "otro"
+                ? ui.sectorOther
+                : sector
+        : "";
 
       const result = await submitLead({
         name: formData.name.trim(),
         email: formData.email.trim(),
         businessName: formData.businessName.trim() || "Por definir en conversación",
         businessType: sector || "general",
-        message: messageParts.join("\n"),
+        projectIntent: formData.projectIntent,
+        projectIntentLabel: intentLabel,
+        sector,
+        sectorLabel,
+        message: formData.message.trim() || undefined,
+        companyUrl,
       });
 
       if (result.ok) {
@@ -171,7 +182,7 @@ export function LeadForm({
               ve.field === "name" ||
               ve.field === "email" ||
               ve.field === "businessName" ||
-              ve.field === "businessType" ||
+              ve.field === "projectIntent" ||
               ve.field === "message"
             ) {
               (newErrors as Record<string, string>)[ve.field] = ve.message;

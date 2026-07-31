@@ -49,6 +49,8 @@ export type LeadRequest = {
   message: string | undefined;
   /** Honeypot — must stay empty for humans. */
   companyUrl?: string;
+  /** Cloudflare Turnstile token (empty when widget not configured). */
+  turnstileToken?: string;
 };
 
 export type AssistedRequest = {
@@ -211,6 +213,7 @@ export async function submitLead(request: LeadRequest): Promise<ApiResult<LeadRe
       sectorLabel: request.sectorLabel,
       message: request.message ?? "",
       companyUrl: request.companyUrl ?? "",
+      turnstileToken: request.turnstileToken ?? "",
     },
     (payload) => ({
       leadId: String(payload.leadId ?? ""),

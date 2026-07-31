@@ -19,6 +19,7 @@ import "./msStudioHeroMobileFix.css";
 /* Fase 6 — confianza / footer (después del home para no pisar hero) */
 import "./msSiteConsent.css";
 import "./msStudioFooter.css";
+import "./msStudioContactForm.css";
 
 const inter = Inter({
   subsets: ["latin"],

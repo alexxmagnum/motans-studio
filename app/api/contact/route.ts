@@ -5,8 +5,15 @@ import {
   formatContactEmailHtml,
   formatContactEmailText,
   parseContactFormBody,
+  sanitizeContactFormPayload,
+  sanitizeHeaderSafe,
   validateContactFormPayload,
 } from "../../../lib/contactFormServer.js";
+import {
+  getClientIpFromRequest,
+  isContactRateLimited,
+  verifyTurnstileToken,
+} from "../../../lib/contactFormSecurity.js";
 
 export const runtime = "nodejs";
 
@@ -25,11 +32,21 @@ function resolveFromAddress(): string {
   if (configured) {
     return configured;
   }
-  // Resend test sender — replace with a verified domain address in production.
   return "Motans Studio <onboarding@resend.dev>";
 }
 
 export async function POST(request: Request): Promise<NextResponse> {
+  const ip = getClientIpFromRequest(request);
+
+  if (isContactRateLimited(ip)) {
+    return json(429, {
+      success: false,
+      message:
+        "Has enviado demasiadas solicitudes. Inténtalo de nuevo más tarde.",
+      validationErrors: undefined,
+    });
+  }
+
   let raw: unknown;
   try {
     raw = await request.json();
@@ -41,8 +58,8 @@ export async function POST(request: Request): Promise<NextResponse> {
     });
   }
 
-  const payload = parseContactFormBody(raw);
-  if (payload === null) {
+  const parsed = parseContactFormBody(raw);
+  if (parsed === null) {
     return json(400, {
       success: false,
       message: "Cuerpo de la solicitud inválido.",
@@ -50,7 +67,8 @@ export async function POST(request: Request): Promise<NextResponse> {
     });
   }
 
-  // Honeypot filled — pretend success without sending mail.
+  const payload = sanitizeContactFormPayload(parsed);
+
   if (payload.companyUrl.trim().length > 0) {
     return json(200, {
       success: true,
@@ -68,6 +86,20 @@ export async function POST(request: Request): Promise<NextResponse> {
     });
   }
 
+  const turnstileOk = await verifyTurnstileToken({
+    token: payload.turnstileToken,
+    ip,
+  });
+  if (!turnstileOk) {
+    return json(400, {
+      success: false,
+      message: "No pudimos verificar que eres humano. Recarga e inténtalo de nuevo.",
+      validationErrors: [
+        { field: "turnstile", message: "Verificación de seguridad requerida." },
+      ],
+    });
+  }
+
   const apiKey = process.env.RESEND_API_KEY?.trim();
   if (!apiKey) {
     return json(503, {
@@ -77,16 +109,15 @@ export async function POST(request: Request): Promise<NextResponse> {
     });
   }
 
-  const submittedAt = new Date().toISOString();
   const submittedAtLocal = new Intl.DateTimeFormat("es-ES", {
     dateStyle: "full",
     timeStyle: "medium",
     timeZone: "Europe/Madrid",
-  }).format(new Date(submittedAt));
+  }).format(new Date());
 
   const resend = new Resend(apiKey);
-  const replyTo = payload.email.trim();
-  const subjectName = payload.name.trim();
+  const replyTo = payload.email;
+  const subjectName = sanitizeHeaderSafe(payload.name, 80);
 
   try {
     const result = await resend.emails.send({

@@ -6,7 +6,7 @@ import { useMsSiteLocale } from "../MsSiteLocaleProvider.js";
 import { MsStudioSectionEyebrow } from "../studio-home/MsStudioSectionEyebrow.js";
 import { MsStudioTitleWithAccent } from "../studio-home/MsStudioTitleWithAccent.js";
 
-/** Contacto — página /contacto (mismo bloque que antes en #contacto). */
+/** Contacto — apertura al grid de página; formulario centrado debajo. */
 export function MsHomeContact({
   asPage = false,
 }: {
@@ -18,18 +18,20 @@ export function MsHomeContact({
   return (
     <section
       id={asPage ? undefined : "contacto"}
-      className="ms-dp-section msh-contact"
+      className="ms-dp-section msh-contact msh-contact--premium"
       aria-labelledby="ms-dp-contact-title"
     >
-      <div className="ms-dp-shell">
-        <MsStudioSectionEyebrow>{ui.contactKicker}</MsStudioSectionEyebrow>
-        <Title id="ms-dp-contact-title" className="ms-dp-section__title">
-          <MsStudioTitleWithAccent text={ui.contactTitle} />
-        </Title>
-        <p className="ms-dp-section__note">{ui.contactLead}</p>
-        <p className="msh-contact__trust">{ui.contactTrust}</p>
-        <p className="msh-contact__next">{ui.contactNext}</p>
-        <div className="msh-contact__form-card">
+      <div className="ms-dp-shell msh-contact__shell">
+        <header className="msh-contact__opening">
+          <MsStudioSectionEyebrow>{ui.contactKicker}</MsStudioSectionEyebrow>
+          <Title id="ms-dp-contact-title" className="msh-contact__title">
+            <MsStudioTitleWithAccent text={ui.contactTitle} />
+          </Title>
+        </header>
+      </div>
+
+      <div className="msh-contact__stage">
+        <div className="msh-contact__panel">
           <LeadForm variant="premium" submitVariant="studio-home" />
         </div>
       </div>

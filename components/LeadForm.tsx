@@ -1,18 +1,24 @@
 "use client";
 
 import type React from "react";
-import { useState, useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import { submitLead } from "../lib/apiClient.js";
-import { MS_SITE_PROJECT_INTENTS, MS_SITE_PROJECT_INTENTS_PUBLIC } from "../lib/msSite1703Foundation.js";
-import { useMsSiteLocale } from "./MsSiteLocaleProvider.js";
+import {
+  CONTACT_MESSAGE_MAX,
+  CONTACT_MESSAGE_MIN,
+} from "../lib/contactFormLimits.js";
 import type { MsSiteUiCopy } from "../lib/msSiteUiI18nFoundation.js";
+import {
+  isTurnstileConfigured,
+  MsContactTurnstile,
+} from "./contact/MsContactTurnstile.js";
+import { useMsSiteLocale } from "./MsSiteLocaleProvider.js";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
 interface LeadFormData {
   name: string;
   email: string;
-  projectIntent: string;
   businessName: string;
   message: string;
 }
@@ -20,36 +26,32 @@ interface LeadFormData {
 interface LeadFormErrors {
   name?: string;
   email?: string;
-  projectIntent?: string;
-  businessName?: string;
   message?: string;
+  turnstile?: string;
 }
 
-function validateLeadForm(data: LeadFormData, ui: MsSiteUiCopy): LeadFormErrors {
-  const errors: LeadFormErrors = {};
-  const name = data.name.trim();
-  const email = data.email.trim();
+const EMAIL_REGEX =
+  /^(?=.{1,254}$)(?=.{1,64}@)[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)+$/;
 
-  if (!name || name.length < 2) {
-    errors.name = ui.formRequiredName;
-  }
+function validateName(value: string, ui: MsSiteUiCopy): string | undefined {
+  const name = value.trim();
+  if (!name || name.length < 2) return ui.formRequiredName;
+  if (name.length > 120) return ui.formRequiredName;
+  return undefined;
+}
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!email) {
-    errors.email = ui.formRequiredEmail;
-  } else if (!emailRegex.test(email)) {
-    errors.email = ui.formInvalidEmail;
-  }
+function validateEmail(value: string, ui: MsSiteUiCopy): string | undefined {
+  const email = value.trim();
+  if (!email) return ui.formRequiredEmail;
+  if (!EMAIL_REGEX.test(email)) return ui.formInvalidEmail;
+  return undefined;
+}
 
-  if (!data.projectIntent) {
-    errors.projectIntent = ui.formRequiredIntent;
-  }
-
-  if (data.message.trim().length > 500) {
-    errors.message = ui.formMessageTooLong;
-  }
-
-  return errors;
+function validateMessage(value: string, ui: MsSiteUiCopy): string | undefined {
+  const message = value.trim();
+  if (message.length < CONTACT_MESSAGE_MIN) return ui.formMessageTooShort;
+  if (message.length > CONTACT_MESSAGE_MAX) return ui.formMessageTooLong;
+  return undefined;
 }
 
 interface LeadFormProps {
@@ -65,53 +67,102 @@ export function LeadForm({
 }: LeadFormProps): React.ReactElement {
   const isPremium = variant === "premium";
   const { ui } = useMsSiteLocale();
-
-  const intentOptions = MS_SITE_PROJECT_INTENTS_PUBLIC.map((intent) => ({
-    value: intent.value,
-    label:
-      intent.value === "web-only"
-        ? ui.intentWebOnly
-        : intent.value === "custom-saas"
-          ? ui.intentCustomSaas
-          : intent.value === "automation"
-            ? ui.intentAutomation
-            : intent.value === "other"
-              ? ui.intentOther
-              : intent.label,
-  }));
-
-  const sectorOptions = [
-    { value: "", label: ui.sectorOptional },
-    { value: "hosteleria", label: ui.sectorHospitality },
-    { value: "retail", label: ui.sectorRetail },
-    { value: "servicios", label: ui.sectorServices },
-    { value: "otro", label: ui.sectorOther },
-  ] as const;
+  const liveRef = useRef<HTMLDivElement>(null);
 
   const [formData, setFormData] = useState<LeadFormData>({
     name: "",
     email: "",
-    projectIntent: "",
     businessName: "",
     message: "",
   });
-  const [sector, setSector] = useState("");
-  /** Honeypot — bots lo rellenan; humanos no lo ven. */
   const [companyUrl, setCompanyUrl] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileReset, setTurnstileReset] = useState(0);
+  const [touched, setTouched] = useState<
+    Partial<Record<keyof LeadFormErrors, boolean>>
+  >({});
   const [errors, setErrors] = useState<LeadFormErrors>({});
   const [status, setStatus] = useState<FormStatus>("idle");
-  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState("");
   const inFlightRef = useRef(false);
+
+  const messageLength = formData.message.trim().length;
+  const messageEnough = messageLength >= CONTACT_MESSAGE_MIN;
+
+  const markTouched = (field: keyof LeadFormErrors) => {
+    setTouched((prev) => ({ ...prev, [field]: true }));
+  };
+
+  const runFieldValidation = useCallback(
+    (field: keyof LeadFormData, next: LeadFormData) => {
+      let error: string | undefined;
+      if (field === "name") error = validateName(next.name, ui);
+      if (field === "email") error = validateEmail(next.email, ui);
+      if (field === "message") error = validateMessage(next.message, ui);
+      setErrors((prev) => {
+        const copy = { ...prev };
+        if (field === "name" || field === "email" || field === "message") {
+          if (error) copy[field] = error;
+          else delete copy[field];
+        }
+        return copy;
+      });
+    },
+    [ui],
+  );
 
   const updateField = useCallback(
     (field: keyof LeadFormData, value: string) => {
-      setFormData((prev) => ({ ...prev, [field]: value }));
-      if (errors[field]) {
-        setErrors((prev) => ({ ...prev, [field]: undefined }));
-      }
+      setFormData((prev) => {
+        const next = { ...prev, [field]: value };
+        if (touched[field as keyof LeadFormErrors] || field === "message") {
+          queueMicrotask(() => runFieldValidation(field, next));
+        }
+        return next;
+      });
     },
-    [errors],
+    [runFieldValidation, touched],
   );
+
+  const onTurnstileToken = useCallback((token: string) => {
+    setTurnstileToken(token);
+    setErrors((prev) => {
+      if (!prev.turnstile) return prev;
+      const copy = { ...prev };
+      delete copy.turnstile;
+      return copy;
+    });
+  }, []);
+
+  const onTurnstileExpire = useCallback(() => {
+    setTurnstileToken("");
+  }, []);
+
+  const validateAll = useCallback((): LeadFormErrors => {
+    const next: LeadFormErrors = {};
+    const nameErr = validateName(formData.name, ui);
+    const emailErr = validateEmail(formData.email, ui);
+    const messageErr = validateMessage(formData.message, ui);
+    if (nameErr) next.name = nameErr;
+    if (emailErr) next.email = emailErr;
+    if (messageErr) next.message = messageErr;
+    if (isTurnstileConfigured() && !turnstileToken.trim()) {
+      next.turnstile = ui.formTurnstileRequired;
+    }
+    return next;
+  }, [formData, turnstileToken, ui]);
+
+  const resetForm = () => {
+    inFlightRef.current = false;
+    setStatus("idle");
+    setFormData({ name: "", email: "", businessName: "", message: "" });
+    setCompanyUrl("");
+    setTurnstileToken("");
+    setTurnstileReset((n) => n + 1);
+    setTouched({});
+    setErrors({});
+    setErrorMessage("");
+  };
 
   const handleSubmit = useCallback(
     async (e: React.FormEvent) => {
@@ -122,13 +173,15 @@ export function LeadForm({
         return;
       }
 
-      const validationErrors = validateLeadForm(formData, ui);
+      setTouched({ name: true, email: true, message: true, turnstile: true });
+
+      const validationErrors = validateAll();
       if (Object.keys(validationErrors).length > 0) {
         setErrors(validationErrors);
+        liveRef.current?.focus();
         return;
       }
 
-      // Bot filled the honeypot — fake success, no API call
       if (companyUrl.trim()) {
         setStatus("success");
         onSuccess?.();
@@ -138,34 +191,19 @@ export function LeadForm({
       inFlightRef.current = true;
       setStatus("loading");
 
-      const intentLabel =
-        intentOptions.find((i) => i.value === formData.projectIntent)?.label ??
-        MS_SITE_PROJECT_INTENTS.find((i) => i.value === formData.projectIntent)?.label ??
-        formData.projectIntent;
-
-      const sectorLabel = sector
-        ? sector === "hosteleria"
-          ? ui.sectorHospitality
-          : sector === "retail"
-            ? ui.sectorRetail
-            : sector === "servicios"
-              ? ui.sectorServices
-              : sector === "otro"
-                ? ui.sectorOther
-                : sector
-        : "";
-
       const result = await submitLead({
         name: formData.name.trim(),
         email: formData.email.trim(),
-        businessName: formData.businessName.trim() || "Por definir en conversación",
-        businessType: sector || "general",
-        projectIntent: formData.projectIntent,
-        projectIntentLabel: intentLabel,
-        sector,
-        sectorLabel,
-        message: formData.message.trim() || undefined,
+        businessName:
+          formData.businessName.trim() || "Por definir en conversación",
+        businessType: "general",
+        projectIntent: "other",
+        projectIntentLabel: "",
+        sector: "",
+        sectorLabel: "",
+        message: formData.message.trim(),
         companyUrl,
+        turnstileToken,
       });
 
       if (result.ok) {
@@ -175,49 +213,51 @@ export function LeadForm({
         inFlightRef.current = false;
         setStatus("error");
         setErrorMessage(result.error);
+        setTurnstileReset((n) => n + 1);
+        setTurnstileToken("");
         if (result.validationErrors) {
           const newErrors: LeadFormErrors = {};
           for (const ve of result.validationErrors) {
             if (
               ve.field === "name" ||
               ve.field === "email" ||
-              ve.field === "businessName" ||
-              ve.field === "projectIntent" ||
-              ve.field === "message"
+              ve.field === "message" ||
+              ve.field === "turnstile"
             ) {
-              (newErrors as Record<string, string>)[ve.field] = ve.message;
+              newErrors[ve.field] = ve.message;
             }
           }
           setErrors(newErrors);
         }
       }
     },
-    [companyUrl, formData, intentOptions, onSuccess, sector, status, ui],
+    [
+      companyUrl,
+      formData,
+      onSuccess,
+      status,
+      turnstileToken,
+      validateAll,
+    ],
   );
 
   if (status === "success") {
     return (
-      <div className="ms-form ms-form__status ms-form__status--success" role="status">
+      <div
+        className="ms-form ms-form__status ms-form__status--success ms-form-success"
+        role="status"
+        aria-live="polite"
+      >
+        <div className="ms-form-success__mark" aria-hidden="true">
+          ✓
+        </div>
         <h3 className="ms-form__success-title">{ui.formSuccessTitle}</h3>
-        <p className="ms-form__success-body">
-          {ui.formSuccessBody.replace("{name}", formData.name).replace("{email}", formData.email)}
-        </p>
+        <p className="ms-form__success-body">{ui.formSuccessLead}</p>
+        <p className="ms-form__success-follow">{ui.formSuccessFollow}</p>
         <button
           type="button"
           className="msh-btn msh-btn--cta ms-form__success-again"
-          onClick={() => {
-            inFlightRef.current = false;
-            setStatus("idle");
-            setFormData({
-              name: "",
-              email: "",
-              projectIntent: "",
-              businessName: "",
-              message: "",
-            });
-            setSector("");
-            setCompanyUrl("");
-          }}
+          onClick={resetForm}
         >
           {ui.formSendAnother}
         </button>
@@ -225,18 +265,44 @@ export function LeadForm({
     );
   }
 
-  const fieldClass = (field: keyof LeadFormErrors) =>
-    errors[field] ? "ms-field ms-field--error" : "ms-field";
+  const fieldClass = (
+    field: keyof LeadFormErrors,
+    value = "",
+  ): string => {
+    if (errors[field]) return "ms-field ms-field--error";
+    if (value.trim().length > 0) return "ms-field ms-field--filled";
+    return "ms-field";
+  };
+
+  const formDisabled = status === "loading";
 
   return (
-    <form onSubmit={handleSubmit} className={`ms-form${isPremium ? " ms-form--premium" : ""}`} noValidate>
-      {status === "error" && (
-        <div className="ms-form__status ms-form__status--error" role="alert">
-          {errorMessage || ui.formErrorGeneric}
-        </div>
-      )}
+    <form
+      onSubmit={handleSubmit}
+      className={`ms-form ms-form--contact ms-form--contact-v2${isPremium ? " ms-form--premium" : ""}`}
+      noValidate
+      aria-busy={formDisabled}
+    >
+      <div
+        ref={liveRef}
+        className="ms-sr-only"
+        tabIndex={-1}
+        aria-live="polite"
+      >
+        {errors.name ||
+          errors.email ||
+          errors.message ||
+          errors.turnstile ||
+          errorMessage ||
+          ""}
+      </div>
 
-      {/* Honeypot: oculto visualmente; no anunciado a AT para no confundir. */}
+      {status === "error" && errorMessage ? (
+        <div className="ms-form__status ms-form__status--error" role="alert">
+          {errorMessage}
+        </div>
+      ) : null}
+
       <div className="ms-sr-only" aria-hidden="true">
         <label htmlFor="lead-company-url">Company website</label>
         <input
@@ -250,118 +316,155 @@ export function LeadForm({
         />
       </div>
 
-      <fieldset className={fieldClass("projectIntent")}>
-        <legend className={isPremium ? "ms-form__legend" : undefined}>
-          {ui.formWhatLooking}
-        </legend>
-        <div className="ms-intents" role="radiogroup" aria-required="true">
-          {intentOptions.map((intent) => (
-            <label key={intent.value} className="ms-intent">
-              <input
-                type="radio"
-                name="projectIntent"
-                value={intent.value}
-                checked={formData.projectIntent === intent.value}
-                onChange={() => updateField("projectIntent", intent.value)}
-                disabled={status === "loading"}
-              />
-              {intent.label}
-            </label>
-          ))}
+      <fieldset disabled={formDisabled} className="ms-form__fieldset">
+        <div className="ms-form-grid">
+          <div className={fieldClass("name", formData.name)}>
+            <label htmlFor="lead-name">{ui.formName}</label>
+            <input
+              id="lead-name"
+              type="text"
+              autoComplete="name"
+              value={formData.name}
+              onChange={(e) => updateField("name", e.target.value)}
+              onBlur={() => {
+                markTouched("name");
+                runFieldValidation("name", formData);
+              }}
+              aria-invalid={Boolean(errors.name)}
+              aria-describedby={errors.name ? "lead-name-error" : undefined}
+              disabled={formDisabled}
+              maxLength={120}
+            />
+            {errors.name ? (
+              <span id="lead-name-error" className="ms-field__error" role="alert">
+                {errors.name}
+              </span>
+            ) : null}
+          </div>
+
+          <div className={fieldClass("email", formData.email)}>
+            <label htmlFor="lead-email">{ui.formEmail}</label>
+            <input
+              id="lead-email"
+              type="email"
+              autoComplete="email"
+              inputMode="email"
+              value={formData.email}
+              onChange={(e) => updateField("email", e.target.value)}
+              onBlur={() => {
+                markTouched("email");
+                runFieldValidation("email", formData);
+              }}
+              aria-invalid={Boolean(errors.email)}
+              aria-describedby={errors.email ? "lead-email-error" : undefined}
+              disabled={formDisabled}
+              maxLength={254}
+            />
+            {errors.email ? (
+              <span id="lead-email-error" className="ms-field__error" role="alert">
+                {errors.email}
+              </span>
+            ) : null}
+          </div>
         </div>
-        {errors.projectIntent && (
-          <span className="ms-field__error">{errors.projectIntent}</span>
-        )}
-      </fieldset>
 
-      <div className={fieldClass("name")}>
-        <label htmlFor="lead-name">{ui.formName}</label>
-        <input
-          id="lead-name"
-          type="text"
-          autoComplete="name"
-          value={formData.name}
-          onChange={(e) => updateField("name", e.target.value)}
-          disabled={status === "loading"}
-        />
-        {errors.name && <span className="ms-field__error">{errors.name}</span>}
-      </div>
-
-      <div className={fieldClass("email")}>
-        <label htmlFor="lead-email">{ui.formEmail}</label>
-        <input
-          id="lead-email"
-          type="email"
-          autoComplete="email"
-          inputMode="email"
-          value={formData.email}
-          onChange={(e) => updateField("email", e.target.value)}
-          disabled={status === "loading"}
-        />
-        {errors.email && <span className="ms-field__error">{errors.email}</span>}
-      </div>
-
-      {isPremium && (
-        <div className="ms-field">
+        <div
+          className={
+            formData.businessName.trim()
+              ? "ms-field ms-field--filled"
+              : "ms-field"
+          }
+        >
           <label htmlFor="lead-business">{ui.formBusiness}</label>
           <input
             id="lead-business"
             type="text"
             value={formData.businessName}
             onChange={(e) => updateField("businessName", e.target.value)}
-            disabled={status === "loading"}
+            disabled={formDisabled}
+            maxLength={200}
+            autoComplete="organization"
           />
         </div>
-      )}
 
-      {isPremium && (
-        <div className="ms-field">
-          <label htmlFor="lead-sector">{ui.formSector}</label>
-          <select
-            id="lead-sector"
-            value={sector}
-            onChange={(e) => setSector(e.target.value)}
-            disabled={status === "loading"}
-          >
-            {sectorOptions.map((opt) => (
-              <option key={opt.value} value={opt.value}>
-                {opt.label}
-              </option>
-            ))}
-          </select>
+        <div className={`${fieldClass("message", formData.message)} ms-field--project`}>
+          <label htmlFor="lead-message">{ui.formMessage}</label>
+          <textarea
+            id="lead-message"
+            value={formData.message}
+            onChange={(e) => updateField("message", e.target.value)}
+            onBlur={() => {
+              markTouched("message");
+              runFieldValidation("message", formData);
+            }}
+            disabled={formDisabled}
+            rows={12}
+            maxLength={CONTACT_MESSAGE_MAX}
+            placeholder={ui.formMessagePlaceholder}
+            aria-invalid={Boolean(errors.message)}
+            aria-describedby="lead-message-count"
+            required
+          />
+          <div className="ms-form__message-meta" aria-live="polite">
+            <span
+              id="lead-message-count"
+              className={`ms-form__counter${messageEnough ? " is-ready" : ""}`}
+            >
+              {messageLength} / {CONTACT_MESSAGE_MAX}
+            </span>
+            {messageEnough ? (
+              <span className="ms-form__enough">{ui.formMessageEnough}</span>
+            ) : null}
+          </div>
+          {errors.message ? (
+            <span className="ms-field__error" role="alert">
+              {errors.message}
+            </span>
+          ) : null}
         </div>
-      )}
 
-      <div className={fieldClass("message")}>
-        <label htmlFor="lead-message">{ui.formMessage}</label>
-        <textarea
-          id="lead-message"
-          value={formData.message}
-          onChange={(e) => updateField("message", e.target.value)}
-          disabled={status === "loading"}
-          rows={isPremium ? 4 : 3}
-          maxLength={500}
-          placeholder={ui.formMessagePlaceholder}
-        />
-        {errors.message && <span className="ms-field__error">{errors.message}</span>}
+        <div className="ms-form-section--security">
+          <MsContactTurnstile
+            onToken={onTurnstileToken}
+            onExpire={onTurnstileExpire}
+            resetSignal={turnstileReset}
+          />
+          {errors.turnstile ? (
+            <span className="ms-field__error" role="alert">
+              {errors.turnstile}
+            </span>
+          ) : null}
+        </div>
+      </fieldset>
+
+      <div className="ms-form-section--submit">
+        <button
+          type="submit"
+          className={
+            submitVariant === "studio-home"
+              ? "msh-btn msh-btn--cta msh-btn--cta-hero-primary msh-btn--submit"
+              : "ms-btn ms-btn--primary"
+          }
+          disabled={formDisabled}
+          aria-label={formDisabled ? ui.formSending : ui.formSubmit}
+        >
+          {formDisabled ? (
+            <span className="ms-form__sending">
+              <span className="ms-form__spinner" aria-hidden="true" />
+              {ui.formSending}
+            </span>
+          ) : (
+            <>
+              {ui.formSubmit}
+              {submitVariant === "studio-home" ? (
+                <span className="msh-btn__arrow" aria-hidden="true">
+                  →
+                </span>
+              ) : null}
+            </>
+          )}
+        </button>
       </div>
-
-      <button
-        type="submit"
-        className={
-          submitVariant === "studio-home"
-            ? "msh-btn msh-btn--cta msh-btn--cta-hero-primary msh-btn--submit"
-            : "ms-btn ms-btn--primary"
-        }
-        disabled={status === "loading"}
-      >
-        {status === "loading" ? ui.formSending : ui.formSubmit}
-        {submitVariant === "studio-home" && status !== "loading" ? (
-          <span className="msh-btn__arrow" aria-hidden="true">
-            →
-          </span>
-        ) : null}
-      </button>
     </form>
   );
 }

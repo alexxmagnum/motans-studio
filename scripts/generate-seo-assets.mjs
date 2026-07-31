@@ -3,13 +3,13 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 const root = process.cwd();
-const srcMark = join(root, "public/brand/motans-m.png");
+const srcMark = join(root, "public/brand/motans-ms.png");
 
 async function squarePng(size, out) {
   await sharp(srcMark)
     .resize(size, size, {
       fit: "contain",
-      background: { r: 0, g: 0, b: 0, alpha: 1 },
+      background: { r: 0, g: 0, b: 0, alpha: 0 },
     })
     .png()
     .toFile(out);
@@ -50,15 +50,15 @@ await squarePng(180, join(root, "app/apple-icon.png"));
 const png32 = await sharp(srcMark)
   .resize(32, 32, {
     fit: "contain",
-    background: { r: 0, g: 0, b: 0, alpha: 1 },
+    background: { r: 0, g: 0, b: 0, alpha: 0 },
   })
   .png()
   .toBuffer();
 
 const ico = pngToIco(png32);
+// App Router only — do not also write public/favicon.ico (conflicts → 500).
 writeFileSync(join(root, "app/favicon.ico"), ico);
-writeFileSync(join(root, "public/favicon.ico"), ico);
-console.log("wrote favicon.ico", ico.length);
+console.log("wrote app/favicon.ico", ico.length);
 
 const svg = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <rect width="1200" height="630" fill="#000000"/>
@@ -90,7 +90,6 @@ for (const f of [
   "app/icon.png",
   "app/apple-icon.png",
   "app/favicon.ico",
-  "public/favicon.ico",
 ]) {
   const b = readFileSync(join(root, f));
   const png = b[0] === 0x89 && b[1] === 0x50;

@@ -35,7 +35,7 @@ describe("MOTANS_STUDIO_HOME_PREMIUM_HERO_CONTINUITY_V1", () => {
     assert.ok(home.includes("MsStudioOfferSection"));
     assert.ok(home.includes("MsStudioFactorySection"));
     assert.ok(!home.includes("MsStudioHomeProcess"));
-    assert.ok(home.includes("MsStudioHomeFinalCta"));
+    assert.ok(!home.includes("MsStudioHomeFinalCta"));
     assert.ok(home.includes("MsHomeContact"));
     assert.ok(!home.includes("MsStudioLandingSectionSlot"));
     assert.ok(!home.includes("MsStudioHomeContinuity"));

@@ -1,46 +1,54 @@
 /** Altura sticky del header (min-height .ms-header__inner). */
 export const MS_SITE_HEADER_SCROLL_OFFSET_PX = 76;
 
-/** Sube el card un poco respecto a la medida del hero (negativo = menos hueco bajo el header). */
+/**
+ * Hueco extra bajo el header al anclar secciones.
+ * Valor bajo → título/eyebrow quedan pegados al header tras el click de nav.
+ */
+export const MS_SITE_LANDING_SECTION_SCROLL_GAP_PX = 8;
+
+/** @deprecated Prefer getLandingSectionScrollOffsetPx — kept for existing call sites. */
 export const MS_SITE_LANDING_SCROLL_OFFSET_ADJUST_PX = -24;
 
-const MS_SITE_LANDING_CARD_SELECTORS = [".msh-hero", ".ms-dp-hero"] as const;
-
-function findLandingHeroCard(): HTMLElement | null {
-  for (const selector of MS_SITE_LANDING_CARD_SELECTORS) {
-    const element = document.querySelector(selector);
-    if (element instanceof HTMLElement) {
-      return element;
-    }
-  }
-  return null;
+export function getLandingSectionScrollOffsetPx(): number {
+  return MS_SITE_HEADER_SCROLL_OFFSET_PX + MS_SITE_LANDING_SECTION_SCROLL_GAP_PX;
 }
 
-let cachedLandingCardTopOffsetPx: number | null = null;
-
 /**
- * Distancia desde el top del viewport hasta el card grande del hero con scroll en 0
- * (misma referencia visual que pulsar Inicio).
+ * Offset de anclas / spy: justo bajo el header.
+ * (Nombre histórico: antes medía la tapa del card del hero.)
  */
 export function measureLandingCardTopOffsetPx(): number {
-  const heroCard = findLandingHeroCard();
-  if (!heroCard) {
-    return MS_SITE_HEADER_SCROLL_OFFSET_PX + 28 + MS_SITE_LANDING_SCROLL_OFFSET_ADJUST_PX;
-  }
-
-  const top =
-    heroCard.getBoundingClientRect().top +
-    window.scrollY +
-    MS_SITE_LANDING_SCROLL_OFFSET_ADJUST_PX;
-  cachedLandingCardTopOffsetPx = top;
-  return top;
+  return getLandingSectionScrollOffsetPx();
 }
 
 export function getLandingCardTopOffsetPx(): number {
-  if (cachedLandingCardTopOffsetPx !== null) {
-    return cachedLandingCardTopOffsetPx;
+  return getLandingSectionScrollOffsetPx();
+}
+
+/**
+ * El id de sección suele estar en el <section> con padding grande.
+ * Para que el click de nav no deje un hueco negro, anclamos al bloque de título.
+ */
+function findLandingAnchorFocus(section: HTMLElement): HTMLElement {
+  const selectors = [
+    ".msh-contact__opening",
+    ".msh-offer__opening",
+    ".msh-factory__opening",
+    ".msh-eyebrow",
+    "[aria-labelledby] > .ms-dp-shell",
+    "h1",
+    "h2",
+  ] as const;
+
+  for (const selector of selectors) {
+    const match = section.querySelector(selector);
+    if (match instanceof HTMLElement) {
+      return match;
+    }
   }
-  return measureLandingCardTopOffsetPx();
+
+  return section;
 }
 
 function landingScrollBehavior(): ScrollBehavior {
@@ -61,20 +69,21 @@ export function scrollLandingToAnchor(anchorId: string): void {
     return;
   }
 
-  const target = document.getElementById(id);
-  if (!target) {
+  const section = document.getElementById(id);
+  if (!section) {
     scrollLandingToTop();
     return;
   }
 
-  const offset = getLandingCardTopOffsetPx();
-  const top = target.getBoundingClientRect().top + window.scrollY - offset;
+  const focus = findLandingAnchorFocus(section);
+  const offset = getLandingSectionScrollOffsetPx();
+  const top = focus.getBoundingClientRect().top + window.scrollY - offset;
 
   window.scrollTo({ top: Math.max(0, top), left: 0, behavior: landingScrollBehavior() });
 }
 
 export function syncLandingScrollPaddingTop(): void {
-  const offset = measureLandingCardTopOffsetPx();
+  const offset = getLandingSectionScrollOffsetPx();
   document.documentElement.style.setProperty("scroll-padding-top", `${offset}px`);
   document.documentElement.style.setProperty("--ms-landing-scroll-offset", `${offset}px`);
 }

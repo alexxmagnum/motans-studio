@@ -27,7 +27,7 @@ describe("MS_SITE_17_03C emergency visual redesign", () => {
     assert.ok(home.includes("MsStudioOfferSection"));
     assert.ok(home.includes("MsStudioFactorySection"));
     assert.ok(!home.includes("MsStudioHomeProcess"));
-    assert.ok(home.includes("MsStudioHomeFinalCta"));
+    assert.ok(!home.includes("MsStudioHomeFinalCta"));
     assert.ok(home.includes("MsHomeContact"));
     assert.ok(!home.includes("MsStudioLandingSectionSlot"));
     assert.ok(!home.includes("MsStudioHomeContinuity"));

@@ -29,7 +29,7 @@ describe("MOTANS_STUDIO_HOME_PREMIUM_HERO_CONTINUITY_V1 (dark premium shell)", (
     assert.ok(home.includes("MsStudioOfferSection"));
     assert.ok(home.includes("MsStudioFactorySection"));
     assert.ok(!home.includes("MsStudioHomeProcess"));
-    assert.ok(home.includes("MsStudioHomeFinalCta"));
+    assert.ok(!home.includes("MsStudioHomeFinalCta"));
     assert.ok(!home.includes("MsStudioHomeContinuity"));
     assert.ok(!home.includes("MsStudioHomeMotanosLab"));
     assert.ok(!home.includes("MsHomePlans"));
@@ -84,8 +84,9 @@ describe("MOTANS_STUDIO_HOME_PREMIUM_HERO_CONTINUITY_V1 (dark premium shell)", (
     assert.ok(shell.includes("MS_STUDIO_HOME_LOGO"));
   });
 
-  it("landing scroll targets V10 hero selector", () => {
+  it("landing scroll anchors sections just below the sticky header", () => {
     const scroll = readFileSync(join(libDir, "msSiteLandingScroll.ts"), "utf-8");
-    assert.ok(scroll.includes(".msh-hero"));
+    assert.ok(scroll.includes("getLandingSectionScrollOffsetPx"));
+    assert.ok(scroll.includes("MS_SITE_HEADER_SCROLL_OFFSET_PX"));
   });
 });

@@ -64,8 +64,9 @@ describe("MOTANS_STUDIO_PUBLIC_SITE_REBUILD_CORRECTION_V1", () => {
     assert.ok(seo.includes("canonical"));
   });
 
-  it("landing scroll targets new hero frame selector", () => {
+  it("landing scroll anchors sections just below the sticky header", () => {
     const scroll = readFileSync(join(libDir, "msSiteLandingScroll.ts"), "utf-8");
-    assert.ok(scroll.includes(".ms-home-hero--impact"));
+    assert.ok(scroll.includes("getLandingSectionScrollOffsetPx"));
+    assert.ok(scroll.includes("MS_SITE_HEADER_SCROLL_OFFSET_PX"));
   });
 });

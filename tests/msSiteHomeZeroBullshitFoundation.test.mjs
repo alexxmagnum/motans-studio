@@ -26,15 +26,14 @@ describe("MOTANS_STUDIO_HOME_V10 content SSOT", () => {
     assert.ok(home.includes("MsStudioOfferSection"));
     assert.ok(home.includes("MsStudioFactorySection"));
     assert.ok(!home.includes("MsStudioHomeProcess"));
-    assert.ok(home.includes("MsStudioHomeFinalCta"));
+    assert.ok(!home.includes("MsStudioHomeFinalCta"));
     assert.ok(!home.includes("MsStudioHomeContinuity"));
     assert.ok(!home.includes("MsStudioHomeMotanosLab"));
     assert.ok(!home.includes("MsHomePlans"));
     assert.ok(home.includes("MsHomeContact"));
     assert.ok(home.indexOf("MsStudioHomeHero") < home.indexOf("MsStudioOfferSection"));
     assert.ok(home.indexOf("MsStudioOfferSection") < home.indexOf("MsStudioFactorySection"));
-    assert.ok(home.indexOf("MsStudioFactorySection") < home.indexOf("MsStudioHomeFinalCta"));
-    assert.ok(home.indexOf("MsStudioHomeFinalCta") < home.indexOf("MsHomeContact"));
+    assert.ok(home.indexOf("MsStudioFactorySection") < home.indexOf("MsHomeContact"));
   });
 
   it("hero uses single H1 and CTA buttons", () => {
@@ -62,8 +61,9 @@ describe("MOTANS_STUDIO_HOME_V10 content SSOT", () => {
     assert.ok(seo.includes("canonical"));
   });
 
-  it("landing scroll targets V10 hero selector", () => {
+  it("landing scroll anchors sections just below the sticky header", () => {
     const scroll = readFileSync(join(libDir, "msSiteLandingScroll.ts"), "utf-8");
-    assert.ok(scroll.includes(".msh-hero"));
+    assert.ok(scroll.includes("getLandingSectionScrollOffsetPx"));
+    assert.ok(scroll.includes("MS_SITE_HEADER_SCROLL_OFFSET_PX"));
   });
 });

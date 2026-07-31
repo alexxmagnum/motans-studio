@@ -33,16 +33,17 @@
   --ms-space-chapter: clamp(3.5rem, 8vw, 5.5rem);
 }
 
-/* Solo en la home: offset medido del hero (template → --ms-landing-scroll-offset) */
+/* Solo en la home: anclas justo bajo el header sticky */
 body:has(.ms-page--landing) {
-  scroll-padding-top: var(--ms-landing-scroll-offset, 4.75rem);
+  scroll-padding-top: var(--ms-landing-scroll-offset, 5.5rem);
 }
 
 body:has(.ms-page--landing) #inicio,
 body:has(.ms-page--landing) #servicios,
+body:has(.ms-page--landing) #estudio,
 body:has(.ms-page--landing) #planes,
 body:has(.ms-page--landing) #contacto {
-  scroll-margin-top: var(--ms-landing-scroll-offset, 4.75rem);
+  scroll-margin-top: var(--ms-landing-scroll-offset, 5.5rem);
 }
 
 .ms-site {

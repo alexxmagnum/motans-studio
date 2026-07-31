@@ -19,11 +19,12 @@ export const MS_STUDIO_HOME_REPOSITIONING_BLOCK_ID =
 export const MS_STUDIO_HOME_MOTANOS_PUBLIC_VISIBLE = MS_SITE_PUBLIC_MOTANOS_VISIBLE;
 
 export const MS_STUDIO_HOME_LOGO = {
-  path: MOTANS_CORPORATE_BRAND_ASSETS.markMsWebp.publicPath,
+  /** Header mark (synced from app/icon.png crop). Source full mark: /brand/motans-ms.png */
+  path: "/brand/motans-ms-header.png",
   fallbackPath: MOTANS_CORPORATE_BRAND_ASSETS.markMsPng.publicPath,
-  alt: MOTANS_CORPORATE_BRAND_ASSETS.markMsWebp.alt,
-  width: 82,
-  height: 58,
+  alt: MOTANS_CORPORATE_BRAND_ASSETS.markMsPng.alt,
+  width: 512,
+  height: 405,
 } as const;
 
 /** Panel escultura M — asset lateral derecho del hero (no background). */

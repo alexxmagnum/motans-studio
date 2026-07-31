@@ -192,7 +192,7 @@
 
   .msh-hero--experience .msh-hero__figure.msh-hero__figure--hero-video {
     position: relative;
-    transform: translateX(9rem);
+    transform: translateX(12rem);
     /* Difumina solo el corte inferior (alfa), sin nublar la imagen */
     -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 84%, transparent 100%) !important;
     mask-image: linear-gradient(to bottom, #000 0%, #000 84%, transparent 100%) !important;
@@ -221,14 +221,16 @@
     background: #000;
   }
 
-  /* Solo difuminado lateral izquierdo — sin nube negra abajo */
+  /* Difuminado lateral izquierdo + derecho */
   .msh-hero--experience .msh-hero__figure.msh-hero__figure--hero-video::after {
     content: "";
     position: absolute;
     inset: 0;
     z-index: 2;
     pointer-events: none;
-    background: linear-gradient(to right, #000 0%, rgba(0, 0, 0, 0.55) 8%, transparent 28%);
+    background:
+      linear-gradient(to right, #000 0%, rgba(0, 0, 0, 0.55) 8%, transparent 28%),
+      linear-gradient(to left, #000 0%, rgba(0, 0, 0, 0.55) 8%, transparent 28%);
   }
 
   /* Nombre: ver bloque desktop más abajo (evita conflicto de left) */

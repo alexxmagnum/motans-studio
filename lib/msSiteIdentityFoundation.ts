@@ -14,7 +14,7 @@ export const MS_SITE_IDENTITY = {
   legalForm: "Empresario Individual (Autónomo)",
   taxId: "X5129436E",
   taxIdLabel: "NIE",
-  email: "inf.motans@gmail.com",
+  email: "info@motansstudio.com",
   phone: "+34 614 20 64 65",
   phoneTel: "+34614206465",
   /** wa.me — mismo número que teléfono. */

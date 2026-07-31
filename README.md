@@ -39,9 +39,9 @@ Ver `.env.example`:
 | Variable | Obligatoria | Descripción |
 |----------|-------------|-------------|
 | `RESEND_API_KEY` | **Sí** (prod) | API key de Resend. Solo servidor. Nunca `NEXT_PUBLIC_*`. |
-| `RESEND_FROM_EMAIL` | No | Remitente verificado, p. ej. `Motans Studio <hola@motansstudio.com>`. Si falta, se usa `onboarding@resend.dev` (pruebas). |
+| `RESEND_FROM_EMAIL` | No | Remitente verificado, p. ej. `Motans Studio <info@motansstudio.com>`. Si falta, se usa `onboarding@resend.dev` (pruebas). |
 
-El correo de destino del formulario es `inf.motans@gmail.com` (identidad del site).
+El correo de destino del formulario es `info@motansstudio.com` (identidad del site).
 
 ### Otras
 
@@ -71,4 +71,4 @@ Dependencias vía `file:` (sin `workspace:*`).
 ### Notas Resend
 
 - En la cuenta gratuita, sin dominio verificado, Resend solo entrega a la dirección del propietario de la cuenta.
-- Para enviar a `inf.motans@gmail.com` desde un `from` propio, verifica el dominio en [Resend Domains](https://resend.com/domains).
+- Para enviar a `info@motansstudio.com` desde un `from` propio, verifica el dominio en [Resend Domains](https://resend.com/domains).

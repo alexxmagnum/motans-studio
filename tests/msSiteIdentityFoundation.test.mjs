@@ -15,7 +15,7 @@ describe("msSiteIdentityFoundation", () => {
     assert.ok(identity.includes("https://www.motansstudio.com"));
     assert.ok(identity.includes("Alexandru Ionut Casian"));
     assert.ok(identity.includes("X5129436E"));
-    assert.ok(identity.includes("inf.motans@gmail.com"));
+    assert.ok(identity.includes("info@motansstudio.com"));
     assert.ok(identity.includes("+34 614 20 64 65"));
     assert.ok(seo.includes("MS_SITE_OFFICIAL_ORIGIN"));
     assert.ok(seo.includes("MS_SITE_IDENTITY.email"));

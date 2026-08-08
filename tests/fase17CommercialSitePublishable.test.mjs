@@ -22,9 +22,14 @@ describe("Fase 17 commercial site publishable", () => {
 
   it("should include publishable routes in sitemap", () => {
     const seo = readFileSync(join(root, "lib", "msSite1703SeoFoundation.ts"), "utf-8");
+    const sitemapBlock = seo.match(/export const MS_SITE_SITEMAP_PATHS[\s\S]*?;/)?.[0] ?? "";
+    assert.ok(sitemapBlock.includes('"/"'));
+    assert.ok(!sitemapBlock.includes('"/legal/aviso-legal"'));
+    assert.ok(!sitemapBlock.includes('"/legal/privacidad"'));
+    assert.ok(!sitemapBlock.includes('"/legal/cookies"'));
+    assert.ok(!sitemapBlock.includes('"/legal/condiciones"'));
     assert.ok(seo.includes('"/planes"'));
     assert.ok(seo.includes('"/solicitud"'));
-    assert.ok(seo.includes('"/legal/aviso-legal"'));
   });
 
   it("should wire lead form to contact route and assisted to public API path", () => {

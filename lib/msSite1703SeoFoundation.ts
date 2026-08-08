@@ -372,10 +372,6 @@ export const MS_SITE_HOME_JSON_LD = {
 
 export const MS_SITE_SITEMAP_PATHS: readonly string[] = [
   "/",
-  "/legal/aviso-legal",
-  "/legal/privacidad",
-  "/legal/cookies",
-  "/legal/condiciones",
   ...(MS_SITE_PUBLIC_MOTANOS_VISIBLE
     ? (["/motanos", "/motanos/hosteleria", "/planes", "/solicitud"] as const)
     : ([] as const)),
